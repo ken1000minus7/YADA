@@ -28,7 +28,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        class="com.kamikaze.yada.MainFragment"/>
+        class="com.kamikaze.yada.DiaryListFragment"
+        />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_button"
         android:layout_width="wrap_content"
