@@ -112,5 +112,6 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
             itemView=(TextView) view.findViewById(R.id.content);
             this.adapter=adapter;
         }
+
     }
 }
