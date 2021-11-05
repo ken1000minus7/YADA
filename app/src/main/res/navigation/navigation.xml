@@ -8,5 +8,14 @@
     <fragment
         android:id="@+id/landingFragment"
         android:name="com.kamikaze.yada.LandingFragment"
-        android:label="LandingFragment" />
+        android:label="LandingFragment" >
+        <action
+            android:id="@+id/action_landingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.kamikaze.yada.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>

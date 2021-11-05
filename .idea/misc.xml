@@ -6,8 +6,11 @@
         <entry key="..\:/Users/ashua/YADA/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.202734375" />
         <entry key="..\:/Users/ashua/YADA/app/src/main/res/drawable/ic_rectangle_1.xml" value="0.202734375" />
         <entry key="..\:/Users/ashua/YADA/app/src/main/res/drawable/ic_yada.xml" value="0.1921875" />
+        <entry key="..\:/Users/ashua/YADA/app/src/main/res/layout-v21/fragment_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ashua/YADA/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ashua/YADA/app/src/main/res/layout/fragment_landing.xml" value="0.2" />
+        <entry key="..\:/Users/ashua/YADA/app/src/main/res/layout/fragment_blank.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ashua/YADA/app/src/main/res/layout/fragment_landing.xml" value="0.42397914856646396" />
+        <entry key="..\:/Users/ashua/YADA/app/src/main/res/layout/fragment_login.xml" value="0.190625" />
       </map>
     </option>
   </component>
