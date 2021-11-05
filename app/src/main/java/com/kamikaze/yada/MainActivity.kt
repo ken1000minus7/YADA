@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
         navController = navHostFragment.navController
-//        setupActionBarWithNavController(navController)
+
         setContentView(binding.root)
     }
     override fun onSupportNavigateUp(): Boolean {

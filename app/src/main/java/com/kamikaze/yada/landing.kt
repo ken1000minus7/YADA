@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.kamikaze.yada.databinding.FragmentLandingBinding
 
 class LandingFragment : Fragment(R.layout.fragment_landing){
@@ -21,6 +22,11 @@ class LandingFragment : Fragment(R.layout.fragment_landing){
     ): View {
         _binding = FragmentLandingBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        binding.google.setOnClickListener {view: View ->
+          Navigation.findNavController(view).navigate(R.id.action_landingFragment_to_loginFragment)
+
+        }
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
