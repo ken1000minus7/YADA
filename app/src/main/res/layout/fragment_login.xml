@@ -90,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000000"
-
+            android:inputType="textEmailAddress"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -108,6 +108,8 @@
         android:layout_marginTop="@dimen/_22sdp"
         android:layout_marginEnd="@dimen/_24sdp"
         android:imeActionLabel="@string/action_sign_in_short"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/user"
 app:counterMaxLength="25"
 
@@ -123,7 +125,7 @@ app:counterMaxLength="25"
             android:textColor="#000000"
             android:scrollHorizontally="false"
             android:maxLength="25"
-
+            android:inputType="textPassword"
              />
 
     </com.google.android.material.textfield.TextInputLayout>

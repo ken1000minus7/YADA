@@ -12,7 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kamikaze.yada.placeholder.PlaceholderContent;
+
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
@@ -59,12 +60,12 @@ public class DiaryListFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new DiaryListRecyclerViewAdapter(context,PlaceholderContent.ITEMS));
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+            //To be replaced with the list obtained from firebase
+            ArrayList<Diary> diaries=new ArrayList<>();
+
+            recyclerView.setAdapter(new DiaryListRecyclerViewAdapter(context,diaries));
         }
         return view;
     }
