@@ -71,7 +71,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kamikaze.yada.placeholder.PlaceholderContent.PlaceholderItem;
 import com.kamikaze.yada.databinding.FragmentDiaryListBinding;
 
 import org.w3c.dom.Text;
@@ -79,9 +78,9 @@ import org.w3c.dom.Text;
 import java.util.*;
 
 public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryListRecyclerViewAdapter.DiaryListViewHolder>{
-    public List<PlaceholderItem> itemList;
+    public List<Diary> itemList;
     private LayoutInflater inflater;
-    public DiaryListRecyclerViewAdapter(Context context,List<PlaceholderItem> itemList)
+    public DiaryListRecyclerViewAdapter(Context context,List<Diary> itemList)
     {
         this.itemList=itemList;
         inflater=LayoutInflater.from(context);
@@ -95,8 +94,9 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
 
     @Override
     public void onBindViewHolder(@NonNull DiaryListRecyclerViewAdapter.DiaryListViewHolder holder, int position) {
-        PlaceholderItem item=itemList.get(position);
-        holder.itemView.setText(item.content);
+        Diary item=itemList.get(position);
+        holder.titleView.setText(item.getTitle());
+        holder.descriptionView.setText(item.getDescription());
     }
 
     @Override
@@ -104,12 +104,14 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
         return itemList.size();
     }
     class DiaryListViewHolder extends RecyclerView.ViewHolder{
-        public TextView itemView;
+        public TextView titleView;
+        public TextView descriptionView;
         public DiaryListRecyclerViewAdapter adapter;
         public DiaryListViewHolder(View view,DiaryListRecyclerViewAdapter adapter)
         {
             super(view);
-            itemView=(TextView) view.findViewById(R.id.content);
+            titleView=(TextView) view.findViewById(R.id.title);
+            descriptionView=(TextView) view.findViewById(R.id.description);
             this.adapter=adapter;
         }
 
