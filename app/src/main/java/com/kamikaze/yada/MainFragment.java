@@ -1,5 +1,7 @@
 package com.kamikaze.yada;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -66,8 +69,17 @@ public class MainFragment extends Fragment {
         floatingActionButton=(FloatingActionButton) view.findViewById(R.id.floating_button);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Button works, now implement add thing", Toast.LENGTH_SHORT).show();
+            public void onClick(View viewed) {
+                View dialogView=inflater.inflate(R.layout.diary_input_dialog,container,false);
+                EditText titleView=(EditText) dialogView.findViewById(R.id.title_input);
+                EditText descriptionView=(EditText) dialogView.findViewById(R.id.description_input);
+                new AlertDialog.Builder(view.getContext()).setView(dialogView).setTitle("Create new diary").setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(view.getContext(), "Done ig vai", Toast.LENGTH_SHORT).show();
+                        dialogInterface.cancel();
+                    }
+                }).show();
             }
         });
         return view;
