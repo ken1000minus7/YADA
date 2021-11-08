@@ -1,20 +1,18 @@
-package com.kamikaze.yada;
+package com.kamikaze.yada.diary;
 
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+
+import com.kamikaze.yada.R;
 
 import java.util.ArrayList;
 
@@ -67,21 +65,8 @@ public class DiaryListFragment extends Fragment {
 
             //To be replaced with the list obtained from firebase
             ArrayList<Diary> diaries=new ArrayList<>();
-            DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries);
-            recyclerView.setAdapter(adapter);
-            ItemTouchHelper.SimpleCallback itemTouchCallback=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
-                @Override
-                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                    return false;
-                }
 
-                @Override
-                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                    Toast.makeText(getContext(), "Deleting this soon wen firebase done", Toast.LENGTH_SHORT).show();
-                }
-            };
-            ItemTouchHelper itemTouchHelper=new ItemTouchHelper(itemTouchCallback);
-            itemTouchHelper.attachToRecyclerView(recyclerView);
+            recyclerView.setAdapter(new DiaryListRecyclerViewAdapter(context,diaries));
         }
         return view;
     }

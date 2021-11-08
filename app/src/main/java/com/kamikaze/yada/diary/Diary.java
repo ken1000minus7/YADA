@@ -1,4 +1,4 @@
-package com.kamikaze.yada;
+package com.kamikaze.yada.diary;
 
 import android.location.Location;
 import android.location.LocationManager;
