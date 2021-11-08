@@ -1,4 +1,4 @@
-package com.kamikaze.yada;
+package com.kamikaze.yada.diary;
 
 public class Diary {
     private String title;

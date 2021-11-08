@@ -10,21 +10,22 @@
         android:name="com.kamikaze.yada.LandingFragment"
         android:label="LandingFragment" >
         <action
-            android:id="@+id/action_landingFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.kamikaze.yada.ui.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_landingFragment_to_loginActivity"
+            app:destination="@id/loginActivity" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.kamikaze.yada.MainFragment"
+        android:name="com.kamikaze.yada.diary.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/diaryListFragment"
+        android:name="com.kamikaze.yada.diary.DiaryListFragment"
+        android:label="fragment_diary_list"
+        tools:layout="@layout/fragment_diary_list" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.kamikaze.yada.auth.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>

@@ -1,4 +1,7 @@
 package com.kamikaze.yada.model
 
-class User {
-}
+data class User (
+    val uid: String = "" ,
+    val displayName : String? = "",
+            val imageUrl: String = "")
+
