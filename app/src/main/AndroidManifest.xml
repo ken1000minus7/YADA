@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YADA">
         <activity
+            android:name=".auth.Check"
+            android:exported="false" />
+
+        <activity
+            android:name=".auth.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
