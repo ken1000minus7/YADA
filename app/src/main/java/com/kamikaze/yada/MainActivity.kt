@@ -48,9 +48,9 @@ class MainActivity : AppCompatActivity() {
             return
         }
         val user = User(firebaseuser.uid , firebaseuser.displayName, firebaseuser.photoUrl.toString())
-        val userDao = UserDao()
-        userDao.addUser(user)
-        startActivity(Intent(this, Check::class.java))
+//        val userDao = UserDao()
+//        userDao.addUser(user)
+        startActivity(Intent(this, MainPageActivity::class.java))
         finish()
     }
 }

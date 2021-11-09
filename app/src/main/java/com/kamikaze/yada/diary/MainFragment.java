@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kamikaze.yada.R;
@@ -60,10 +59,15 @@ public class MainFragment extends Fragment {
                 View dialogView=inflater.inflate(R.layout.diary_input_dialog,container,false);
                 EditText titleView=(EditText) dialogView.findViewById(R.id.title_input);
                 EditText descriptionView=(EditText) dialogView.findViewById(R.id.description_input);
+                EditText location=(EditText) dialogView.findViewById(R.id.location_input);
                 new AlertDialog.Builder(view.getContext()).setView(dialogView).setTitle("Create new diary").setPositiveButton("Create", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(view.getContext(), "Done ig vai", Toast.LENGTH_SHORT).show();
+
+                        DiaryHandler diaryHandler=new DiaryHandler(getContext());
+                        Diary diary=new Diary(titleView.getText().toString(),descriptionView.getText().toString(), location.getText().toString());
+//                        diaryHandler.loadData(view.findViewById(R.id.list));
+                        diaryHandler.addDiary(diary,view.findViewById(R.id.list));
                         dialogInterface.cancel();
                     }
                 }).show();
