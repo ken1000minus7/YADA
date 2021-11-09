@@ -140,13 +140,12 @@
         android:shadowColor="@color/primary"
         android:layout_marginEnd="48dp"
 
-        android:text="@string/action_sign_in"
+        android:text="@string/login_back"
         app:layout_constraintBottom_toBottomOf="@id/peach2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pass"
         />
-
 
     <Button
         android:id="@+id/btnSignIn"
@@ -157,7 +156,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintTop_toBottomOf="@id/login_again"
         app:layout_constraintVertical_bias="0.584" />
 
     <View
@@ -167,9 +166,18 @@
         app:layout_constraintTop_toTopOf="@id/peach2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         android:background="?android:attr/listDivider"
         app:layout_constraintTop_toBottomOf="@+id/login"
         tools:layout_editor_absoluteX="16dp" />
+
+    <Button
+        android:id="@+id/login_again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

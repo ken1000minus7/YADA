@@ -13,6 +13,9 @@
             android:name=".MainPageActivity"
             android:exported="false" />
         <activity
+            android:name=".auth.NewSignUp"
+            android:exported="false" />
+        <activity
             android:name=".auth.Check"
             android:exported="false" />
         <activity
