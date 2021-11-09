@@ -5,7 +5,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in with Email</string>
+    <string name="action_register">Register with Email</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
@@ -14,6 +14,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="default_web_client" translatable="false">891929709408-1qivi9tr5d9o50ff3tfqdvlsj2b7nkd0.apps.googleusercontent.com</string>
     <string name="sign_in_google">Sign In With Google</string>
+    <string name="login_back">Login Back</string>
 
 
 </resources>

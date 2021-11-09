@@ -1,8 +1,8 @@
 package com.kamikaze.yada.auth
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -27,66 +27,89 @@ class LoginActivity : AppCompatActivity() {
     }
     private lateinit var auth: FirebaseAuth
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        auth = Firebase.auth
-
         var username = findViewById<EditText>(R.id.username)
         var epass = findViewById<EditText>(R.id.password)
         val emailsignin = findViewById<Button>(R.id.login)
+        val emailbutton = findViewById<Button>(R.id.login_again)
 
 
         val btnSignIn = findViewById<Button>(R.id.btnSignIn)
+        auth = Firebase.auth
+
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client))
             .requestEmail()
             .build()
         val client : GoogleSignInClient = GoogleSignIn.getClient(this ,gso)
         btnSignIn.setOnClickListener{
+
             val signInIntent = client.signInIntent
             startActivityForResult(signInIntent , RC_SIGN_IN)
         }
+
+        //login_again with email and password.
+        emailbutton.setOnClickListener{
+
+            val emailnewpage = Intent(this , NewSignUp::class.java)
+            startActivity(emailnewpage)
+        }
+
     // Email Sign in
+
         emailsignin.setOnClickListener {
-        val username_text = username.text.toString()
+
+
+            val username_text = username.text.toString()
             val epass_text = epass.text.toString()
-       auth.createUserWithEmailAndPassword(username_text, epass_text)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithEmail:success")
-                        val firebaseUser = task.result!!.user!!
-                        val user = User(firebaseUser.uid , firebaseUser.displayName, firebaseUser.photoUrl.toString())
-                        val userDao = UserDao()
-                        userDao.addUser(user)
-
-                        Toast.makeText(
-                            this, "You were registered!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                        val intent = Intent(this, Check::class.java)
-                        intent.flags =
-                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        intent.putExtra("username", firebaseUser.uid)
-                        intent.putExtra("email-id", username_text)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "signInWithEmail:failure", task.exception)
-                        Toast.makeText(
-                            baseContext, "Authentication failed.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                    }
-                }
+           connectuser(username_text , epass_text ,username , epass)
         }
     }
 
+    private fun connectuser(username_text: String, epass_text: String, username: EditText , epass: EditText) {
 
+        if (username_text.isEmpty()){
+            username.error = "Please enter email"
+            username.requestFocus()
+            return
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(username_text).matches()){
+            username.error = "Please enter valid email"
+            username.requestFocus()
+            return
+        }
+        if(epass_text.isEmpty()){
+            epass.error = "Please enter password"
+            epass.requestFocus()
+            return
+        }
+
+
+
+
+        auth.signInWithEmailAndPassword(username_text, epass_text)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithEmail:success")
+
+
+                    val user = auth.currentUser
+                    updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                    updateUI(null)
+                }
+            }
+
+    }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -128,6 +151,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
+
 
         updateUI(currentUser)
     }
