@@ -15,10 +15,20 @@ class UserDao {
 
     fun addUser(user: User?){
         if (user != null) {
+//            db.collection("users")
+//                .add(user)
+//                .addOnSuccessListener { documentReference ->
+//                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+//                }
+//                .addOnFailureListener{e ->
+//                    Log.w(TAG, "Error adding document", e)
+//
+//                }
             db.collection("users")
-                .add(user)
+                .document(user.uid)
+                .set(user)
                 .addOnSuccessListener { documentReference ->
-                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                    Log.d(TAG, "DocumentSnapshot added with ID: ${user.uid}")
                 }
                 .addOnFailureListener{e ->
                     Log.w(TAG, "Error adding document", e)

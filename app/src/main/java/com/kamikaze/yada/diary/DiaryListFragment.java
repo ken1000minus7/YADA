@@ -3,15 +3,21 @@ package com.kamikaze.yada.diary;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.kamikaze.yada.MainActivity;
+import com.kamikaze.yada.MainPageActivity;
 import com.kamikaze.yada.R;
 
 import java.util.ArrayList;
@@ -64,9 +70,33 @@ public class DiaryListFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
             //To be replaced with the list obtained from firebase
-            ArrayList<Diary> diaries=new ArrayList<>();
+//            ArrayList<Diary> diaries=new ArrayList<>();
+//            diaries.add(new Diary("title","desc"));
+//            diaries.add(new Diary("title","desc"));
+//            diaries.add(new Diary("title","desc"));
+//            diaries.add(new Diary("title","desc"));
+//            diaries.add(new Diary("title","desc"));
+//            diaries.add(new Diary("title","desc"));
+//            diaries.add(new Diary("title","desc"));
+//            diaries.add(new Diary("title","desc"));
+//            diaries.add(new Diary("title","desc"));
+            DiaryHandler diaryHandler=new DiaryHandler(getContext());
+            diaryHandler.loadData(recyclerView);
+            DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaryHandler.getDiaries());
+            recyclerView.setAdapter(adapter);
+            ItemTouchHelper.SimpleCallback itemTouchCallback=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
+                @Override
+                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                    return false;
+                }
 
-            recyclerView.setAdapter(new DiaryListRecyclerViewAdapter(context,diaries));
+                @Override
+                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                    diaryHandler.deleteDiary(viewHolder.getAdapterPosition(),recyclerView);
+                }
+            };
+            ItemTouchHelper itemTouchHelper=new ItemTouchHelper(itemTouchCallback);
+            itemTouchHelper.attachToRecyclerView(recyclerView);
         }
         return view;
     }

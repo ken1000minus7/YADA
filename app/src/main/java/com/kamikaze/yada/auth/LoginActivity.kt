@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.kamikaze.yada.MainPageActivity
 import com.kamikaze.yada.R
 import com.kamikaze.yada.dao.UserDao
 import com.kamikaze.yada.model.User
@@ -164,7 +165,7 @@ class LoginActivity : AppCompatActivity() {
         val user = User(firebaseuser.uid , firebaseuser.displayName, firebaseuser.photoUrl.toString())
         val userDao = UserDao()
         userDao.addUser(user)
-        startActivity(Intent(this, Check::class.java))
+        startActivity(Intent(this, MainPageActivity::class.java))
         finish()
     }
 
