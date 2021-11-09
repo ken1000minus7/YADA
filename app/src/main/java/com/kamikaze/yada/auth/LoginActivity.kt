@@ -162,9 +162,7 @@ class LoginActivity : AppCompatActivity() {
             Log.w(TAG, "user is null , not going to navigate")
             return
         }
-        val user = User(firebaseuser.uid , firebaseuser.displayName, firebaseuser.photoUrl.toString())
-        val userDao = UserDao()
-        userDao.addUser(user)
+
         startActivity(Intent(this, MainPageActivity::class.java))
         finish()
     }

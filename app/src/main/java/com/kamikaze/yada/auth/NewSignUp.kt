@@ -16,6 +16,7 @@ import androidx.annotation.DrawableRes
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.kamikaze.yada.MainPageActivity
 import com.kamikaze.yada.auth.LoginActivity.Companion.TAG
 import com.kamikaze.yada.dao.UserDao
 import com.kamikaze.yada.model.User
@@ -66,7 +67,7 @@ class NewSignUp : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
 
-                        val intent = Intent(this, Check::class.java)
+                        val intent = Intent(this, MainPageActivity::class.java)
                         intent.flags =
                             Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         intent.putExtra("username", firebaseUser.uid)
