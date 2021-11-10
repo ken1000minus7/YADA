@@ -47,9 +47,6 @@ class MainActivity : AppCompatActivity() {
             Log.w(LoginActivity.TAG, "go next page")
             return
         }
-        val user = User(firebaseuser.uid , firebaseuser.displayName, firebaseuser.photoUrl.toString())
-//        val userDao = UserDao()
-//        userDao.addUser(user)
         startActivity(Intent(this, MainPageActivity::class.java))
         finish()
     }

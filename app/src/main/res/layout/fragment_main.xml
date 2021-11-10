@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ECD0BC"
+
     tools:context=".diary.MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -40,5 +42,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp" />
+        android:layout_marginRight="@dimen/_20sdp"/>
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/empty_background"
+        app:srcCompat="@drawable/empty_list_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:layout_marginHorizontal="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_19sdp"/>
+
+    <TextView
+        android:id="@+id/start_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start a diary"
+        android:visibility="gone"
+        android:textAppearance="@style/start_a_dia"
+        app:layout_constraintBottom_toBottomOf="@+id/empty_background"
+        app:layout_constraintEnd_toEndOf="@+id/empty_background"
+        app:layout_constraintStart_toStartOf="@+id/empty_background"
+        app:layout_constraintTop_toTopOf="@+id/empty_background"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

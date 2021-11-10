@@ -54,6 +54,27 @@ public class DiaryHandler {
         });
     }
 
+    public void loadData()
+    {
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db=FirebaseFirestore.getInstance();
+        db.collection("users").document(firebaseUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    DocumentSnapshot documentSnapshot= task.getResult();
+                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, String>>) documentSnapshot.get("diaries"));
+                    currentUser.setDiaries(diaries);
+                }
+                else
+                {
+                    Toast.makeText(context, "You failed, failure", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     public void deleteDiary(int position,RecyclerView recyclerView)
     {
         FirebaseFirestore db= FirebaseFirestore.getInstance();
@@ -88,13 +109,17 @@ public class DiaryHandler {
 
     public ArrayList<Diary> getDiaries()
     {
-        if(currentUser !=null) return currentUser.getDiaries();
-        return new ArrayList<Diary>();
+        if(currentUser !=null)
+        {
+            loadData();
+            return currentUser.getDiaries();
+        }
+        return new ArrayList<>();
     }
 
     public Diary getDiary(int position)
     {
-        if(currentUser!=null && position<currentUser.getDiaries().size()) return currentUser.getDiaries().get(position);
+        if(currentUser!=null && position<currentUser.getDiaries().size()) return getDiaries().get(position);
         return null;
     }
 
@@ -130,9 +155,38 @@ public class DiaryHandler {
         });
     }
 
-    public void updateDiary()
+    public void updateDiary(int position,String bgImageUrl,RecyclerView recyclerView)
     {
+        FirebaseFirestore db= FirebaseFirestore.getInstance();
+        DocumentReference documentReference=db.collection("users").document(currentUser.getUid());
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+//                    currentUser.getDiaries().add(diary);
+                    DocumentSnapshot documentSnapshot=task.getResult();
+                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, String>>) documentSnapshot.get("diaries"));
+                    Diary item= diaries.get(position);
+                    item.setBgImageUrl(bgImageUrl);
+                    diaries.set(position,item);
+                    currentUser.setDiaries(diaries);
+                    DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries);
+                    recyclerView.setAdapter(adapter);
+                    Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
+                    documentReference.update("diaries",diaries).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful())
+                            {
+                                Log.d("Updation","Diary bgImageUrl updated successfully");
+                            }
+                        }
+                    });
 
+                }
+            }
+        });
     }
 
     public ArrayList<Diary> convertToDiary(List<HashMap<String,String>> diaryContent)

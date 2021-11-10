@@ -1,6 +1,8 @@
 package com.kamikaze.yada.diary;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -69,17 +71,6 @@ public class DiaryListFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-            //To be replaced with the list obtained from firebase
-//            ArrayList<Diary> diaries=new ArrayList<>();
-//            diaries.add(new Diary("title","desc"));
-//            diaries.add(new Diary("title","desc"));
-//            diaries.add(new Diary("title","desc"));
-//            diaries.add(new Diary("title","desc"));
-//            diaries.add(new Diary("title","desc"));
-//            diaries.add(new Diary("title","desc"));
-//            diaries.add(new Diary("title","desc"));
-//            diaries.add(new Diary("title","desc"));
-//            diaries.add(new Diary("title","desc"));
             DiaryHandler diaryHandler=new DiaryHandler(getContext());
             diaryHandler.loadData(recyclerView);
             DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaryHandler.getDiaries());
@@ -92,7 +83,23 @@ public class DiaryListFragment extends Fragment {
 
                 @Override
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                    diaryHandler.deleteDiary(viewHolder.getAdapterPosition(),recyclerView);
+                    View confirmDialog=LayoutInflater.from(context).inflate(R.layout.confirm_dialog,container,false);
+
+                    new AlertDialog.Builder(context).setView(confirmDialog).setTitle("Are you sure you want to delete this diary?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            diaryHandler.loadData();
+                            diaryHandler.deleteDiary(viewHolder.getPosition(),recyclerView);
+                            dialogInterface.cancel();
+                        }
+                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            diaryHandler.loadData(recyclerView);
+                            dialogInterface.cancel();
+                        }
+                    }).show();
+
                 }
             };
             ItemTouchHelper itemTouchHelper=new ItemTouchHelper(itemTouchCallback);

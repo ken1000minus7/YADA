@@ -89,6 +89,7 @@ import java.util.*;
 public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryListRecyclerViewAdapter.DiaryListViewHolder>{
     public List<Diary> itemList;
     private LayoutInflater inflater;
+    private RecyclerView recyclerView;
     public DiaryListRecyclerViewAdapter(Context context,List<Diary> itemList)
     {
         this.itemList=itemList;
@@ -98,6 +99,7 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
     @Override
     public DiaryListRecyclerViewAdapter.DiaryListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view =inflater.inflate(R.layout.fragment_diary_list_item,parent,false);
+        recyclerView= (RecyclerView) parent;
         return new DiaryListViewHolder(view,this);
     }
 
@@ -108,7 +110,7 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
         holder.descriptionView.setText(item.getDescription());
         if(item.getLocation()!=null)
         {
-            if( item.getBgImageUrl()==null) new ImageGetter(item.getLocation(),holder.locationImage,item).execute();
+            if( item.getBgImageUrl()==null) new ImageGetter(item.getLocation(),holder.locationImage,item,position).execute();
             else Picasso.get().load(item.getBgImageUrl()).into(holder.locationImage);
         }
 
@@ -138,15 +140,17 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
         String location;
         ImageView locationImage;
         Diary item;
-        public ImageGetter(String location,ImageView locationImage,Diary item)
+        int position;
+        public ImageGetter(String location,ImageView locationImage,Diary item,int position)
         {
             this.location=location;
             this.locationImage=locationImage;
             this.item=item;
+            this.position=position;
         }
         @Override
         protected String doInBackground(Void... voids) {
-            String searchUrl= "https://www.google.com/search?q=" + location + "+tourism+unsplash"+ "&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiUpP35yNXiAhU1BGMBHdDeBAgQ_AUIECgB";
+            String searchUrl= "https://www.google.com/search?q=" + location + "+tourism+1080p"+ "&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiUpP35yNXiAhU1BGMBHdDeBAgQ_AUIECgB";
 //            String searchUrl="https://api.unsplash.com/search/photos?query="+location+"+tourism&client_id=6fa91622109e859b1c40218a5dead99f7262cf4f698b1e2cb89dd18fc5824d15";
             Log.d("searchy",searchUrl);
             String result=null;
@@ -155,7 +159,7 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
                 Document document=Jsoup.connect(searchUrl).get();
                 String siteResponse=document.toString();
                 Elements media=document.select("[data-src]");
-                int position= new Random().nextInt(media.size()/2);
+                int position= new Random().nextInt(Math.min(10, media.size()));
                 Element image= media.get(position);
                 String imageUrl=image.attr("abs:data-src");
                 result =imageUrl.replace("&quot", "");
@@ -172,7 +176,7 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            item.setBgImageUrl(s);
+            new DiaryHandler(locationImage.getContext()).updateDiary(position,s,recyclerView);
             Picasso.get().load(s).into(locationImage);
         }
     }
