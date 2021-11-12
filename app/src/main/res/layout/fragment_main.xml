@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ECD0BC"
-
     tools:context=".diary.MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -21,7 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/_10sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            android:elevation="@dimen/_200sdp"
             android:background="@drawable/search_bar_background"/>
     </androidx.appcompat.widget.Toolbar>
     <androidx.fragment.app.FragmentContainerView
@@ -33,7 +31,54 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         class="com.kamikaze.yada.diary.DiaryListFragment"
+        tools:layout="@layout/fragment_diary_list"
         />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_temp_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/_23sdp"
+        android:layout_marginBottom="@dimen/_23sdp"
+        app:srcCompat="@drawable/ic_location"
+        android:tooltipText="Temp"
+        app:maxImageSize="@dimen/_38sdp"
+        app:fabSize="mini"
+        app:backgroundTint="@android:color/transparent"
+        android:outlineSpotShadowColor="@android:color/transparent"
+        android:outlineProvider="none"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_favorite_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/_23sdp"
+        android:layout_marginBottom="@dimen/_23sdp"
+        app:srcCompat="@drawable/ic_favorite"
+        app:maxImageSize="@dimen/_38sdp"
+        app:fabSize="mini"
+        app:backgroundTint="@android:color/transparent"
+        android:outlineSpotShadowColor="@android:color/transparent"
+        android:outlineProvider="none"
+        android:tooltipText="Favorites"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_diary_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/_23sdp"
+        android:layout_marginBottom="@dimen/_23sdp"
+        app:srcCompat="@drawable/ic_add_diary"
+        app:maxImageSize="@dimen/_38sdp"
+        android:outlineSpotShadowColor="@android:color/transparent"
+        android:outlineProvider="none"
+        app:fabSize="mini"
+        app:backgroundTint="@android:color/transparent"
+        android:tooltipText="New diary"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_button"
         android:layout_width="wrap_content"
@@ -42,7 +87,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp"/>
+        app:srcCompat="@drawable/ic_plus_button"
+        app:maxImageSize="@dimen/_52sdp"
+        android:focusable="true"
+        android:elevation="@dimen/_20sdp"
+        app:fabSize="normal"
+        app:backgroundTint="@android:color/white"/>
+
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_profile"/>
+
+    <item
+        android:id="@+id/security"
+        android:title="Security"
+        android:icon="@drawable/ic_security"/>
+
+    <item
+        android:id="@+id/customize"
+        android:title="Customize"
+        android:icon="@drawable/ic_customize"/>
+
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"/>
+
+
+
+    <item
+        android:id="@+id/logout"
+        android:title="Log out"
+        android:icon="@drawable/ic_logout"/>
+</menu>

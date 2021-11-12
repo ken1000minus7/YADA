@@ -2,6 +2,7 @@ package com.kamikaze.yada.diary;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,7 +25,7 @@ public class MainFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    boolean fabOpen=false;
     public MainFragment() {
 
     }
@@ -52,8 +53,39 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_main, container, false);
+
+
         floatingActionButton=(FloatingActionButton) view.findViewById(R.id.floating_button);
+        FloatingActionButton diaryButton=(FloatingActionButton) view.findViewById(R.id.floating_diary_button);
+        FloatingActionButton favoriteButton=(FloatingActionButton) view.findViewById(R.id.floating_favorite_button);
+        FloatingActionButton tempButton=(FloatingActionButton) view.findViewById(R.id.floating_temp_button);
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(fabOpen)
+                {
+                    fabOpen=false;
+                    diaryButton.animate().translationY(0);
+                    favoriteButton.animate().translationX(0).translationY(0);
+                    tempButton.animate().translationX(0);
+                    floatingActionButton.setImageResource(R.drawable.ic_plus_button);
+                    floatingActionButton.setBackgroundColor(Color.WHITE);
+                }
+                else
+                {
+                    fabOpen=true;
+                    diaryButton.animate().translationY(-getResources().getDimension(R.dimen._53sdp));
+                    favoriteButton.animate().translationY(-getResources().getDimension(R.dimen._53sdp)/1.414f).translationX(-getResources().getDimension(R.dimen._53sdp)/1.414f);
+                    tempButton.animate().translationX(-getResources().getDimension(R.dimen._53sdp));
+                    floatingActionButton.setImageResource(R.drawable.ic_close);
+                    floatingActionButton.setBackgroundColor(Color.BLACK);
+                }
+            }
+        });
+
+
+        diaryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View viewed) {
                 View dialogView=inflater.inflate(R.layout.diary_input_dialog,container,false);
