@@ -1,5 +1,6 @@
 package com.kamikaze.yada;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,7 +70,14 @@ public class FeatureFragment extends Fragment {
                 return false;
             }
         });
-
+        Button hikerButton=(Button) view.findViewById(R.id.hiker_button);
+        hikerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(),HikersWatchActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

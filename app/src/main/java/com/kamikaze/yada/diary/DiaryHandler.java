@@ -44,7 +44,7 @@ public class DiaryHandler {
                 if(task.isSuccessful())
                 {
                     DocumentSnapshot documentSnapshot= task.getResult();
-                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, String>>) documentSnapshot.get("diaries"));
+                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
                     currentUser.setDiaries(diaries);
                     recyclerView.setAdapter(new DiaryListRecyclerViewAdapter(context,diaries));
                 }
@@ -66,7 +66,7 @@ public class DiaryHandler {
                 if(task.isSuccessful())
                 {
                     DocumentSnapshot documentSnapshot= task.getResult();
-                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, String>>) documentSnapshot.get("diaries"));
+                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
                     currentUser.setDiaries(diaries);
                 }
                 else
@@ -88,7 +88,7 @@ public class DiaryHandler {
                 {
 //                    currentUser.getDiaries().add(diary);
                     DocumentSnapshot documentSnapshot=task.getResult();
-                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, String>>) documentSnapshot.get("diaries"));
+                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
                     diaries.remove(position);
                     DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries);
                     recyclerView.setAdapter(adapter);
@@ -136,7 +136,7 @@ public class DiaryHandler {
                 {
 //                    currentUser.getDiaries().add(diary);
                     DocumentSnapshot documentSnapshot=task.getResult();
-                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, String>>) documentSnapshot.get("diaries"));
+                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
                     diaries.add(diary);
                     currentUser.setDiaries(diaries);
                     DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries);
@@ -168,7 +168,7 @@ public class DiaryHandler {
                 {
 //                    currentUser.getDiaries().add(diary);
                     DocumentSnapshot documentSnapshot=task.getResult();
-                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, String>>) documentSnapshot.get("diaries"));
+                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
                     Diary item= diaries.get(position);
                     item.setBgImageUrl(bgImageUrl);
                     diaries.set(position,item);
@@ -191,13 +191,24 @@ public class DiaryHandler {
         });
     }
 
-    public ArrayList<Diary> convertToDiary(List<HashMap<String,String>> diaryContent)
+    public ArrayList<Diary> convertToDiary(List<HashMap<String,Object>> diaryContent)
     {
         ArrayList<Diary> diaries=new ArrayList<>();
         for(int i=0;i<diaryContent.size();i++)
         {
-            Notes note=new Notes(diaryContent.get(i).get("note").get("topic"),diaryContent.get(i).get("note").get("desc"),diaryContent.get(i).get("note").get("location"));
-            diaries.add(new Diary(diaryContent.get(i).get("title"),diaryContent.get(i).get("description"),diaryContent.get(i).get("location"),diaryContent.get(i).get("bgImageUrl"),note));         }
+            HashMap<String,String> noteContent= (HashMap<String, String>) diaryContent.get(i).get("note");
+            Notes note=null;
+            String dtitle=null;
+            String ddescription=null;
+            String dlocation=null;
+            String dbgImageUrl=null;
+            if(diaryContent.get(i).get("title")!=null) dtitle=diaryContent.get(i).get("title").toString();
+            if(diaryContent.get(i).get("description")!=null) ddescription=diaryContent.get(i).get("description").toString();
+            if(diaryContent.get(i).get("location")!=null) dlocation=diaryContent.get(i).get("location").toString();
+            if(diaryContent.get(i).get("bgImageUrl")!=null) dbgImageUrl=diaryContent.get(i).get("bgImageUrl").toString();
+            if(noteContent!=null) note=new Notes(noteContent.get("topic"),noteContent.get("description"),noteContent.get("location"),noteContent.get("textnote"));
+
+            diaries.add(new Diary(dtitle,ddescription,dlocation,dbgImageUrl,note));         }
         return diaries;
     }
 }

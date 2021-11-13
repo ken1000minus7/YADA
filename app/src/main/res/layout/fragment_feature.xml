@@ -24,14 +24,17 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/memorable_button"
             android:layout_marginHorizontal="@dimen/_5sdp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/hiker_button"
             android:layout_marginHorizontal="@dimen/_5sdp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/path_button"
             android:layout_marginHorizontal="@dimen/_5sdp"/>
     </androidx.appcompat.widget.Toolbar>
 

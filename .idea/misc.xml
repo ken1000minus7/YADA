@@ -11,6 +11,7 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/search_bar_background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/sidebar_background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout-v21/fragment_login.xml" value="0.24003623188405798" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_hikers_watch.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_main.xml" value="0.1766304347826087" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_main2.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_main_page.xml" value="0.264" />
@@ -24,7 +25,6 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_main.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_maps.xml" value="0.2" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/menu/sidebar_menu.xml" value="0.25" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_write_diary.xml" value="0.13020833333333334" />
       </map>
     </option>
   </component>

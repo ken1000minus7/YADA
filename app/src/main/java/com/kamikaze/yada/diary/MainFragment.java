@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kamikaze.yada.R;
+import com.kamikaze.yada.model.Notes;
 
 public class MainFragment extends Fragment {
 
@@ -97,7 +98,8 @@ public class MainFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         DiaryHandler diaryHandler=new DiaryHandler(getContext());
-                        Diary diary=new Diary(titleView.getText().toString(),descriptionView.getText().toString(), location.getText().toString() );
+//                        Notes note=new Notes("Trip to New York","Very good trip","New York","I went to new york and saw spidey boi");
+                        Diary diary=new Diary(titleView.getText().toString(),descriptionView.getText().toString(), location.getText().toString());
 //                        diaryHandler.loadData(view.findViewById(R.id.list));
                         diaryHandler.addDiary(diary,view.findViewById(R.id.list));
                         dialogInterface.cancel();

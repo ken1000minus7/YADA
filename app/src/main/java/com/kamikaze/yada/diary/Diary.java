@@ -9,16 +9,10 @@ public class Diary {
     private String description;
     private String location;
     private String bgImageUrl=null;
-    private Notes note ;
+    private Notes note=null ;
 
 
-    public String getBgImageUrl() {
-        return bgImageUrl;
-    }
 
-    public void setBgImageUrl(String bgImageUrl) {
-        this.bgImageUrl = bgImageUrl;
-    }
 
     public Diary(String title, String description, String location , Notes note) {
         this.title = title;
@@ -33,6 +27,19 @@ public class Diary {
         this.location = location;
         this.bgImageUrl = bgImageUrl;
         this.note = note;
+    }
+
+    public Diary(String title, String description, String location) {
+        this.title = title;
+        this.description = description;
+        this.location = location;
+    }
+    public String getBgImageUrl() {
+        return bgImageUrl;
+    }
+
+    public void setBgImageUrl(String bgImageUrl) {
+        this.bgImageUrl = bgImageUrl;
     }
 
     public String getLocation() {
@@ -57,5 +64,13 @@ public class Diary {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Notes getNote() {
+        return note;
+    }
+
+    public void setNote(Notes note) {
+        this.note = note;
     }
 }
