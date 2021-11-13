@@ -7,16 +7,14 @@
     android:id="@+id/drawer_layout"
     tools:openDrawer="start"
     tools:context=".MainPageActivity">
-        <androidx.fragment.app.FragmentContainerView
+        <androidx.viewpager2.widget.ViewPager2
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/main_fragment_container"
-            class="com.kamikaze.yada.diary.MainFragment"
-            tools:layout="@layout/fragment_main" />
+            tools:layout="@layout/fragment_main"/>
         <com.google.android.material.navigation.NavigationView
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_150sdp"
             android:id="@+id/sidebar"
-            android:layout_marginEnd="@dimen/_120sdp"
             android:layout_height="match_parent"
             android:layout_marginVertical="@dimen/_60sdp"
             android:fitsSystemWindows="true"
@@ -25,4 +23,13 @@
             app:itemIconSize="@dimen/_25sdp"
             android:background="#FFD2B2"
             app:menu="@menu/sidebar_menu" />
+
+
 </androidx.drawerlayout.widget.DrawerLayout>
+
+<!--<androidx.fragment.app.FragmentContainerView-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:id="@+id/main_fragment_container"-->
+<!--class="com.kamikaze.yada.diary.MainFragment"-->
+<!--tools:layout="@layout/fragment_main" />-->
