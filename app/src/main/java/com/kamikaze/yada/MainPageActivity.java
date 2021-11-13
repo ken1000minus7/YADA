@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -25,12 +26,16 @@ import com.kamikaze.yada.model.User;
 import java.util.ArrayList;
 
 public class MainPageActivity extends AppCompatActivity {
+    ViewPager2 viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         DrawerLayout drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView sidebar=(NavigationView) findViewById(R.id.sidebar);
+        viewPager=(ViewPager2) findViewById(R.id.main_fragment_container);
+        MainFragmentPagerAdapter adapter=new MainFragmentPagerAdapter(this);
+        viewPager.setAdapter(adapter);
         sidebar.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -58,5 +63,10 @@ public class MainPageActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        if(viewPager.getCurrentItem()==0) super.onBackPressed();
+        else viewPager.setCurrentItem(0);
+    }
 
 }
