@@ -97,7 +97,7 @@ public class MainFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         DiaryHandler diaryHandler=new DiaryHandler(getContext());
-                        Diary diary=new Diary(titleView.getText().toString(),descriptionView.getText().toString(), location.getText().toString());
+                        Diary diary=new Diary(titleView.getText().toString(),descriptionView.getText().toString(), location.getText().toString() );
 //                        diaryHandler.loadData(view.findViewById(R.id.list));
                         diaryHandler.addDiary(diary,view.findViewById(R.id.list));
                         dialogInterface.cancel();

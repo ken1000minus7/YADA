@@ -2,6 +2,7 @@ package com.kamikaze.yada.diary;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.kamikaze.yada.model.Notes;
 import com.kamikaze.yada.model.User;
 
 import java.util.ArrayList;
@@ -194,8 +196,8 @@ public class DiaryHandler {
         ArrayList<Diary> diaries=new ArrayList<>();
         for(int i=0;i<diaryContent.size();i++)
         {
-            diaries.add(new Diary(diaryContent.get(i).get("title"),diaryContent.get(i).get("description"),diaryContent.get(i).get("location"),diaryContent.get(i).get("bgImageUrl")));
-        }
+            Notes note=new Notes(diaryContent.get(i).get("note").get("topic"),diaryContent.get(i).get("note").get("desc"),diaryContent.get(i).get("note").get("location"));
+            diaries.add(new Diary(diaryContent.get(i).get("title"),diaryContent.get(i).get("description"),diaryContent.get(i).get("location"),diaryContent.get(i).get("bgImageUrl"),note));         }
         return diaries;
     }
 }

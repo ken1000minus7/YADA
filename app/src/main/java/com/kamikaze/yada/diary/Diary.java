@@ -1,10 +1,16 @@
 package com.kamikaze.yada.diary;
 
+import android.widget.EditText;
+
+import com.kamikaze.yada.model.Notes;
+
 public class Diary {
     private String title;
     private String description;
     private String location;
     private String bgImageUrl=null;
+    private Notes note ;
+
 
     public String getBgImageUrl() {
         return bgImageUrl;
@@ -14,17 +20,19 @@ public class Diary {
         this.bgImageUrl = bgImageUrl;
     }
 
-    public Diary(String title, String description, String location) {
+    public Diary(String title, String description, String location , Notes note) {
         this.title = title;
         this.description = description;
         this.location = location;
+        this.note = note;
     }
 
-    public Diary(String title, String description, String location, String bgImageUrl) {
+    public Diary(String title, String description, String location, String bgImageUrl, Notes note) {
         this.title = title;
         this.description = description;
         this.location = location;
         this.bgImageUrl = bgImageUrl;
+        this.note = note;
     }
 
     public String getLocation() {
