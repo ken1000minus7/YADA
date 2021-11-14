@@ -35,18 +35,18 @@ class WriteDiaryFragment : Fragment() {
 
         val writeNote = writeNoteET.text.toString()
 
-        switchTVET.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked){
-                seeNoteTV.setVisibility(View.GONE)
-            writeNoteET.setVisibility(View.VISIBLE)
+//        switchTVET.setOnCheckedChangeListener { buttonView, isChecked ->
+//            if (isChecked){
+//                seeNoteTV.setVisibility(View.GONE)
+//            writeNoteET.setVisibility(View.VISIBLE)
 
-            }
-            else{
-                seeNoteTV.text = writeNoteET.text
-                seeNoteTV.setVisibility(View.VISIBLE)
-                writeNoteET.setVisibility(View.GONE)
-            }
-        }
+//            }
+//            else{
+//                seeNoteTV.text = writeNoteET.text
+//                seeNoteTV.setVisibility(View.VISIBLE)
+//                writeNoteET.setVisibility(View.GONE)
+//            }
+       // }
 
 
 
