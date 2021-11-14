@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,11 +107,12 @@ public class MainFragment extends Fragment {
 //                        Notes note=new Notes("Trip to New York","Very good trip","New York","I went to new york and saw spidey boi");
                         Diary diary=new Diary(titleView.getText().toString(),descriptionView.getText().toString(), location.getText().toString());
 //                        diaryHandler.loadData(view.findViewById(R.id.list));
-                        diaryHandler.addDiary(diary,view.findViewById(R.id.list));
+                        RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.list);
+                        int position=recyclerView.getAdapter().getItemCount();
+                        diaryHandler.addDiary(diary,recyclerView);
                         diaryHandler.loadData();
                         dialogInterface.cancel();
                         Intent intent1 = new Intent(getActivity() , WriteActivity.class);
-                        int position=diaryHandler.getDiaries().size()-1;
                         intent1.putExtra("position",position);
                         startActivity(intent1);
 
