@@ -154,12 +154,13 @@ public class MapsFragment extends Fragment {
                         } else {
                             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
                             Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                            if(lastKnownLocation!=null)
+                            if (lastKnownLocation!=null){
                             mMap.clear();
+
                             LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
                             mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
-                        }
+                        }}
                     }
                 }
             });

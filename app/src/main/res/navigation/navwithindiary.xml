@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navwithindiary"
+    app:startDestination="@id/writeDiaryFragment">
+    <fragment
+        android:id="@+id/writeDiaryFragment"
+        android:name="com.kamikaze.yada.diary.writenotes.WriteDiaryFragment"
+        android:label="fragment_write_diary"
+        tools:layout="@layout/fragment_write_diary" />
+
+</navigation>
