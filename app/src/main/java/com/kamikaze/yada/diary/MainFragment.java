@@ -58,8 +58,9 @@ public class MainFragment extends Fragment {
 
         floatingActionButton=(FloatingActionButton) view.findViewById(R.id.floating_button);
         FloatingActionButton diaryButton=(FloatingActionButton) view.findViewById(R.id.floating_diary_button);
-        FloatingActionButton favoriteButton=(FloatingActionButton) view.findViewById(R.id.floating_favorite_button);
-        FloatingActionButton tempButton=(FloatingActionButton) view.findViewById(R.id.floating_temp_button);
+        FloatingActionButton translateButton=(FloatingActionButton) view.findViewById(R.id.floating_translate_button);
+        FloatingActionButton newsButton=(FloatingActionButton) view.findViewById(R.id.floating_news_button);
+        FloatingActionButton weatherButton=(FloatingActionButton) view.findViewById(R.id.floating_weather_button);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,17 +69,19 @@ public class MainFragment extends Fragment {
                 {
                     fabOpen=false;
                     diaryButton.animate().translationY(0);
-                    favoriteButton.animate().translationX(0).translationY(0);
-                    tempButton.animate().translationX(0);
+                    translateButton.animate().translationY(0);
+                    newsButton.animate().translationY(0);
+                    weatherButton.animate().translationY(0);
                     floatingActionButton.setImageResource(R.drawable.ic_plus_button);
                     floatingActionButton.setBackgroundColor(Color.WHITE);
                 }
                 else
                 {
                     fabOpen=true;
-                    diaryButton.animate().translationY(-getResources().getDimension(R.dimen._53sdp));
-                    favoriteButton.animate().translationY(-getResources().getDimension(R.dimen._53sdp)/1.414f).translationX(-getResources().getDimension(R.dimen._53sdp)/1.414f);
-                    tempButton.animate().translationX(-getResources().getDimension(R.dimen._53sdp));
+                    diaryButton.animate().translationY(-getResources().getDimension(R.dimen._168sdp));
+                    translateButton.animate().translationY(-getResources().getDimension(R.dimen._126sdp));
+                    newsButton.animate().translationY(-getResources().getDimension(R.dimen._84sdp));
+                    weatherButton.animate().translationY(-getResources().getDimension(R.dimen._42sdp));
                     floatingActionButton.setImageResource(R.drawable.ic_close);
                     floatingActionButton.setBackgroundColor(Color.BLACK);
                 }

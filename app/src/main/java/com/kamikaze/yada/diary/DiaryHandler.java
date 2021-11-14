@@ -191,6 +191,38 @@ public class DiaryHandler {
         });
     }
 
+    public void updateDiary(int position,Notes note)
+    {
+        FirebaseFirestore db= FirebaseFirestore.getInstance();
+        DocumentReference documentReference=db.collection("users").document(currentUser.getUid());
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+//                    currentUser.getDiaries().add(diary);
+                    DocumentSnapshot documentSnapshot=task.getResult();
+                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
+                    Diary item= diaries.get(position);
+                    item.setNote(note);
+                    diaries.set(position,item);
+                    currentUser.setDiaries(diaries);
+                    Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
+                    documentReference.update("diaries",diaries).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful())
+                            {
+                                Log.d("Updation","Diary note updated successfully");
+                            }
+                        }
+                    });
+
+                }
+            }
+        });
+    }
+
     public ArrayList<Diary> convertToDiary(List<HashMap<String,Object>> diaryContent)
     {
         ArrayList<Diary> diaries=new ArrayList<>();
