@@ -2,6 +2,7 @@ package com.kamikaze.yada.diary.writenotes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.kamikaze.yada.R
@@ -16,8 +17,12 @@ class WriteActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.myNavHostFragment2) as NavHostFragment
         navController = navHostFragment.navController
         setContentView(binding.root)
-        val topBar = binding.topAppBar
 
+
+
+
+        val position=intent.getIntExtra("position",0)
+        Log.d("position", position.toString());
 
     }
 

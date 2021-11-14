@@ -32,7 +32,7 @@ class WriteDiaryFragment : Fragment() {
         val writeNoteET : EditText = binding.writehere
         writeNoteET.setVisibility(View.GONE)
         val seeNoteTV : TextView = binding.seehere
-     
+
         val writeNote = writeNoteET.text.toString()
 
         switchTVET.setOnCheckedChangeListener { buttonView, isChecked ->

@@ -107,8 +107,11 @@ public class MainFragment extends Fragment {
                         Diary diary=new Diary(titleView.getText().toString(),descriptionView.getText().toString(), location.getText().toString());
 //                        diaryHandler.loadData(view.findViewById(R.id.list));
                         diaryHandler.addDiary(diary,view.findViewById(R.id.list));
+                        diaryHandler.loadData();
                         dialogInterface.cancel();
                         Intent intent1 = new Intent(getActivity() , WriteActivity.class);
+                        int position=diaryHandler.getDiaries().size()-1;
+                        intent1.putExtra("position",position);
                         startActivity(intent1);
 
                     }
