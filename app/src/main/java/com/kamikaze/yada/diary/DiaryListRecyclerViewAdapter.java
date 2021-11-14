@@ -66,6 +66,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -75,7 +76,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kamikaze.yada.MainPageActivity;
 import com.kamikaze.yada.R;
+import com.kamikaze.yada.diary.writenotes.WriteActivity;
 import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
@@ -100,6 +103,15 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
     public DiaryListRecyclerViewAdapter.DiaryListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view =inflater.inflate(R.layout.fragment_diary_list_item,parent,false);
         recyclerView= (RecyclerView) parent;
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position=recyclerView.getChildLayoutPosition(view);
+                Intent intent=new Intent(recyclerView.getContext(), WriteActivity.class);
+                intent.putExtra("position",position);
+                recyclerView.getContext().startActivity(intent);
+            }
+        });
         return new DiaryListViewHolder(view,this);
     }
 
