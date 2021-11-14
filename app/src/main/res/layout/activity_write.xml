@@ -25,6 +25,10 @@
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
         />
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/myNavHostFragment2"
@@ -35,6 +39,6 @@
         app:navGraph="@navigation/navwithindiary" />
 
 
-
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

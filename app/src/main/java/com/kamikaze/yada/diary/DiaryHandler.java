@@ -119,7 +119,7 @@ public class DiaryHandler {
         return new ArrayList<>();
     }
 
-    public Diary getDiary(int position)
+    public Diary getDiary(int position)//gib pos get diary
     {
         if(currentUser!=null && position<currentUser.getDiaries().size()) return getDiaries().get(position);
         return null;

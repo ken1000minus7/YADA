@@ -11,6 +11,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.kamikaze.yada.R
 import com.kamikaze.yada.databinding.FragmentLandingBinding
+import com.kamikaze.yada.diary.writenotes.WriteActivity
 import com.kamikaze.yada.databinding.FragmentWriteDiaryBinding
 
 class WriteDiaryFragment : Fragment() {
@@ -27,9 +28,11 @@ class WriteDiaryFragment : Fragment() {
     ): View? {
         _binding = FragmentWriteDiaryBinding.inflate(inflater, container, false)
         val view = binding.root
+
         val writeNoteET : EditText = binding.writehere
+        writeNoteET.setVisibility(View.GONE)
         val seeNoteTV : TextView = binding.seehere
-        val switchTVET = binding.editornot
+     
         val writeNote = writeNoteET.text.toString()
 
         switchTVET.setOnCheckedChangeListener { buttonView, isChecked ->

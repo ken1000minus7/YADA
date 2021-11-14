@@ -16,6 +16,7 @@ class WriteActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.myNavHostFragment2) as NavHostFragment
         navController = navHostFragment.navController
         setContentView(binding.root)
+        val topBar = binding.topAppBar
 
 
     }
