@@ -2,6 +2,7 @@ package com.kamikaze.yada.diary;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kamikaze.yada.R;
+import com.kamikaze.yada.diary.writenotes.WriteActivity;
 import com.kamikaze.yada.model.Notes;
 
 public class MainFragment extends Fragment {
@@ -103,7 +105,12 @@ public class MainFragment extends Fragment {
 //                        diaryHandler.loadData(view.findViewById(R.id.list));
                         diaryHandler.addDiary(diary,view.findViewById(R.id.list));
                         dialogInterface.cancel();
+                        Intent intent1 = new Intent(getActivity() , WriteActivity.class);
+                        startActivity(intent1);
+
                     }
+
+
                 }).show();
             }
         });

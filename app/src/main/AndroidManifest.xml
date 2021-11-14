@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YADA">
         <activity
+            android:name=".diary.writenotes.WriteActivity"
+            android:exported="false" />
+        <activity
             android:name=".HikersWatchActivity"
             android:exported="false" />
         <!--
@@ -30,7 +33,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyD1RPdup8ffijXBAy7QFQqflZBq7RZoVcI" />
 
         <activity
             android:name=".MainPageActivity"
