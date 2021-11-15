@@ -38,6 +38,8 @@
             android:clickable="true"
             android:focusableInTouchMode="true"
             android:focusable="true"
+            app:theme="@style/search_style"
+            app:queryHint="Search your diaries"
             android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"/>
     </androidx.appcompat.widget.Toolbar>
 

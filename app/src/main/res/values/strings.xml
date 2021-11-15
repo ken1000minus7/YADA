@@ -27,6 +27,7 @@
     <string name="page_title" />
     <string name="start_a_diary"><b>Start a Diary!</b></string>
     <string name="no_result"><b>No result found</b></string>
+    <string name="create_a_new_diary"><b>Create a new diary</b></string>
 
 
 </resources>

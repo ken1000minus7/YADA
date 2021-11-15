@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -113,7 +114,7 @@ public class MainFragment extends Fragment {
                 EditText titleView=(EditText) dialogView.findViewById(R.id.title_input);
                 EditText descriptionView=(EditText) dialogView.findViewById(R.id.description_input);
                 EditText location=(EditText) dialogView.findViewById(R.id.location_input);
-                new AlertDialog.Builder(view.getContext()).setView(dialogView).setTitle("Create new diary").setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                AlertDialog alertDialog=new AlertDialog.Builder(view.getContext()).setView(dialogView).setPositiveButton("Create", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -133,7 +134,9 @@ public class MainFragment extends Fragment {
                     }
 
 
-                }).show();
+                }).create();
+                alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+                alertDialog.show();
             }
         });
 
@@ -158,7 +161,7 @@ public class MainFragment extends Fragment {
                 for(int i=0;i<originalList.size();i++)
                 {
                     Diary diary=originalList.get(i);
-                    if(diary.getLocation().contains(s) || diary.getTitle().contains(s) || diary.getDescription().contains(s))
+                    if(diary.getLocation().toLowerCase().contains(s.toLowerCase()) || diary.getTitle().toLowerCase().contains(s.toLowerCase()) || diary.getDescription().toLowerCase().contains(s.toLowerCase()))
                     {
                         result.add(diary);
                     }
@@ -183,7 +186,7 @@ public class MainFragment extends Fragment {
                 for(int i=0;i<originalList.size();i++)
                 {
                     Diary diary=originalList.get(i);
-                    if(diary.getLocation().contains(s) || diary.getTitle().contains(s) || diary.getDescription().contains(s))
+                    if(diary.getLocation().toLowerCase().contains(s.toLowerCase()) || diary.getTitle().toLowerCase().contains(s.toLowerCase()) || diary.getDescription().toLowerCase().contains(s.toLowerCase()))
                     {
                         result.add(diary);
                     }
@@ -232,8 +235,8 @@ public class MainFragment extends Fragment {
                 return false;
             }
         });
-
-
+//        TextView searchText=(TextView) searchView.findViewById(searchView.getResources().getIdentifier("android:id/search_src_text",null,null));
+//        searchText.setTypeface(ResourcesCompat.getFont(getContext(),R.font.segoeprint));
         return view;
     }
 
