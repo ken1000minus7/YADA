@@ -76,22 +76,7 @@ public class DiaryListFragment extends Fragment {
             diaryHandler.loadData(recyclerView);
             DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaryHandler.getDiaries());
             recyclerView.setAdapter(adapter);
-            recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-                @Override
-                public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                    return false;
-                }
 
-                @Override
-                public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
-                }
-
-                @Override
-                public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-                }
-            });
             ItemTouchHelper.SimpleCallback itemTouchCallback=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
                 @Override
                 public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {

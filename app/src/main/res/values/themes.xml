@@ -24,7 +24,6 @@
     <style name="Theme.YADA.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="start_a_dia">
-
         <item name="android:textSize">
             30sp
         </item>

@@ -1,28 +1,42 @@
 package com.kamikaze.yada.diary;
 
 import android.app.AlertDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.kamikaze.yada.MainPageActivity;
 import com.kamikaze.yada.R;
 import com.kamikaze.yada.diary.writenotes.WriteActivity;
 import com.kamikaze.yada.model.Notes;
 
+import java.util.ArrayList;
+
 public class MainFragment extends Fragment {
 
 
-
+    ArrayList<Diary> originalList=null;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -67,7 +81,7 @@ public class MainFragment extends Fragment {
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View viewed) {
                 if(fabOpen)
                 {
                     fabOpen=false;
@@ -122,6 +136,131 @@ public class MainFragment extends Fragment {
                 }).show();
             }
         });
+
+
+
+        TextView startDiary=(TextView) view.findViewById(R.id.start_diary);
+        TextView noResult=(TextView) view.findViewById(R.id.empty_result);
+        SearchView searchView=(SearchView) view.findViewById(R.id.search_view);
+        SearchManager searchManager=(SearchManager)getActivity().getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+//        setupStuff(view,searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.list);
+                DiaryListRecyclerViewAdapter diaryListRecyclerViewAdapter=(DiaryListRecyclerViewAdapter) recyclerView.getAdapter();
+                if(originalList==null)
+                {
+                    originalList=diaryListRecyclerViewAdapter.itemList;
+                }
+                ArrayList<Diary> result=new ArrayList<>();
+                for(int i=0;i<originalList.size();i++)
+                {
+                    Diary diary=originalList.get(i);
+                    if(diary.getLocation().contains(s) || diary.getTitle().contains(s) || diary.getDescription().contains(s))
+                    {
+                        result.add(diary);
+                    }
+                }
+                DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(getContext(),result,recyclerView);
+                recyclerView.swapAdapter(adapter,false);
+                startDiary.setVisibility(View.INVISIBLE);
+                if(result.size()==0) noResult.setVisibility(View.VISIBLE);
+                else noResult.setVisibility(View.INVISIBLE);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.list);
+                DiaryListRecyclerViewAdapter diaryListRecyclerViewAdapter=(DiaryListRecyclerViewAdapter) recyclerView.getAdapter();
+                if(originalList==null)
+                {
+                    originalList=diaryListRecyclerViewAdapter.itemList;
+                }
+                ArrayList<Diary> result=new ArrayList<>();
+                for(int i=0;i<originalList.size();i++)
+                {
+                    Diary diary=originalList.get(i);
+                    if(diary.getLocation().contains(s) || diary.getTitle().contains(s) || diary.getDescription().contains(s))
+                    {
+                        result.add(diary);
+                    }
+                }
+                DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(getContext(),result,recyclerView);
+                recyclerView.swapAdapter(adapter,false);
+                startDiary.setVisibility(View.INVISIBLE);
+                if(result.size()==0) noResult.setVisibility(View.VISIBLE);
+                else noResult.setVisibility(View.INVISIBLE);
+                return false;
+            }
+        });
+
+//        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View viewed, boolean b) {
+//                Log.d("work two","or no work");
+//                if(!b)
+//                {
+//                    searchView.setIconified(true);
+//                    searchView.onActionViewCollapsed();
+//                    Log.d("focus thingy", String.valueOf(b));
+//                }
+//            }
+//        });
+//
+//        searchView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View viewed, boolean b) {
+//                Log.d("heee","hooo");
+//            }
+//        });
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                if(originalList!=null)
+                {
+                    RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.list);
+                    DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(getContext(),originalList,recyclerView);
+                    recyclerView.swapAdapter(adapter,false);
+                    if(originalList.size()==0) startDiary.setVisibility(View.VISIBLE);
+                    originalList=null;
+                    noResult.setVisibility(View.INVISIBLE);
+                }
+                return false;
+            }
+        });
+
+
         return view;
     }
+
+
+
+//    public void setupStuff(View view,SearchView searchView)
+//    {
+//        if(!(view instanceof EditText || view instanceof SearchView))
+//        {
+//            view.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View view, MotionEvent motionEvent) {
+//                    Log.d("heeeeeeeeeeeeeeeeeee",view.toString());
+//                    InputMethodManager inputMethodManager=(InputMethodManager) getActivity().getSystemService(MainPageActivity.INPUT_METHOD_SERVICE);
+//                    inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
+//                    searchView.clearFocus();
+//                    return false;
+//                }
+//            });
+//        }
+//        if(view instanceof ViewGroup)
+//        {
+//            for(int i=0;i<((ViewGroup)view).getChildCount();i++)
+//            {
+//                View child=((ViewGroup)view).getChildAt(i);
+//                setupStuff(child,searchView);
+//            }
+//        }
+//    }
 }

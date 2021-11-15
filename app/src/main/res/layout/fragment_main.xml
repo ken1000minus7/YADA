@@ -5,34 +5,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ECD0BC"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:clickable="true"
     tools:context=".diary.MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_40sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
         app:layout_constraintTop_toTopOf="parent">
-        <androidx.appcompat.widget.SearchView
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="@dimen/_60sdp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:background="@drawable/search_bar_background"/>
+            android:layout_marginTop="@dimen/_5sdp"
+            android:id="@+id/logo"
+            android:layout_gravity="start"
+            app:srcCompat="@drawable/yadatext"/>
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_view"
+            app:searchIcon="@drawable/ic_search"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_gravity="end"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"/>
     </androidx.appcompat.widget.Toolbar>
+
     <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/diary_fragment_container"
+        class="com.kamikaze.yada.diary.DiaryListFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:id="@+id/diary_fragment_container"
-        app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        class="com.kamikaze.yada.diary.DiaryListFragment"
-        tools:layout="@layout/fragment_diary_list"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_toolbar" />
+
+    <TextView
+        android:id="@+id/start_diary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_fragment_container"
+        app:layout_constraintEnd_toEndOf="@+id/diary_fragment_container"
+        app:layout_constraintStart_toStartOf="@+id/diary_fragment_container"
+        app:layout_constraintTop_toTopOf="@id/diary_fragment_container"
+        android:text="@string/start_a_diary"
+        android:textAppearance="@style/start_a_dia"/>
+    <TextView
+        android:id="@+id/empty_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_fragment_container"
+        app:layout_constraintEnd_toEndOf="@+id/diary_fragment_container"
+        app:layout_constraintStart_toStartOf="@+id/diary_fragment_container"
+        app:layout_constraintTop_toTopOf="@id/diary_fragment_container"
+        android:text="@string/no_result"
+        android:textAppearance="@style/start_a_dia"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_weather_button"
         android:layout_width="wrap_content"
