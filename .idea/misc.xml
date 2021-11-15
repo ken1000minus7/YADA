@@ -24,8 +24,11 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_main.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_maps.xml" value="0.2" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/menu/sidebar_menu.xml" value="0.25" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_favorite.xml" value="0.2703125" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_check.xml" value="0.176" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_main.xml" value="0.12360688956433637" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_write.xml" value="0.1693840579710145" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_write.xml" value="0.1" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/confirm_dialog.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/diary_input_dialog.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_diary_list.xml" value="0.1" />
@@ -33,7 +36,9 @@
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_feature.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_landing.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_write_diary.xml" value="0.1" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/switch_item.xml" value="0.264" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/switch_layout.xml" value="0.1" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/menu/sidebar_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/menu/top_app_bar.xml" value="0.25416666666666665" />
       </map>
     </option>

@@ -5,8 +5,8 @@ import android.widget.ImageView
 import android.widget.VideoView
 
 data class Notes (
-    val topic: String,
-    val description : String,
-    val location : String,
-    val textnote : String ,
+    var topic: String,
+    var description : String,
+    var location : String,
+    var textnote : String,
         )
