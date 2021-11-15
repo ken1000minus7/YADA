@@ -2,40 +2,97 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/primary1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/input_head"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="@dimen/_50sdp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:id="@+id/input_head_image"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_add_diary"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_gravity="start" />
+
+        <TextView
+            android:id="@+id/input_head_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/create_a_new_diary"
+            android:textSize="@dimen/_21sdp"
+            android:textAppearance="@style/start_a_dia" />
+    </LinearLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_head"
+        android:id="@+id/title_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/title_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        android:hint="Enter Title"
-        android:textSize="@dimen/_20sdp"
+        android:layout_margin="@dimen/_5sdp"
+        android:hint="Title"
         android:inputType="text"
+        android:textAppearance="@style/start_a_dia"
+        android:textSize="@dimen/_13sdp"
+         />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/title_layout"
+        android:id="@+id/description_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/description_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        android:hint="Enter Description"
+        android:layout_margin="@dimen/_5sdp"
+        android:hint="Description"
         android:inputType="textMultiLine"
-        android:textSize="@dimen/_20sdp"
+        android:textAppearance="@style/start_a_dia"
+        android:textSize="@dimen/_13sdp"
+         />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_input" />
+        app:layout_constraintTop_toBottomOf="@+id/description_layout"
+        android:id="@+id/location_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/location_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        android:hint="Enter Location"
+        android:layout_margin="@dimen/_5sdp"
+        android:hint="Location"
         android:inputType="textCapSentences"
-        android:textSize="@dimen/_20sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_input" />
+        android:textAppearance="@style/start_a_dia"
+        android:textSize="@dimen/_13sdp"
+         />
+    </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

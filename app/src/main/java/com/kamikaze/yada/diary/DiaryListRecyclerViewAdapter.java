@@ -63,6 +63,8 @@
 package com.kamikaze.yada.diary;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -90,19 +92,31 @@ import java.io.IOException;
 import java.util.*;
 
 public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryListRecyclerViewAdapter.DiaryListViewHolder>{
-    public List<Diary> itemList;
+    public ArrayList<Diary> itemList;
     private LayoutInflater inflater;
     private RecyclerView recyclerView;
-    public DiaryListRecyclerViewAdapter(Context context,List<Diary> itemList)
+    public DiaryListRecyclerViewAdapter(Context context,ArrayList<Diary> itemList)
     {
         this.itemList=itemList;
         inflater=LayoutInflater.from(context);
+    }
+    public DiaryListRecyclerViewAdapter(Context context,ArrayList<Diary> itemList,RecyclerView recyclerView)
+    {
+        this.itemList=itemList;
+        this.recyclerView=recyclerView;
+        inflater=LayoutInflater.from(context);
+        ConstraintLayout mainLayout= (ConstraintLayout) recyclerView.getParent().getParent();
+        TextView startDiary=(TextView) mainLayout.findViewById(R.id.start_diary);
+        if(itemList.size()==0) startDiary.setVisibility(View.VISIBLE);
+        else startDiary.setVisibility(View.INVISIBLE);
+        Log.d("visibility", String.valueOf(startDiary.getVisibility()));
+        Log.d("hello",recyclerView.toString());
     }
     @NonNull
     @Override
     public DiaryListRecyclerViewAdapter.DiaryListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view =inflater.inflate(R.layout.fragment_diary_list_item,parent,false);
-        recyclerView= (RecyclerView) parent;
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,7 +176,7 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
         }
         @Override
         protected String doInBackground(Void... voids) {
-            String searchUrl= "https://www.google.com/search?q=" + location + "+tourism+1080p"+ "&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiUpP35yNXiAhU1BGMBHdDeBAgQ_AUIECgB";
+            String searchUrl= "https://www.google.com/search?q=" + location + "+tourism+4k"+ "&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiUpP35yNXiAhU1BGMBHdDeBAgQ_AUIECgB";
 //            String searchUrl="https://api.unsplash.com/search/photos?query="+location+"+tourism&client_id=6fa91622109e859b1c40218a5dead99f7262cf4f698b1e2cb89dd18fc5824d15";
             Log.d("searchy",searchUrl);
             String result=null;

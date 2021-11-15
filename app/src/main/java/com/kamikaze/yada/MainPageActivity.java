@@ -2,6 +2,7 @@ package com.kamikaze.yada;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.viewpager2.widget.ViewPager2;
@@ -65,7 +66,16 @@ public class MainPageActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(viewPager.getCurrentItem()==0) super.onBackPressed();
+        if(viewPager.getCurrentItem()==0)
+        {
+            SearchView searchView=(SearchView) findViewById(R.id.search_view);
+            if(searchView.isIconified()) super.onBackPressed();
+            else
+            {
+                searchView.setIconified(true);
+                searchView.onActionViewCollapsed();
+            }
+        }
         else viewPager.setCurrentItem(0);
     }
 

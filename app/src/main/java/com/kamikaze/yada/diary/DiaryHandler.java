@@ -46,7 +46,7 @@ public class DiaryHandler {
                     DocumentSnapshot documentSnapshot= task.getResult();
                     ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
                     currentUser.setDiaries(diaries);
-                    recyclerView.setAdapter(new DiaryListRecyclerViewAdapter(context,diaries));
+                    recyclerView.swapAdapter(new DiaryListRecyclerViewAdapter(context,diaries,recyclerView),false);
                 }
                 else
                 {
@@ -90,8 +90,8 @@ public class DiaryHandler {
                     DocumentSnapshot documentSnapshot=task.getResult();
                     ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
                     diaries.remove(position);
-                    DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries);
-                    recyclerView.setAdapter(adapter);
+                    DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries,recyclerView);
+                    recyclerView.swapAdapter(adapter,false);
                     currentUser.setDiaries(diaries);
                     Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
                     documentReference.update("diaries",diaries).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -139,8 +139,8 @@ public class DiaryHandler {
                     ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
                     diaries.add(diary);
                     currentUser.setDiaries(diaries);
-                    DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries);
-                    recyclerView.setAdapter(adapter);
+                    DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries,recyclerView);
+                    recyclerView.swapAdapter(adapter,false);
                     Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
                     documentReference.update("diaries",diaries).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -173,8 +173,8 @@ public class DiaryHandler {
                     item.setBgImageUrl(bgImageUrl);
                     diaries.set(position,item);
                     currentUser.setDiaries(diaries);
-                    DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries);
-                    recyclerView.setAdapter(adapter);
+                    DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries,recyclerView);
+                    recyclerView.swapAdapter(adapter,false);
                     Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
                     documentReference.update("diaries",diaries).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
