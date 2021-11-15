@@ -23,11 +23,14 @@ class NotesDao {
                 Log.d(TAG, "DocumentSnapshot data: ${document}")
                 val dh : DiaryHandler = DiaryHandler(tv.context)
                 val listofdiary = dh.convertToDiary(document.result.get("diaries") as MutableList<java.util.HashMap<String, Any>>)
-               val diary =  listofdiary.get(position)
-                val note = diary.note
-                val textnote = note?.textnote
-                tv.text = textnote
-                et.setText(textnote)
+                if(position<listofdiary.size)
+                {
+                    val diary =  listofdiary.get(position)
+                    val note = diary.note
+                    val textnote = note?.textnote
+                    tv.text = textnote
+                    et.setText(textnote)
+                }
 
 
 
