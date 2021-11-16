@@ -21,7 +21,7 @@
             android:layout_gravity="start"
             app:itemTextAppearance="@style/sidebar_style"
             app:itemIconSize="@dimen/_25sdp"
-            android:background="#FFD2B2"
+            android:background="@drawable/sidebar_background"
             app:menu="@menu/sidebar_menu" />
 
 

@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.AlertDialog;
@@ -18,13 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.ktx.Firebase;
-import com.kamikaze.yada.diary.Diary;
-import com.kamikaze.yada.diary.DiaryHandler;
-import com.kamikaze.yada.model.User;
-
-import java.util.ArrayList;
+import com.kamikaze.yada.options.OptionsActivity;
 
 public class MainPageActivity extends AppCompatActivity {
     ViewPager2 viewPager;
@@ -40,8 +33,26 @@ public class MainPageActivity extends AppCompatActivity {
         sidebar.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if(item.getItemId()==R.id.logout)
+                Intent intent=new Intent(getApplicationContext(), OptionsActivity.class);
+                switch(item.getItemId())
                 {
+                    case R.id.profile:
+                        intent.putExtra("position",0);
+                        break;
+
+                    case R.id.security:
+                        intent.putExtra("position",1);
+                        break;
+
+                    case R.id.customize:
+                        intent.putExtra("position",2);
+                        break;
+
+                    case R.id.settings:
+                        intent.putExtra("position",3);
+                        break;
+
+                    case R.id.logout:
                     View confirmDialog= LayoutInflater.from(MainPageActivity.this).inflate(R.layout.confirm_dialog,drawerLayout,false);
                     new AlertDialog.Builder(MainPageActivity.this).setView(confirmDialog).setTitle("Are you sure you want to log out?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
@@ -58,7 +69,9 @@ public class MainPageActivity extends AppCompatActivity {
 
                         }
                     }).show();
+                    return false;
                 }
+                startActivity(intent);
                 return false;
             }
         });

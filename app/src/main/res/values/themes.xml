@@ -54,4 +54,7 @@
 
         <item name="android:fontFamily">@font/segoeprint</item>
     </style>
+    <style name="nav_rail_style">
+        <item name="android:fontFamily">@font/segoeprint</item>
+    </style>
 </resources>

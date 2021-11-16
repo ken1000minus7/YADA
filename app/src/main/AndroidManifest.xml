@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YADA">
         <activity
+            android:name=".options.OptionsActivity"
+            android:exported="false" />
+        <activity
             android:name=".diary.writenotes.WriteActivity"
             android:exported="false" />
         <activity

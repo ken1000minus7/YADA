@@ -226,6 +226,7 @@ public class DiaryHandler {
     public ArrayList<Diary> convertToDiary(List<HashMap<String,Object>> diaryContent)
     {
         ArrayList<Diary> diaries=new ArrayList<>();
+        if(diaryContent==null) return diaries;
         for(int i=0;i<diaryContent.size();i++)
         {
             HashMap<String,String> noteContent= (HashMap<String, String>) diaryContent.get(i).get("note");

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECD0BC"
+    android:background="@color/primary2"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:clickable="true"
