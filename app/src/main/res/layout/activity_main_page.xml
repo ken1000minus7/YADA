@@ -15,13 +15,14 @@
         <com.google.android.material.navigation.NavigationView
             android:layout_width="@dimen/_150sdp"
             android:id="@+id/sidebar"
+            app:headerLayout="@layout/sidebar_header"
             android:layout_height="match_parent"
             android:layout_marginVertical="@dimen/_60sdp"
             android:fitsSystemWindows="true"
             android:layout_gravity="start"
             app:itemTextAppearance="@style/sidebar_style"
             app:itemIconSize="@dimen/_25sdp"
-            android:background="#FFD2B2"
+            android:background="@drawable/sidebar_background"
             app:menu="@menu/sidebar_menu" />
 
 

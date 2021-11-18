@@ -22,6 +22,7 @@ class NotesDao {
                 Log.d(TAG, "DocumentSnapshot data: ${document}")
                 val dh : DiaryHandler = DiaryHandler(tv.context)
                 val listofdiary = dh.convertToDiary(document.result.get("diaries") as MutableList<java.util.HashMap<String, Any>>)
+
                if(position<listofdiary.size) {
                    val diary = listofdiary.get(position)
                    val note = diary.note
@@ -33,12 +34,7 @@ class NotesDao {
                     val top = note?.topic
 
                     title.text = diary.title
-
-
                }
-
-
-
             } else {
                 Log.d(TAG, "No such document")
             }

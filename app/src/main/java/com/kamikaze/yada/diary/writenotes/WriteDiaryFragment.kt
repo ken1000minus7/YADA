@@ -132,7 +132,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                 imgview.setImageBitmap(bitmapImage)
                 //local
                 addView(imgview , LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
-               
+
 
 
             }

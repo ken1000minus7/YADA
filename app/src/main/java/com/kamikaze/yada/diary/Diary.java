@@ -4,15 +4,33 @@ import android.widget.EditText;
 
 import com.kamikaze.yada.model.Notes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Diary {
     private String title;
     private String description;
     private String location;
     private String bgImageUrl=null;
     private Notes note=null ;
+    private List<String> images=new ArrayList<>();
 
+    public Diary(String title, String description, String location, String bgImageUrl, Notes note, List<String> images) {
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.bgImageUrl = bgImageUrl;
+        this.note = note;
+        this.images = images;
+    }
 
+    public List<String> getImages() {
+        return images;
+    }
 
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
 
     public Diary(String title, String description, String location , Notes note) {
         this.title = title;

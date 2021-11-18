@@ -10,6 +10,7 @@
     <color name="primary">#f8ac64</color>
     <color name="secondary">#e6ba9a</color>
     <color name="primary1">#FFF0E5</color>
+
     <color name="githubcolor2">#0d1117</color>
     <color name="githubcolor">#010409</color>
     <color name="githubcolor3">#05152f</color>
@@ -18,4 +19,6 @@
     <color name="yellow">#efff01</color>
     <color name="blue_light">#027AD5</color>
     <color name="green">#00bfa5</color>
+
+    <color name="primary2">#ECD0BC</color>
 </resources>
