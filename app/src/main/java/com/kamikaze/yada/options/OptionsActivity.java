@@ -1,6 +1,7 @@
 package com.kamikaze.yada.options;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
@@ -9,19 +10,30 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigationrail.NavigationRailView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.kamikaze.yada.MainActivity;
 import com.kamikaze.yada.MainPageActivity;
 import com.kamikaze.yada.R;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 public class OptionsActivity extends AppCompatActivity {
 
@@ -85,8 +97,8 @@ public class OptionsActivity extends AppCompatActivity {
                                 Intent intent=new Intent(OptionsActivity.this, MainActivity.class);
                                 FirebaseAuth.getInstance().signOut();
                                 Toast.makeText(OptionsActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
-                                finish();
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
@@ -101,5 +113,49 @@ public class OptionsActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        TextView aboutText=(TextView) findViewById(R.id.about_text);
+        TextView nameText=(TextView) findViewById(R.id.name);
+        ImageView profilePic=(ImageView) findViewById(R.id.profile_pic);
+
+        FirebaseStorage firebaseStorage=FirebaseStorage.getInstance();
+        StorageReference storage=firebaseStorage.getReference().child(FirebaseAuth.getInstance().getUid()+"/pfp.jpg");
+        Log.d("datahoho", String.valueOf(requestCode));
+        if(resultCode!=RESULT_OK || data==null)
+        {
+            if(data==null) Log.d("stopped","data null");
+            else Log.d("stopped","result cancel");
+            if(data==null)Toast.makeText(this, "Didn't work, try something else maybe", Toast.LENGTH_SHORT).show();
+            Picasso.get().load("https://i.kym-cdn.com/photos/images/newsfeed/000/754/538/454.jpg").into(profilePic);
+            nameText.setText("Dio Brando");
+            aboutText.setText("You thought it was your profile pic, BUT IT WAS ME! DIO!");
+            return;
+        }
+
+        Log.d("lol","didnt stop");
+        switch(requestCode)
+        {
+            case 1:
+                Uri uri= (Uri) data.getData();
+                try {
+                    Bitmap bitmap=MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+                    profilePic.setImageBitmap(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("gallery",data.getDataString());
+                break;
+
+            case 2:
+                uri= (Uri) data.getExtras().get(MediaStore.EXTRA_OUTPUT);
+                Log.d("camera",uri.toString());
+                break;
+        }
     }
 }

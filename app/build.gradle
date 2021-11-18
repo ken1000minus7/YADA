@@ -73,6 +73,9 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.0')
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.firebaseui:firebase-ui-firestore:6.4.0'
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-storage-ktx'
     implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'org.jsoup:jsoup:1.14.3'

@@ -1,14 +1,27 @@
 package com.kamikaze.yada.options;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.kamikaze.yada.R;
+
+import java.io.File;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +74,44 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view= inflater.inflate(R.layout.fragment_profile, container, false);
+        TextView emailText=(TextView) view.findViewById(R.id.email_text);
+        emailText.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        ImageButton profileEdit=(ImageButton) view.findViewById(R.id.profile_pic_edit);
+        String[] options={"Upload from gallery","Take a new picture"};
+        profileEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getContext()).setTitle("Change profile photo").setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        switch(i)
+                        {
+                            case 0:
+                                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                intent.setType("image/*");
+                                if(intent.resolveActivity(getActivity().getPackageManager())!=null)
+                                {
+                                    getActivity().startActivityForResult(intent,1);
+                                }
+                                break;
+
+                            case 1:
+                                Intent intent1= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                File file=new File(Environment.getExternalStorageDirectory(),"pfp.png");
+                                intent1.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(getContext(), getActivity().getApplicationContext().getPackageName() + ".provider", file));
+                                intent1.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                                if(intent1.resolveActivity(getActivity().getPackageManager())!=null)
+                                {
+                                    getActivity().startActivityForResult(intent1,2);
+                                }
+                                break;
+                        }
+                    }
+                });
+                alertDialog.show();
+            }
+        });
+        return view;
     }
 }
