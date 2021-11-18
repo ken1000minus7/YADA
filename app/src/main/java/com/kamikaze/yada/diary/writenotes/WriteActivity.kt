@@ -23,13 +23,17 @@ import com.kamikaze.yada.databinding.ActivityWriteBinding
 class WriteActivity : AppCompatActivity() {
     private lateinit var navController: NavController
    public var position = 0
+    var title : String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityWriteBinding.inflate(layoutInflater)
+
         val navHostFragment = supportFragmentManager.findFragmentById(id.myNavHostFragment2) as NavHostFragment
         navController = navHostFragment.navController
         position=intent.getIntExtra("position",0)
+        title = intent.getStringExtra("title")
         Log.d("position", position.toString());
+        title?.let { Log.d("tit", it) }
         setContentView(binding.root)
 
 

@@ -32,8 +32,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        var username = findViewById<EditText>(R.id.username)
-        var epass = findViewById<EditText>(R.id.password)
+        val username = findViewById<EditText>(R.id.username)
+        val epass = findViewById<EditText>(R.id.password)
         val emailsignin = findViewById<Button>(R.id.login)
         val emailbutton = findViewById<Button>(R.id.login_again)
 
@@ -43,10 +43,13 @@ class LoginActivity : AppCompatActivity() {
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client))
+            .requestIdToken("891929709408-1qivi9tr5d9o50ff3tfqdvlsj2b7nkd0.apps.googleusercontent.com")
             .requestEmail()
             .build()
         val client : GoogleSignInClient = GoogleSignIn.getClient(this ,gso)
+
+
+        //google sign in
         btnSignIn.setOnClickListener{
 
             val signInIntent = client.signInIntent
@@ -119,14 +122,17 @@ class LoginActivity : AppCompatActivity() {
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+
+
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
+                updateUI(auth.currentUser)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e)
+                Log.w(TAG, "Google sign in failed"+ e.statusCode)
             }
         }}
 

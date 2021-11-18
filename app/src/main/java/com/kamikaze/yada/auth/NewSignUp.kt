@@ -57,7 +57,8 @@ class NewSignUp : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success")
-                        var firebaseUser = task.result.user!!
+                        val firebaseUser = task.result.user!!
+
                         val user = User(firebaseUser.uid , newuser.text.toString(), firebaseUser.photoUrl.toString())
                         val userDao = UserDao()
                         userDao.addUser(user)

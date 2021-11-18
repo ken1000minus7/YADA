@@ -122,6 +122,7 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
             public void onClick(View view) {
                 int position=recyclerView.getChildLayoutPosition(view);
                 Intent intent=new Intent(recyclerView.getContext(), WriteActivity.class);
+                intent.putExtra("title",itemList.get(position).getTitle());
                 intent.putExtra("position",position);
                 recyclerView.getContext().startActivity(intent);
             }

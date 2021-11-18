@@ -126,10 +126,13 @@ public class MainFragment extends Fragment {
                         int position=recyclerView.getAdapter().getItemCount();
                         diaryHandler.addDiary(diary,recyclerView);
                         diaryHandler.loadData();
-                        dialogInterface.cancel();
+
                         Intent intent1 = new Intent(getActivity() , WriteActivity.class);
                         intent1.putExtra("position",position);
+                        intent1.putExtra("title",titleView.getText().toString());
+                        Log.d("intent", titleView.getText().toString());
                         startActivity(intent1);
+                        dialogInterface.cancel();
 
                     }
 
