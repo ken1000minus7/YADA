@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
@@ -16,10 +17,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.kamikaze.yada.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -78,6 +87,26 @@ public class ProfileFragment extends Fragment {
         TextView emailText=(TextView) view.findViewById(R.id.email_text);
         emailText.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         ImageButton profileEdit=(ImageButton) view.findViewById(R.id.profile_pic_edit);
+        ImageView profilePic=(ImageView) view.findViewById(R.id.profile_pic);
+        String pfpUrl=((OptionsActivity) getActivity()).pfpUrl;
+        FirebaseFirestore db= FirebaseFirestore.getInstance();
+        DocumentReference document=db.collection("users").document(FirebaseAuth.getInstance().getUid());
+        document.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    String imageUrl= (String) task.getResult().get("imageUrl");
+                    if(imageUrl!=null && !imageUrl.equals("") && !imageUrl.equals("null"))
+                    {
+                        if(profilePic!=null)Picasso.get().load(imageUrl).into(profilePic);
+                        else
+                            Toast.makeText(getContext(), "Sadge not working", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
         String[] options={"Upload from gallery","Take a new picture"};
         profileEdit.setOnClickListener(new View.OnClickListener() {
             @Override

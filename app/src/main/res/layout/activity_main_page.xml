@@ -15,6 +15,7 @@
         <com.google.android.material.navigation.NavigationView
             android:layout_width="@dimen/_150sdp"
             android:id="@+id/sidebar"
+            app:headerLayout="@layout/sidebar_header"
             android:layout_height="match_parent"
             android:layout_marginVertical="@dimen/_60sdp"
             android:fitsSystemWindows="true"
