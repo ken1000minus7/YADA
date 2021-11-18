@@ -91,12 +91,15 @@ public class ProfileFragment extends Fragment {
         String pfpUrl=((OptionsActivity) getActivity()).pfpUrl;
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         DocumentReference document=db.collection("users").document(FirebaseAuth.getInstance().getUid());
+        TextView nameText=(TextView) view.findViewById(R.id.name);
         document.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful())
                 {
                     String imageUrl= (String) task.getResult().get("imageUrl");
+                    String name= (String) task.getResult().get("displayName");
+                    nameText.setText(name);
                     if(imageUrl!=null && !imageUrl.equals("") && !imageUrl.equals("null"))
                     {
                         if(profilePic!=null)Picasso.get().load(imageUrl).into(profilePic);
