@@ -20,9 +20,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YADA">
         <provider
@@ -36,12 +36,15 @@
         </provider>
         <activity
             android:name=".options.OptionsActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".diary.writenotes.WriteActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".HikersWatchActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -53,23 +56,29 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD1RPdup8ffijXBAy7QFQqflZBq7RZoVcI" />
+            android:value="AIzaSyD1RPdup8ffijXBAy7QFQqflZBq7RZoVcI"
+            />
 
         <activity
             android:name=".MainPageActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".auth.NewSignUp"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".auth.Check"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".auth.LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
