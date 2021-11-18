@@ -223,6 +223,40 @@ public class DiaryHandler {
         });
     }
 
+    public void updateDiary(int position,String imageUrl)
+    {
+        FirebaseFirestore db= FirebaseFirestore.getInstance();
+        DocumentReference documentReference=db.collection("users").document(currentUser.getUid());
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+//                    currentUser.getDiaries().add(diary);
+                    DocumentSnapshot documentSnapshot=task.getResult();
+                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
+                    Diary item= diaries.get(position);
+                    List<String> images=item.getImages();
+                    images.add(imageUrl);
+                    item.setImages(images);
+                    diaries.set(position,item);
+                    currentUser.setDiaries(diaries);
+                    Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
+                    documentReference.update("diaries",diaries).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful())
+                            {
+                                Log.d("Updation","Diary images updated successfully");
+                            }
+                        }
+                    });
+
+                }
+            }
+        });
+    }
+
     public ArrayList<Diary> convertToDiary(List<HashMap<String,Object>> diaryContent)
     {
         ArrayList<Diary> diaries=new ArrayList<>();
@@ -235,13 +269,15 @@ public class DiaryHandler {
             String ddescription=null;
             String dlocation=null;
             String dbgImageUrl=null;
+            List<String> dimages=new ArrayList<>();
             if(diaryContent.get(i).get("title")!=null) dtitle=diaryContent.get(i).get("title").toString();
             if(diaryContent.get(i).get("description")!=null) ddescription=diaryContent.get(i).get("description").toString();
             if(diaryContent.get(i).get("location")!=null) dlocation=diaryContent.get(i).get("location").toString();
             if(diaryContent.get(i).get("bgImageUrl")!=null) dbgImageUrl=diaryContent.get(i).get("bgImageUrl").toString();
+            if(diaryContent.get(i).get("images")!=null) dimages=(List<String>) diaryContent.get(i).get("images");
             if(noteContent!=null) note=new Notes(noteContent.get("topic"),noteContent.get("description"),noteContent.get("location"),noteContent.get("textnote"));
 
-            diaries.add(new Diary(dtitle,ddescription,dlocation,dbgImageUrl,note));         }
+            diaries.add(new Diary(dtitle,ddescription,dlocation,dbgImageUrl,note,dimages));         }
         return diaries;
     }
 }

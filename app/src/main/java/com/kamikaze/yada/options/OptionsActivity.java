@@ -131,7 +131,6 @@ public class OptionsActivity extends AppCompatActivity {
         TextView nameText=(TextView) findViewById(R.id.name);
         ImageView profilePic=(ImageView) findViewById(R.id.profile_pic);
 
-
         Log.d("datahoho", String.valueOf(requestCode));
         if(resultCode!=RESULT_OK || data==null)
         {
