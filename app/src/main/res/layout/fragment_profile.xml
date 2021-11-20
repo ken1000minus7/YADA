@@ -61,19 +61,91 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_card" />
+    <EditText
+        android:id="@+id/name_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_22sdp"
+        android:textAppearance="@style/nav_rail_style"
+        tools:text="Name"
+
+        android:textAlignment="center"
+        android:layout_marginVertical="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_card" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name_edit_img"
+        android:layout_marginHorizontal="@dimen/_6sdp"
+        app:layout_constraintStart_toEndOf="@id/name"
+        app:layout_constraintTop_toTopOf="@id/name"
+        android:scaleX="1.3"
+        android:scaleY="1.3"
+        app:layout_constraintBottom_toBottomOf="@id/name"
+        android:background="@drawable/ic_edit"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name_done_img"
+        android:layout_marginHorizontal="@dimen/_6sdp"
+        app:layout_constraintStart_toEndOf="@id/name"
+        app:layout_constraintTop_toTopOf="@id/name"
+        android:scaleX="1.3"
+        android:visibility="invisible"
+        android:scaleY="1.3"
+        app:layout_constraintBottom_toBottomOf="@id/name"
+        android:background="@drawable/ic_done"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/about_layout"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginVertical="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name">
     <TextView
         android:id="@+id/about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_20sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:textAppearance="@style/nav_rail_style"
         android:text="About"
         android:textAlignment="textStart"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginVertical="@dimen/_15sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
-
+         />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/about_edit_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            app:layout_constraintStart_toEndOf="@id/about"
+            app:layout_constraintTop_toTopOf="@id/about"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
+            tools:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/about"
+            android:background="@drawable/ic_edit"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/about_done_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            app:layout_constraintStart_toEndOf="@id/about"
+            app:layout_constraintTop_toTopOf="@id/about"
+            android:scaleX="1.1"
+            android:visibility="invisible"
+            tools:visibility="visible"
+            android:scaleY="1.1"
+            app:layout_constraintBottom_toBottomOf="@id/about"
+            android:background="@drawable/ic_done"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
         android:id="@+id/about_text"
         android:layout_width="match_parent"
@@ -85,9 +157,29 @@
         android:textAppearance="@style/nav_rail_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/about"
-        android:layout_marginHorizontal="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@id/about_layout"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginVertical="@dimen/_10sdp"/>
+
+    <EditText
+        android:id="@+id/about_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_12sdp"
+        android:visibility="invisible"
+        android:maxLines="9"
+        android:inputType="textCapSentences|textMultiLine"
+        tools:text="I am godly boy who can destroy everything and everyone"
+        android:textAppearance="@style/nav_rail_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/about_layout"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginVertical="@dimen/_5sdp"/>
+
+
 
     <TextView
         android:id="@+id/email"
@@ -115,42 +207,3 @@
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginVertical="@dimen/_10sdp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--<androidx.cardview.widget.CardView-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:id="@+id/profile_card"-->
-<!--app:layout_constraintEnd_toEndOf="parent"-->
-<!--app:layout_constraintStart_toStartOf="parent"-->
-<!--app:layout_constraintTop_toTopOf="parent"-->
-<!--app:cardCornerRadius="@dimen/_200sdp"-->
-<!--app:cardElevation="@dimen/_20sdp"-->
-<!--android:layout_marginVertical="@dimen/_30sdp">-->
-
-<!--<ImageView-->
-<!--    android:id="@+id/profile_pic"-->
-<!--    android:layout_height="@dimen/_150sdp"-->
-<!--    android:layout_width="@dimen/_150sdp"-->
-
-<!--    android:scaleType="centerCrop"-->
-<!--    android:background="@drawable/pfp_border"-->
-<!--    app:srcCompat="@drawable/ic_profile" />-->
-<!--</androidx.cardview.widget.CardView>-->
-<!--<androidx.cardview.widget.CardView-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:id="@+id/profile_edit_card"-->
-<!--android:background="@color/primary2"-->
-<!--app:cardCornerRadius="@dimen/_200sdp"-->
-<!--app:cardElevation="@dimen/_30sdp"-->
-<!--app:layout_constraintBottom_toBottomOf="@+id/profile_card"-->
-<!--app:layout_constraintEnd_toEndOf="@+id/profile_card">-->
-<!--<androidx.appcompat.widget.AppCompatImageButton-->
-<!--    android:id="@+id/profile_pic_edit"-->
-<!--    android:layout_width="@dimen/_40sdp"-->
-<!--    android:layout_height="@dimen/_40sdp"-->
-<!--    android:scaleType="centerCrop"-->
-
-<!--    app:srcCompat="@drawable/ic_edit" />-->
-
-<!--</androidx.cardview.widget.CardView>-->

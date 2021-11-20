@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,6 +20,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -203,9 +206,24 @@ public class OptionsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent();
-        intent.putExtra("pfpUrl",pfpUrl);
-        setResult(RESULT_OK,intent);
-        finish();
+        TextView aboutText=(TextView) findViewById(R.id.about_text);
+        EditText aboutEdit=(EditText) findViewById(R.id.about_edit);
+        ImageView aboutEditButton=(ImageView) findViewById(R.id.about_edit_img);
+        ImageView aboutDoneButton=(ImageView) findViewById(R.id.about_done_img);
+        if(aboutText!=null && aboutText.getVisibility()==View.INVISIBLE)
+        {
+            aboutText.setVisibility(View.VISIBLE);
+            aboutEdit.setVisibility(View.INVISIBLE);
+            aboutDoneButton.setVisibility(View.INVISIBLE);
+            aboutEditButton.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            Intent intent=new Intent();
+            intent.putExtra("pfpUrl",pfpUrl);
+            setResult(RESULT_OK,intent);
+            finish();
+        }
+
     }
 }

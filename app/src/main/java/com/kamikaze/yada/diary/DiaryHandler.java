@@ -33,7 +33,7 @@ public class DiaryHandler {
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         String ok="";
         if(firebaseUser.getPhotoUrl()!=null) ok=firebaseUser.getPhotoUrl().toString();
-        if(currentUser==null) currentUser=new User(firebaseUser.getUid(), firebaseUser.getDisplayName(),ok,new ArrayList<>());
+        if(currentUser==null) currentUser=new User(firebaseUser.getUid(), firebaseUser.getDisplayName(),ok,new ArrayList<>(),"");
     }
 
     public void loadData(RecyclerView recyclerView)
