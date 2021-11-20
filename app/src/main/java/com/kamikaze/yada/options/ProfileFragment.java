@@ -3,6 +3,7 @@ package com.kamikaze.yada.options;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +31,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.kamikaze.yada.R;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 
@@ -92,6 +96,58 @@ public class ProfileFragment extends Fragment {
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         DocumentReference document=db.collection("users").document(FirebaseAuth.getInstance().getUid());
         TextView nameText=(TextView) view.findViewById(R.id.name);
+        ImageView aboutEditButton=(ImageView) view.findViewById(R.id.about_edit_img);
+        ImageView aboutDoneButton=(ImageView) view.findViewById(R.id.about_done_img);
+        EditText aboutEdit=(EditText) view.findViewById(R.id.about_edit);
+        TextView aboutText=(TextView) view.findViewById(R.id.about_text);
+        aboutEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                if(aboutText.getVisibility()==View.VISIBLE)
+//                {
+                    String oldAbout=aboutText.getText().toString();
+                    aboutEdit.setText(oldAbout);
+//                    aboutEditButton.setImageResource(R.color.primary1);
+//                    aboutEditButton.setImageResource(R.drawable.ic_done);
+                    aboutEdit.setVisibility(View.VISIBLE);
+                    aboutText.setVisibility(View.INVISIBLE);
+                    aboutEditButton.setVisibility(View.INVISIBLE);
+                    aboutDoneButton.setVisibility(View.VISIBLE);
+//                }
+//                else
+//                {
+//
+//                }
+            }
+        });
+
+        aboutDoneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String newAbout=aboutEdit.getText().toString();
+                aboutText.setText(newAbout);
+                aboutText.setVisibility(View.VISIBLE);
+                aboutEdit.setVisibility(View.INVISIBLE);
+                aboutDoneButton.setVisibility(View.INVISIBLE);
+                aboutEditButton.setVisibility(View.VISIBLE);
+                document.update("about",newAbout).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(getContext(), "About updated", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
+
+
         document.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -99,6 +155,8 @@ public class ProfileFragment extends Fragment {
                 {
                     String imageUrl= (String) task.getResult().get("imageUrl");
                     String name= (String) task.getResult().get("displayName");
+                    String about=(String) task.getResult().get("about");
+                    aboutText.setText(about);
                     nameText.setText(name);
                     if(imageUrl!=null && !imageUrl.equals("") && !imageUrl.equals("null"))
                     {

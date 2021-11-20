@@ -9,7 +9,8 @@ data class User(
     val uid: String = "",
     val displayName: String? = "",
     val imageUrl: String = "",
-    var diaries: ArrayList<Diary> = ArrayList()
+    var diaries: ArrayList<Diary> = ArrayList(),
+    var about: String = ""
 ) {
 }
 

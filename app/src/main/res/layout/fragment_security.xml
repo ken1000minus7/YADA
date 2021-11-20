@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,9 +8,44 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Security"
+        android:textAppearance="@style/nav_rail_style"
         android:textSize="@dimen/_50sdp"
-        android:text="security" />
+        android:layout_marginVertical="@dimen/_20sdp"
+        android:id="@+id/security_head"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginVertical="@dimen/_20sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/security_head" >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/change_email"
+            android:textAppearance="@style/nav_rail_style"
+            android:text="Change E-Mail"
+            android:textSize="@dimen/_25sdp"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:backgroundTint="@color/primary1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/change_password"
+            android:textAppearance="@style/nav_rail_style"
+            android:text="Change Password"
+            android:textSize="@dimen/_25sdp"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:backgroundTint="@color/primary1"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
