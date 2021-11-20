@@ -29,6 +29,6 @@
         app:layout_constraintEnd_toStartOf="@+id/navigation_rail"
         app:layout_constraintStart_toStartOf="parent"
         class="com.kamikaze.yada.options.ProfileFragment"
-        tools:layout="@layout/fragment_profile"
+        tools:layout="@layout/fragment_security"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

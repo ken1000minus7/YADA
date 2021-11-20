@@ -77,8 +77,9 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 FragmentManager fragmentManager=getSupportFragmentManager();
-
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                if(navRail.getSelectedItemId()==item.getItemId()) return false;
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 switch(item.getItemId())
                 {
                     case R.id.profile:

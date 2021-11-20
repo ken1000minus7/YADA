@@ -28,6 +28,8 @@
     <string name="start_a_diary"><b>Start a Diary!</b></string>
     <string name="no_result"><b>No result found</b></string>
     <string name="create_a_new_diary"><b>Create a new diary</b></string>
+    <string name="change_password"><b>Change Password</b></string>
+    <string name="change_e_mail"><b>Change E-mail</b></string>
 
 
 </resources>
