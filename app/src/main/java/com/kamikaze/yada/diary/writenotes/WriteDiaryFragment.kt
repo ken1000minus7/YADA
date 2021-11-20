@@ -11,36 +11,35 @@ import android.provider.MediaStore
 import android.text.Layout
 import android.text.method.ScrollingMovementMethod
 import android.view.*
-import android.widget.GridLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.widget.*
+import androidx.annotation.ContentView
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.kamikaze.yada.R
 import com.kamikaze.yada.dao.NotesDao
 import com.kamikaze.yada.databinding.FragmentWriteDiaryBinding
+import com.kamikaze.yada.diary.Diary
 import com.kamikaze.yada.diary.DiaryHandler
 import com.kamikaze.yada.model.Notes
 import io.grpc.Context
 import java.io.File
 import kotlin.math.floor
-
-
 class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     private var _binding: FragmentWriteDiaryBinding? = null
     private val binding get() = _binding!!
-    val storageref = FirebaseStorage.getInstance().reference
     lateinit var mlayout: GridLayout
-     private var layoutmisc : LinearLayout? = null
+    val images = mutableListOf<ImageView>()
+    lateinit var gridAdapter: ArrayAdapter<ImageView>
+    private var layoutmisc : LinearLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
-
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,13 +56,11 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         topAppBar.title = act.title
         val fab = binding.fab
         val imgview = ImageView(act)
-
-
-
-
+        val layout = binding.layout
+        val gridView = act.findViewById<GridView>(R.id.imggrid)
+         gridAdapter = ArrayAdapter<ImageView>(act , android.R.layout.simple_list_item_1, images )
+        gridView.adapter = gridAdapter
         initMisc(act.findViewById(R.id.layoutmiscnote))
-
-
         //-----------------------------------------------------------
         mlayout = view.findViewById(R.id.layout)
 
@@ -88,8 +85,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                 seeTV.text = writeET.text
                 seeTV.visibility = View.VISIBLE
                 val note :Notes = Notes(title.text.toString(),"Random","Random0",writeET.text.toString() , )
-                val act = activity as com.kamikaze.yada.diary.writenotes.WriteActivity
-                var diaryins:DiaryHandler = DiaryHandler(activity)
+                val act = activity as WriteActivity
+                val diaryins:DiaryHandler = DiaryHandler(activity)
                 diaryins.updateDiary(act.position, note)
                 true
             }
@@ -108,37 +105,44 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
        val layoutParams = GridLayout.LayoutParams()
 
-
+    imageView.scaleType = ImageView.ScaleType.CENTER_CROP
 
        layoutParams.setMargins(0,1,0,1)
-
-
-
         imageView.layoutParams = layoutParams
         mlayout.addView(imageView)
-
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode==RESULT_OK){
             if(requestCode==1000){
-
                 val returnUri = data?.data
-                val act = activity as com.kamikaze.yada.diary.writenotes.WriteActivity
-
+                val act = activity as WriteActivity
                 val bitmapImage = MediaStore.Images.Media.getBitmap(act.contentResolver,returnUri)
                 val imgview = ImageView(act)
                 imgview.setImageBitmap(bitmapImage)
+                val gridView = act.findViewById<GridView>(R.id.imggrid)
+                images.add(imgview)
+                gridAdapter = ArrayAdapter<ImageView>(act , android.R.layout.simple_list_item_1, images )
+
+                gridView.adapter = gridAdapter
+                gridAdapter.notifyDataSetChanged()
                 //local
-                addView(imgview , LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
-
-
-
+              // addView(imgview , GridLayout.LayoutParams.WRAP_CONTENT,GridLayout.LayoutParams.WRAP_CONTENT)
+                val storageRef = FirebaseStorage.getInstance().getReference(FirebaseAuth.getInstance().uid!!+"/images/asu.jpg")//asu= check inent me random string
+                storageRef.putFile(returnUri!!).addOnCompleteListener{
+                    task->
+                        if (task.isSuccessful) {
+                            task.result.storage.downloadUrl.addOnCompleteListener { task ->
+                                    val url = task.result.toString()
+                                    val diaryobj = DiaryHandler(act)
+                                    diaryobj.updateDiary(act.position , url)
+                            }
+                        }
+                }
             }
         }
     }
-
     private  fun initMisc(layoutmisc : LinearLayout?) {
         val act = activity as WriteActivity
         if (layoutmisc!=null){
@@ -152,7 +156,6 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             }
     }}
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -27,6 +27,7 @@ class NotesDao {
                    val diary = listofdiary.get(position)
                    val note = diary.note
                    val textnote = note?.textnote
+                   val lis = diary.images //list of images which contains url
 
 
                    tv.text = textnote

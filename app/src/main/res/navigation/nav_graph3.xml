@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph3.xml"
+    app:startDestination="@id/trackingFragment">
+
+    <fragment
+        android:id="@+id/trackingFragment"
+        android:name="com.kamikaze.yada.pathtracker.TrackingFragment"
+        android:label="TrackingFragment" />
+</navigation>
