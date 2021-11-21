@@ -60,7 +60,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.navigation:navigation-ui:2.3.5'
-    implementation 'com.google.android.gms:play-services-maps:18.0.0'
+
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
     implementation 'com.google.firebase:firebase-storage:20.0.0'
     implementation 'com.google.firebase:firebase-core:17.3.0'
@@ -104,7 +104,6 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
- //   kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
     // Google Maps Location Services
     implementation 'com.google.android.gms:play-services-location:18.0.0'

@@ -25,6 +25,7 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.model.LatLng
 import com.kamikaze.yada.R
 import com.kamikaze.yada.pathtracker.Constants.ACTION_PAUSE_SERVICE
+import com.kamikaze.yada.pathtracker.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import com.kamikaze.yada.pathtracker.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.kamikaze.yada.pathtracker.Constants.ACTION_STOP_SERVICE
 import com.kamikaze.yada.pathtracker.Constants.FASTEST_LOCATION_INTERVAL
@@ -86,6 +87,8 @@ class TrackingService : LifecycleService() {
         }
         return super.onStartCommand(intent, flags, startId)
     }
+
+
 
     private fun pauseService() {
         isTracking.postValue(false)
@@ -156,19 +159,19 @@ class TrackingService : LifecycleService() {
             .setOngoing(true)
             .setContentTitle("Running App")
             .setContentText("00:00:00")
-//            .setContentIntent(getMainActivityPendingIntent())
+          .setContentIntent(getMainActivityPendingIntent())
 
         startForeground(NOTIFICATION_ID, notificationBuilder.build())
     }
 
-//    private fun getMainActivityPendingIntent() = PendingIntent.getActivity(
-//        this,
-//        0,
-//        Intent(this, MainActivity::class.java).also {
-//            it.action = ACTION_SHOW_TRACKING_FRAGMENT
-//        },
-//        FLAG_UPDATE_CURRENT
-//    )
+    private fun getMainActivityPendingIntent() = PendingIntent.getActivity(
+        this,
+        0,
+        Intent(this, PathTracker::class.java).also {
+            it.action = ACTION_SHOW_TRACKING_FRAGMENT
+        },
+        FLAG_UPDATE_CURRENT
+    )
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(notificationManager: NotificationManager) {

@@ -23,6 +23,7 @@ import com.kamikaze.yada.pathtracker.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.kamikaze.yada.pathtracker.Constants.MAP_ZOOM
 import com.kamikaze.yada.pathtracker.Constants.POLYLINE_COLOR
 import com.kamikaze.yada.pathtracker.Constants.POLYLINE_WIDTH
+import com.kamikaze.yada.pathtracker.TrackingService.Companion.isTracking
 
 
 class TrackingFragment : Fragment(R.layout.fragment_tracking) {
@@ -41,6 +42,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     ): View {
         _binding = FragmentTrackingBinding.inflate(inflater, container, false)
         val view = binding.root
+        btnFinishRun = view.findViewById(R.id.btnFinishRun)
 
         return view
     }
@@ -48,7 +50,9 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnToggleRun = view.findViewById<MaterialButton>(R.id.btnToggleRun)
+
         btnToggleRun.setOnClickListener {
+            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
             toggleRun()
         }
         mapView = view.findViewById<MapView>(R.id.mapView)
@@ -63,7 +67,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     }
     private fun addLatestPolyline(){
-        if(pathPoints.isNotEmpty() && pathPoints.size>1){
+        if(pathPoints.isNotEmpty() && pathPoints.last().size>1){
             val preLastLatLng = pathPoints.last()[pathPoints.last().size -2]
             val lastLatLng = pathPoints.last().last()
             val polylineOptions = PolylineOptions()

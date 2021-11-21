@@ -57,7 +57,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         val fab = binding.fab
         val imgview = ImageView(act)
         val layout = binding.layout
-        val gridView = act.findViewById<GridView>(R.id.imggrid)
+        val gridView = view.findViewById<GridView>(R.id.imggrid)
          gridAdapter = ArrayAdapter<ImageView>(act , android.R.layout.simple_list_item_1, images )
         gridView.adapter = gridAdapter
         initMisc(act.findViewById(R.id.layoutmiscnote))
