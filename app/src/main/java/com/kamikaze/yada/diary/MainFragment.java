@@ -32,6 +32,7 @@ import com.kamikaze.yada.MainPageActivity;
 import com.kamikaze.yada.R;
 import com.kamikaze.yada.diary.writenotes.WriteActivity;
 import com.kamikaze.yada.model.Notes;
+import com.kamikaze.yada.weather.WeatherActivity;
 
 import java.util.ArrayList;
 
@@ -111,6 +112,13 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity().getApplicationContext(), MainActivityLangTrans.class);
+                startActivity(intent);
+            }
+        });
+        weatherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity().getApplicationContext(), WeatherActivity.class);
                 startActivity(intent);
             }
         });

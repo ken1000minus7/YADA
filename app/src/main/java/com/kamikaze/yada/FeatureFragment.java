@@ -10,6 +10,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+
+import com.kamikaze.yada.pathtracker.PathTracker;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,11 +73,19 @@ public class FeatureFragment extends Fragment {
                 return false;
             }
         });
-        Button hikerButton=(Button) view.findViewById(R.id.hiker_button);
+        ImageButton hikerButton=(ImageButton) view.findViewById(R.id.hiker_button);
         hikerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getContext(),HikersWatchActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button pathButton = (Button) view.findViewById(R.id.path_button);
+        pathButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), PathTracker.class);
                 startActivity(intent);
             }
         });

@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph3.xml"
     app:startDestination="@id/trackingFragment">
 
     <fragment
         android:id="@+id/trackingFragment"
         android:name="com.kamikaze.yada.pathtracker.TrackingFragment"
-        android:label="TrackingFragment" />
+        android:label="TrackingFragment" >
+        <action
+            android:id="@+id/action_trackingFragment_to_featureFragment"
+            app:destination="@id/featureFragment"
+            app:popUpTo="@id/featureFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/featureFragment"
+        android:name="com.kamikaze.yada.FeatureFragment"
+        android:label="fragment_feature"
+        tools:layout="@layout/fragment_feature" />
 </navigation>
