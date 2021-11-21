@@ -12,6 +12,7 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/ic_profile.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/ic_rectangle_1.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/ic_search.xml" value="1.596875" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/nav_rail_bg.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/pfp_border.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/search_bar_background.xml" value="0.26614583333333336" />
@@ -21,6 +22,7 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_main2.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_main_page.xml" value="0.264" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_options.xml" value="0.23052536231884058" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_path_tracker.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/diary_input_dialog.xml" value="0.23097826086956522" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/email_change_dialog.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_customize.xml" value="0.25" />
@@ -42,10 +44,8 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/menu/sidebar_menu.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/menu/top_app_bar.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/xml/provider_paths.xml" value="0.1109375" />
-
         <entry key="..\:/Users/ashua/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_gallery_item.xml" value="0.17028985507246377" />
         <entry key="..\:/Users/ashua/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.17028985507246377" />
-
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/background_misc.xml" value="0.12037037037037036" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/bg_note_color_1.xml" value="0.17447916666666666" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/bg_note_color_2.xml" value="0.2703125" />

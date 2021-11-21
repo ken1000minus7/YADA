@@ -85,7 +85,7 @@ public class SecurityFragment extends Fragment {
                 EditText newPass=(EditText) dialog.findViewById(R.id.new_input);
                 EditText confirmPass=(EditText) dialog.findViewById(R.id.confirm_input); 
                 AlertDialog alertDialog=new AlertDialog.Builder(getContext()).setView(dialog).setPositiveButton("change password",null).setNegativeButton("forgot password",null).create();
-                alertDialog.getWindow().setBackgroundDrawableResource(R.color.primary1);
+                alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
                 alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface dialogInterface) {
@@ -177,7 +177,7 @@ public class SecurityFragment extends Fragment {
                 EditText passInput=(EditText) dialog.findViewById(R.id.pass_input);
                 EditText emailInput=(EditText) dialog.findViewById(R.id.email_input); 
                 AlertDialog alertDialog=new AlertDialog.Builder(getContext()).setView(dialog).setPositiveButton("change e-mail",null).create();
-                alertDialog.getWindow().setBackgroundDrawableResource(R.color.primary1);
+                alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
                 alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface dialogInterface) {

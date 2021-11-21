@@ -264,6 +264,8 @@ public class OptionsActivity extends AppCompatActivity {
             aboutEditButton.setVisibility(View.VISIBLE);
             nameText.setVisibility(View.VISIBLE);
             nameEdit.setVisibility(View.INVISIBLE);
+            aboutEdit.setText(aboutText.getText().toString());
+            nameEdit.setText(nameText.getText().toString());
             nameDoneButton.setVisibility(View.INVISIBLE);
             nameEditButton.setVisibility(View.VISIBLE);
         }

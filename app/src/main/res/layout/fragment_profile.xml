@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/profile_edit_card"
-        android:background="@color/primary2"
+        android:background="?attr/colorSecondaryVariant"
         app:cardCornerRadius="@dimen/_20sdp"
         app:cardElevation="@dimen/_20sdp"
         app:cardPreventCornerOverlap="false"
@@ -175,7 +175,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/about_layout"
         android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_3sdp"
         android:layout_marginVertical="@dimen/_5sdp"/>
 
 
@@ -189,9 +189,9 @@
         android:text="E-Mail"
         android:textAlignment="textStart"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginVertical="@dimen/_15sdp"
+        android:layout_marginVertical="@dimen/_9sdp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about_text" />
+        app:layout_constraintTop_toBottomOf="@+id/about_edit" />
 
     <TextView
         android:id="@+id/email_text"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary1"
+    android:background="?attr/colorPrimaryVariant"
     android:id="@+id/option_layout"
     tools:context=".options.OptionsActivity">
 
@@ -29,6 +29,6 @@
         app:layout_constraintEnd_toStartOf="@+id/navigation_rail"
         app:layout_constraintStart_toStartOf="parent"
         class="com.kamikaze.yada.options.ProfileFragment"
-        tools:layout="@layout/fragment_profile"
+        tools:layout="@layout/fragment_customize"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
