@@ -1,9 +1,13 @@
 package com.kamikaze.yada.options;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.hardware.input.InputManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +21,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -103,21 +108,12 @@ public class ProfileFragment extends Fragment {
         aboutEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if(aboutText.getVisibility()==View.VISIBLE)
-//                {
                     String oldAbout=aboutText.getText().toString();
                     aboutEdit.setText(oldAbout);
-//                    aboutEditButton.setImageResource(R.color.primary1);
-//                    aboutEditButton.setImageResource(R.drawable.ic_done);
                     aboutEdit.setVisibility(View.VISIBLE);
                     aboutText.setVisibility(View.INVISIBLE);
                     aboutEditButton.setVisibility(View.INVISIBLE);
                     aboutDoneButton.setVisibility(View.VISIBLE);
-//                }
-//                else
-//                {
-//
-//                }
             }
         });
 
@@ -130,6 +126,8 @@ public class ProfileFragment extends Fragment {
                 aboutEdit.setVisibility(View.INVISIBLE);
                 aboutDoneButton.setVisibility(View.INVISIBLE);
                 aboutEditButton.setVisibility(View.VISIBLE);
+                InputMethodManager inputMethodManager=(InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
                 document.update("about",newAbout).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -145,6 +143,51 @@ public class ProfileFragment extends Fragment {
                 });
             }
         });
+
+
+
+        ImageView nameEditButton=(ImageView) view.findViewById(R.id.name_edit_img);
+        ImageView nameDoneButton=(ImageView) view.findViewById(R.id.name_done_img);
+        EditText nameEdit=(EditText) view.findViewById(R.id.name_edit);
+        nameEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String oldname=nameText.getText().toString();
+                nameEdit.setText(oldname);
+                nameEdit.setVisibility(View.VISIBLE);
+                nameText.setVisibility(View.INVISIBLE);
+                nameEditButton.setVisibility(View.INVISIBLE);
+                nameDoneButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        nameDoneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String newname=nameEdit.getText().toString();
+                nameText.setText(newname);
+                nameText.setVisibility(View.VISIBLE);
+                nameEdit.setVisibility(View.INVISIBLE);
+                nameDoneButton.setVisibility(View.INVISIBLE);
+                nameEditButton.setVisibility(View.VISIBLE);
+                InputMethodManager inputMethodManager=(InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+                document.update("displayName",newname).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(getContext(), "Name updated", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
 
 
 
@@ -178,7 +221,7 @@ public class ProfileFragment extends Fragment {
                         switch(i)
                         {
                             case 0:
-                                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                                 intent.setType("image/*");
                                 if(intent.resolveActivity(getActivity().getPackageManager())!=null)
                                 {
@@ -188,12 +231,10 @@ public class ProfileFragment extends Fragment {
 
                             case 1:
                                 Intent intent1= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                File file=new File(Environment.getExternalStorageDirectory(),"pfp.png");
-                                intent1.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(getContext(), getActivity().getApplicationContext().getPackageName() + ".provider", file));
-                                intent1.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                                 if(intent1.resolveActivity(getActivity().getPackageManager())!=null)
                                 {
-                                    getActivity().startActivityForResult(intent1,2);
+//
+                                        getActivity().startActivityForResult(intent1,2);
                                 }
                                 break;
                         }
@@ -202,6 +243,8 @@ public class ProfileFragment extends Fragment {
                 alertDialog.show();
             }
         });
+
+
         return view;
     }
 }

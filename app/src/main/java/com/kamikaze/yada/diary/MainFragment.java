@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.kamikaze.yada.MainActivityLangTrans;
 import com.kamikaze.yada.MainPageActivity;
 import com.kamikaze.yada.R;
 import com.kamikaze.yada.diary.writenotes.WriteActivity;
@@ -106,7 +107,13 @@ public class MainFragment extends Fragment {
             }
         });
 
-
+        translateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity().getApplicationContext(), MainActivityLangTrans.class);
+                startActivity(intent);
+            }
+        });
         diaryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View viewed) {

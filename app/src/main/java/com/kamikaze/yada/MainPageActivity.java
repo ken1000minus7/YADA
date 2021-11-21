@@ -138,12 +138,15 @@ public class MainPageActivity extends AppCompatActivity {
             FirebaseFirestore db= FirebaseFirestore.getInstance();
             DocumentReference document=db.collection("users").document(FirebaseAuth.getInstance().getUid());
             ImageView profilePic=(ImageView) header.findViewById(R.id.profile_pic);
+            TextView nameText=(TextView) header.findViewById(R.id.display_name);
             document.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if(task.isSuccessful())
                     {
                         String imageUrl= (String) task.getResult().get("imageUrl");
+                        String name=(String) task.getResult().get("displayName");
+                        nameText.setText(name);
                         if(imageUrl!=null && !imageUrl.equals("") && !imageUrl.equals("null"))
                         {
                             if(profilePic!=null)Picasso.get().load(imageUrl).into(profilePic);
