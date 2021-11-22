@@ -31,6 +31,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kamikaze.yada.MainActivityLangTrans;
 import com.kamikaze.yada.MainPageActivity;
 import com.kamikaze.yada.R;
+import com.kamikaze.yada.TranslateActivity;
 import com.kamikaze.yada.diary.writenotes.WriteActivity;
 import com.kamikaze.yada.model.Notes;
 import com.kamikaze.yada.weather.WeatherActivity;
@@ -112,7 +113,7 @@ public class MainFragment extends Fragment {
         translateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(getActivity().getApplicationContext(), MainActivityLangTrans.class);
+                Intent intent= new Intent(getActivity().getApplicationContext(), TranslateActivity.class);
                 startActivity(intent);
             }
         });

@@ -26,6 +26,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YADA">
         <activity
+            android:name=".TranslateActivity"
+            android:exported="false" />
+        <activity
             android:name=".weather.WeatherActivity"
             android:exported="false" />
         <activity

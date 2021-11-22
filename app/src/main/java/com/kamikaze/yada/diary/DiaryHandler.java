@@ -3,6 +3,7 @@ package com.kamikaze.yada.diary;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.util.TypedValue;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.kamikaze.yada.R;
 import com.kamikaze.yada.model.Notes;
 import com.kamikaze.yada.model.User;
 
@@ -38,11 +40,20 @@ public class DiaryHandler {
 
     public void loadData(RecyclerView recyclerView)
     {
+        ProgressDialog progressDialog= new ProgressDialog(context);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setMessage("Loading");
+//        TypedValue typedValue=new TypedValue();
+//        context.getTheme().resolveAttribute(R.attr.colorPrimaryVariant,typedValue,true);
+        progressDialog.getWindow().setBackgroundDrawableResource(R.drawable.empty_list_background);
+        progressDialog.show();
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         db.collection("users").document(firebaseUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                progressDialog.cancel();
                 if(task.isSuccessful())
                 {
                     DocumentSnapshot documentSnapshot= task.getResult();
