@@ -219,25 +219,6 @@ public class MainFragment extends Fragment {
             }
         });
 
-//        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View viewed, boolean b) {
-//                Log.d("work two","or no work");
-//                if(!b)
-//                {
-//                    searchView.setIconified(true);
-//                    searchView.onActionViewCollapsed();
-//                    Log.d("focus thingy", String.valueOf(b));
-//                }
-//            }
-//        });
-//
-//        searchView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View viewed, boolean b) {
-//                Log.d("heee","hooo");
-//            }
-//        });
 
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
@@ -251,6 +232,7 @@ public class MainFragment extends Fragment {
                     originalList=null;
                     noResult.setVisibility(View.INVISIBLE);
                 }
+
                 return false;
             }
         });

@@ -1,5 +1,7 @@
 package com.kamikaze.yada;
 
+import static androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_DRAGGING;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +45,30 @@ public class MainPageActivity extends AppCompatActivity {
         viewPager=(ViewPager2) findViewById(R.id.main_fragment_container);
         MainFragmentPagerAdapter adapter=new MainFragmentPagerAdapter(this);
         viewPager.setAdapter(adapter);
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                if(state==SCROLL_STATE_DRAGGING && viewPager.getCurrentItem()==1)
+                {
+                    viewPager.setUserInputEnabled(false);
+                }
+                else
+                {
+                    viewPager.setUserInputEnabled(true);
+                }
+            }
+        });
         View header=sidebar.getHeaderView(0);
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         DocumentReference document=db.collection("users").document(FirebaseAuth.getInstance().getUid());
@@ -127,7 +153,11 @@ public class MainPageActivity extends AppCompatActivity {
                 searchView.onActionViewCollapsed();
             }
         }
-        else viewPager.setCurrentItem(0);
+        else
+        {
+            viewPager.setCurrentItem(0);
+            viewPager.setUserInputEnabled(true);
+        }
     }
 
     @Override
