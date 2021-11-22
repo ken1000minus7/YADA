@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
@@ -32,6 +33,7 @@ import com.kamikaze.yada.MainPageActivity;
 import com.kamikaze.yada.R;
 import com.kamikaze.yada.diary.writenotes.WriteActivity;
 import com.kamikaze.yada.model.Notes;
+import com.kamikaze.yada.weather.WeatherActivity;
 
 import java.util.ArrayList;
 
@@ -111,6 +113,13 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity().getApplicationContext(), MainActivityLangTrans.class);
+                startActivity(intent);
+            }
+        });
+        weatherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity().getApplicationContext(), WeatherActivity.class);
                 startActivity(intent);
             }
         });
@@ -210,25 +219,6 @@ public class MainFragment extends Fragment {
             }
         });
 
-//        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View viewed, boolean b) {
-//                Log.d("work two","or no work");
-//                if(!b)
-//                {
-//                    searchView.setIconified(true);
-//                    searchView.onActionViewCollapsed();
-//                    Log.d("focus thingy", String.valueOf(b));
-//                }
-//            }
-//        });
-//
-//        searchView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View viewed, boolean b) {
-//                Log.d("heee","hooo");
-//            }
-//        });
 
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
@@ -242,38 +232,18 @@ public class MainFragment extends Fragment {
                     originalList=null;
                     noResult.setVisibility(View.INVISIBLE);
                 }
+
                 return false;
             }
         });
-//        TextView searchText=(TextView) searchView.findViewById(searchView.getResources().getIdentifier("android:id/search_src_text",null,null));
-//        searchText.setTypeface(ResourcesCompat.getFont(getContext(),R.font.segoeprint));
+
         return view;
     }
 
-
-
-//    public void setupStuff(View view,SearchView searchView)
-//    {
-//        if(!(view instanceof EditText || view instanceof SearchView))
-//        {
-//            view.setOnTouchListener(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View view, MotionEvent motionEvent) {
-//                    Log.d("heeeeeeeeeeeeeeeeeee",view.toString());
-//                    InputMethodManager inputMethodManager=(InputMethodManager) getActivity().getSystemService(MainPageActivity.INPUT_METHOD_SERVICE);
-//                    inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
-//                    searchView.clearFocus();
-//                    return false;
-//                }
-//            });
-//        }
-//        if(view instanceof ViewGroup)
-//        {
-//            for(int i=0;i<((ViewGroup)view).getChildCount();i++)
-//            {
-//                View child=((ViewGroup)view).getChildAt(i);
-//                setupStuff(child,searchView);
-//            }
-//        }
-//    }
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        TextView noResult=(TextView) getView().findViewById(R.id.empty_result);
+        noResult.setVisibility(View.INVISIBLE);
+    }
 }

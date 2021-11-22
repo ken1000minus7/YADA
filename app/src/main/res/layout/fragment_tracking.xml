@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView">
+        app:layout_constraintTop_toBottomOf="@id/mapView">
 
 
         <com.google.android.material.button.MaterialButton
@@ -33,13 +33,14 @@
             android:id="@+id/btnFinishRun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pause"
+            android:text="Finish Run"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/btnToggleRun"
-            app:layout_constraintTop_toTopOf="@id/clInnerLayout"
-           />
+            app:layout_constraintStart_toEndOf="@+id/btnToggleRun"
+            app:layout_constraintTop_toTopOf="@id/clInnerLayout" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -62,7 +63,7 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/clInnerLayout"
+        app:layout_constraintBottom_toTopOf="@id/clInnerLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

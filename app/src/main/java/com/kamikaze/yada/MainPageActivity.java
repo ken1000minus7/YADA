@@ -1,8 +1,11 @@
 package com.kamikaze.yada;
 
+import static androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_DRAGGING;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
@@ -10,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,6 +45,30 @@ public class MainPageActivity extends AppCompatActivity {
         viewPager=(ViewPager2) findViewById(R.id.main_fragment_container);
         MainFragmentPagerAdapter adapter=new MainFragmentPagerAdapter(this);
         viewPager.setAdapter(adapter);
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                if(state==SCROLL_STATE_DRAGGING && viewPager.getCurrentItem()==1)
+                {
+                    viewPager.setUserInputEnabled(false);
+                }
+                else
+                {
+                    viewPager.setUserInputEnabled(true);
+                }
+            }
+        });
         View header=sidebar.getHeaderView(0);
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         DocumentReference document=db.collection("users").document(FirebaseAuth.getInstance().getUid());
@@ -125,7 +153,11 @@ public class MainPageActivity extends AppCompatActivity {
                 searchView.onActionViewCollapsed();
             }
         }
-        else viewPager.setCurrentItem(0);
+        else
+        {
+            viewPager.setCurrentItem(0);
+            viewPager.setUserInputEnabled(true);
+        }
     }
 
     @Override
@@ -138,12 +170,15 @@ public class MainPageActivity extends AppCompatActivity {
             FirebaseFirestore db= FirebaseFirestore.getInstance();
             DocumentReference document=db.collection("users").document(FirebaseAuth.getInstance().getUid());
             ImageView profilePic=(ImageView) header.findViewById(R.id.profile_pic);
+            TextView nameText=(TextView) header.findViewById(R.id.display_name);
             document.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if(task.isSuccessful())
                     {
                         String imageUrl= (String) task.getResult().get("imageUrl");
+                        String name=(String) task.getResult().get("displayName");
+                        nameText.setText(name);
                         if(imageUrl!=null && !imageUrl.equals("") && !imageUrl.equals("null"))
                         {
                             if(profilePic!=null)Picasso.get().load(imageUrl).into(profilePic);

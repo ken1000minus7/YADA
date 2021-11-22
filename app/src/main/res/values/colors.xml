@@ -19,6 +19,7 @@
     <color name="yellow">#efff01</color>
     <color name="blue_light">#027AD5</color>
     <color name="green">#00bfa5</color>
-
+    <color name="nightPrimary1">#352518</color>
+    <color name="nightPrimary2">#1c140c</color>
     <color name="primary2">#ECD0BC</color>
 </resources>

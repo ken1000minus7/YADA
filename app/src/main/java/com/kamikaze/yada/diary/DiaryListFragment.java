@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -108,5 +109,14 @@ public class DiaryListFragment extends Fragment {
             itemTouchHelper.attachToRecyclerView(recyclerView);
         }
         return view;
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        RecyclerView recyclerView = (RecyclerView) getView();
+
+        DiaryHandler diaryHandler=new DiaryHandler(getContext());
+        diaryHandler.loadData(recyclerView);
     }
 }

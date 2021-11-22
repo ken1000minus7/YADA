@@ -48,7 +48,8 @@ public class DiaryHandler {
                     DocumentSnapshot documentSnapshot= task.getResult();
                     ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
                     currentUser.setDiaries(diaries);
-                    recyclerView.swapAdapter(new DiaryListRecyclerViewAdapter(context,diaries,recyclerView),false);
+                    if(recyclerView.getAdapter()==null) recyclerView.setAdapter(new DiaryListRecyclerViewAdapter(context,diaries,recyclerView));
+                    else recyclerView.swapAdapter(new DiaryListRecyclerViewAdapter(context,diaries,recyclerView),false);
                 }
                 else
                 {

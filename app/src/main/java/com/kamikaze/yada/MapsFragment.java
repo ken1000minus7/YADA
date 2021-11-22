@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
 import android.content.Context;
@@ -42,7 +43,9 @@ public class MapsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_maps, container, false);
+        View view=inflater.inflate(R.layout.fragment_maps, container, false);
+
+        return view;
     }
 
     LocationManager locationManager;
@@ -82,6 +85,8 @@ public class MapsFragment extends Fragment {
             mapFragment.getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(@NonNull GoogleMap googleMap) {
+                    ViewPager2 viewPager=(ViewPager2) getActivity().findViewById(R.id.main_fragment_container);
+                    viewPager.setUserInputEnabled(false);
                     mMap = googleMap;
                     locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     locationListener = new LocationListener() {
@@ -111,7 +116,6 @@ public class MapsFragment extends Fragment {
                                     if (listAddress.get(0).getPostalCode() != null) {
                                         address += listAddress.get(0).getPostalCode();           // Postal Code
                                     }
-                                    Toast.makeText(getContext(), address, Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -147,12 +151,12 @@ public class MapsFragment extends Fragment {
                             // for ActivityCompat#requestPermissions for more details.
                             return;
                         }
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, locationListener);
                     } else {
                         if (ContextCompat.checkSelfPermission(getContext(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
                         } else {
-                            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
+                            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, locationListener);
                             Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             if (lastKnownLocation!=null){
                             mMap.clear();
@@ -166,5 +170,6 @@ public class MapsFragment extends Fragment {
             });
         }
     }
+
 
 }

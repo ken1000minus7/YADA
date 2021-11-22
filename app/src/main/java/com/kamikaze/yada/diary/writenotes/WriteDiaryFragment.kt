@@ -57,7 +57,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         val fab = binding.fab
         val imgview = ImageView(act)
         val layout = binding.layout
-        val gridView = act.findViewById<GridView>(R.id.imggrid)
+        val gridView = view.findViewById<GridView>(R.id.imggrid)
          gridAdapter = ArrayAdapter<ImageView>(act , android.R.layout.simple_list_item_1, images )
         gridView.adapter = gridAdapter
         initMisc(act.findViewById(R.id.layoutmiscnote))
@@ -121,11 +121,11 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                 val bitmapImage = MediaStore.Images.Media.getBitmap(act.contentResolver,returnUri)
                 val imgview = ImageView(act)
                 imgview.setImageBitmap(bitmapImage)
-                val gridView = act.findViewById<GridView>(R.id.imggrid)
+                val gridView = view?.findViewById<GridView>(R.id.imggrid)
                 images.add(imgview)
                 gridAdapter = ArrayAdapter<ImageView>(act , android.R.layout.simple_list_item_1, images )
 
-                gridView.adapter = gridAdapter
+                gridView?.adapter = gridAdapter
                 gridAdapter.notifyDataSetChanged()
                 //local
               // addView(imgview , GridLayout.LayoutParams.WRAP_CONTENT,GridLayout.LayoutParams.WRAP_CONTENT)

@@ -7,9 +7,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -42,6 +44,7 @@ import com.kamikaze.yada.MainPageActivity;
 import com.kamikaze.yada.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class OptionsActivity extends AppCompatActivity {
@@ -127,6 +130,7 @@ public class OptionsActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("LogNotTimber")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -164,8 +168,9 @@ public class OptionsActivity extends AppCompatActivity {
                 break;
 
             case 2:
-                uri= (Uri) data.getExtras().get(MediaStore.EXTRA_OUTPUT);
-                Log.d("camera",uri.toString());
+                Bitmap bitmap=(Bitmap) data.getExtras().get("data");
+                profilePic.setImageBitmap(bitmap);
+                updateProfilePic(bitmap);
                 break;
         }
     }
@@ -204,18 +209,65 @@ public class OptionsActivity extends AppCompatActivity {
         });
     }
 
+    private void updateProfilePic(Bitmap bitmap)
+    {
+        FirebaseStorage firebaseStorage=FirebaseStorage.getInstance();
+        StorageReference storage=firebaseStorage.getReference(FirebaseAuth.getInstance().getUid()+"/pfp.jpg");
+        FirebaseFirestore db= FirebaseFirestore.getInstance();
+        DocumentReference document=db.collection("users").document(FirebaseAuth.getInstance().getUid());
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] pfp=baos.toByteArray();
+        storage.putBytes(pfp).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    task.getResult().getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if(task.isSuccessful())
+                            {
+                                pfpUrl=task.getResult().toString();
+                                document.update("imageUrl",task.getResult().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful())
+                                        {
+                                            Toast.makeText(getApplicationContext(), "Profile pic updated", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
     @Override
     public void onBackPressed() {
         TextView aboutText=(TextView) findViewById(R.id.about_text);
         EditText aboutEdit=(EditText) findViewById(R.id.about_edit);
         ImageView aboutEditButton=(ImageView) findViewById(R.id.about_edit_img);
         ImageView aboutDoneButton=(ImageView) findViewById(R.id.about_done_img);
-        if(aboutText!=null && aboutText.getVisibility()==View.INVISIBLE)
+        TextView nameText=(TextView) findViewById(R.id.name);
+        EditText nameEdit=(EditText) findViewById(R.id.name_edit);
+        ImageView nameEditButton=(ImageView) findViewById(R.id.name_edit_img);
+        ImageView nameDoneButton=(ImageView) findViewById(R.id.name_done_img);
+        if((aboutText!=null && aboutText.getVisibility()==View.INVISIBLE) || (nameText!=null && nameText.getVisibility()==View.INVISIBLE))
         {
             aboutText.setVisibility(View.VISIBLE);
             aboutEdit.setVisibility(View.INVISIBLE);
             aboutDoneButton.setVisibility(View.INVISIBLE);
             aboutEditButton.setVisibility(View.VISIBLE);
+            nameText.setVisibility(View.VISIBLE);
+            nameEdit.setVisibility(View.INVISIBLE);
+            aboutEdit.setText(aboutText.getText().toString());
+            nameEdit.setText(nameText.getText().toString());
+            nameDoneButton.setVisibility(View.INVISIBLE);
+            nameEditButton.setVisibility(View.VISIBLE);
         }
         else
         {
@@ -226,4 +278,6 @@ public class OptionsActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

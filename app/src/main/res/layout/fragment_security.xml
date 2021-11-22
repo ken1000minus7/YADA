@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Security"
         android:textAppearance="@style/nav_rail_style"
-        android:textSize="@dimen/_50sdp"
+        android:textSize="@dimen/_42sdp"
         android:layout_marginVertical="@dimen/_20sdp"
         android:id="@+id/security_head"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,19 +33,21 @@
             android:id="@+id/change_email"
             android:textAppearance="@style/nav_rail_style"
             android:text="Change E-Mail"
-            android:textSize="@dimen/_25sdp"
-            android:textColor="@color/black"
+            android:textSize="@dimen/_20sdp"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:textColor="?attr/colorControlNormal"
             android:textAlignment="center"
-            android:backgroundTint="@color/primary1"/>
+            android:backgroundTint="?attr/colorPrimaryVariant"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/change_password"
             android:textAppearance="@style/nav_rail_style"
             android:text="Change Password"
-            android:textSize="@dimen/_25sdp"
-            android:textColor="@color/black"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:textSize="@dimen/_20sdp"
+            android:textColor="?attr/colorControlNormal"
             android:textAlignment="center"
-            android:backgroundTint="@color/primary1"/>
+            android:backgroundTint="?attr/colorPrimaryVariant"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
