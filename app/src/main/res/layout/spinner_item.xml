@@ -2,9 +2,12 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:padding="4dp"
-    android:textAlignment="center"
-    android:textColor="#F4EFEF">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:textSize="@dimen/_10sdp"
+    tools:text="Detect language"
+    android:paddingHorizontal="@dimen/_5sdp"
+    android:textAppearance="@style/nav_rail_style"
+    android:textAlignment="center">
 
 </TextView>
