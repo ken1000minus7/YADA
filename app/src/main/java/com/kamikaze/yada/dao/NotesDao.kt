@@ -15,7 +15,7 @@ class NotesDao {
     val  auth : FirebaseAuth  = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
     private val idk = db.collection("users").document(auth.currentUser!!.uid)
-    public fun setNote(tv: TextView, position: Int, et: EditText ,title : TextView, gridview :GridLayout){
+    public fun setNote(tv: TextView, position: Int, et: EditText ,title : TextView){
 
         idk.get().addOnCompleteListener { document ->
             if (document != null) {

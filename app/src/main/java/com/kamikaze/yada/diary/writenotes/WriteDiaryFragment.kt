@@ -1,9 +1,13 @@
 package com.kamikaze.yada.diary.writenotes
 
 import android.Manifest
+import android.app.Activity
 import android.app.Activity.RESULT_OK
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -11,12 +15,16 @@ import android.provider.MediaStore
 import android.text.Layout
 import android.text.method.ScrollingMovementMethod
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.ContentView
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.getSystemServiceName
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -24,19 +32,14 @@ import com.google.firebase.storage.StorageReference
 import com.kamikaze.yada.R
 import com.kamikaze.yada.dao.NotesDao
 import com.kamikaze.yada.databinding.FragmentWriteDiaryBinding
-import com.kamikaze.yada.diary.Diary
 import com.kamikaze.yada.diary.DiaryHandler
 import com.kamikaze.yada.model.Notes
-import io.grpc.Context
-import java.io.File
-import kotlin.math.floor
+
 class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     private var _binding: FragmentWriteDiaryBinding? = null
     private val binding get() = _binding!!
-    lateinit var mlayout: GridLayout
     val images = mutableListOf<ImageView>()
-    lateinit var gridAdapter: ArrayAdapter<ImageView>
-    private var layoutmisc : LinearLayout? = null
+    lateinit var selectedNoteColor:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -54,15 +57,25 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         val title = binding.title
         val act = activity as WriteActivity
         topAppBar.title = act.title
-        val fab = binding.fab
+        val fab = view.findViewById<FloatingActionButton>(R.id.fab)
         val imgview = ImageView(act)
         val layout = binding.layout
-        val gridView = view.findViewById<GridView>(R.id.imggrid)
-         gridAdapter = ArrayAdapter<ImageView>(act , android.R.layout.simple_list_item_1, images )
-        gridView.adapter = gridAdapter
         initMisc(act.findViewById(R.id.layoutmiscnote))
+        selectedNoteColor = "#e6ba9a"
+        //----------------------------------------------------------
+        //Button Clicks to change bg color
+        val bgc1 = view.findViewById<ImageView>(R.id.imageColor1)
+        val bgc2 = view.findViewById<ImageView>(R.id.imageColor2)
+        val bgc3 = view.findViewById<ImageView>(R.id.imageColor3)
+        val bgc4 = view.findViewById<ImageView>(R.id.imageColor4)
+
+        bgc1.setOnClickListener {
+            setBgColor(R.color.secondary)
+        }
+        bgc2.setOnClickListener { setBgColor(R.color.blue_light) }
+        bgc3.setOnClickListener { setBgColor(R.color.orange) }
+        bgc4.setOnClickListener { setBgColor(R.color.green) }
         //-----------------------------------------------------------
-        mlayout = view.findViewById(R.id.layout)
 
         fab.setOnClickListener{
             if (ActivityCompat.checkSelfPermission(act,android.Manifest.permission.READ_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
@@ -77,14 +90,14 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     }
         //-------------------------------------------------------------
         val nd = NotesDao()
-       nd.setNote(seeTV,act.position,writeET , title , mlayout)
+        nd.setNote(seeTV,act.position,writeET , title )
         seeTV.movementMethod = ScrollingMovementMethod()
         topAppBar.setOnMenuItemClickListener { menuItem -> when (menuItem.itemId){
             R.id.favorite ->{
                 writeET.visibility = View.GONE
                 seeTV.text = writeET.text
                 seeTV.visibility = View.VISIBLE
-                val note :Notes = Notes(title.text.toString(),"Random","Random0",writeET.text.toString() , )
+                val note  = Notes(title.text.toString(),"Random","Random0",writeET.text.toString()  )
                 val act = activity as WriteActivity
                 val diaryins:DiaryHandler = DiaryHandler(activity)
                 diaryins.updateDiary(act.position, note)
@@ -107,9 +120,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
     imageView.scaleType = ImageView.ScaleType.CENTER_CROP
 
-       layoutParams.setMargins(0,1,0,1)
+
         imageView.layoutParams = layoutParams
-        mlayout.addView(imageView)
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -121,14 +133,10 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                 val bitmapImage = MediaStore.Images.Media.getBitmap(act.contentResolver,returnUri)
                 val imgview = ImageView(act)
                 imgview.setImageBitmap(bitmapImage)
-                val gridView = view?.findViewById<GridView>(R.id.imggrid)
                 images.add(imgview)
-                gridAdapter = ArrayAdapter<ImageView>(act , android.R.layout.simple_list_item_1, images )
 
-                gridView?.adapter = gridAdapter
-                gridAdapter.notifyDataSetChanged()
                 //local
-              // addView(imgview , GridLayout.LayoutParams.WRAP_CONTENT,GridLayout.LayoutParams.WRAP_CONTENT)
+               addView(imgview , FrameLayout.LayoutParams.WRAP_CONTENT,FrameLayout.LayoutParams.WRAP_CONTENT)
                 val storageRef = FirebaseStorage.getInstance().getReference(FirebaseAuth.getInstance().uid!!+"/images/asu.jpg")//asu= check inent me random string
                 storageRef.putFile(returnUri!!).addOnCompleteListener{
                     task->
@@ -143,6 +151,9 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             }
         }
     }
+    //----------------------------------------------------------
+    //Bottom Sheet Navigation
+
     private  fun initMisc(layoutmisc : LinearLayout?) {
         val act = activity as WriteActivity
         if (layoutmisc!=null){
@@ -156,6 +167,13 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             }
     }}
     }
+    private fun setBgColor(value: Int){
+        view?.setBackgroundResource(value)
+
+    }
+
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

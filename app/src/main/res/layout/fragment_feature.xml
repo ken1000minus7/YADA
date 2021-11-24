@@ -37,10 +37,11 @@
             android:id="@+id/hiker_button"
 
             android:layout_marginHorizontal="@dimen/_5sdp"/>
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/path_button"
+            android:background="@drawable/pathtrack"
             android:layout_marginHorizontal="@dimen/_5sdp"/>
     </androidx.appcompat.widget.Toolbar>
 

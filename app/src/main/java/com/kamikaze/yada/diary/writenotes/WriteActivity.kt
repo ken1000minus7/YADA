@@ -1,11 +1,14 @@
 package com.kamikaze.yada.diary.writenotes
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Switch
 import android.widget.TextView
@@ -56,6 +59,17 @@ class WriteActivity : AppCompatActivity() {
             super.onBackPressed()
         }
 
+    }
+    private fun handleKeyEvent(view: View, keyCode: Int):Boolean{
+        if (keyCode == KeyEvent.KEYCODE_ENTER){
+            //Hide Keyboard
+            val inputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0 )
+            return true
+
+        }
+        return false
     }
 
 

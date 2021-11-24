@@ -136,7 +136,7 @@ public class DiaryHandler {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful())
                 {
-//                    currentUser.getDiaries().add(diary);
+//                 currentUser.getDiaries().add(diary);
                     DocumentSnapshot documentSnapshot=task.getResult();
                     ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
                     diaries.add(diary);

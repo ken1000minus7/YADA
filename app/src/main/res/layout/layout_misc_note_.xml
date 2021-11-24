@@ -18,7 +18,12 @@
         android:text="Customize!!"
         android:textColor="@color/white"
         android:textSize="@dimen/_13ssp"/>
-    <LinearLayout
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="wrap_content"
+        >
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layoutNoteColor"
@@ -27,7 +32,8 @@
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_15sdp">
 
             <View
                 android:id="@+id/viewColor1"
@@ -47,6 +53,7 @@
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:layout_weight="1">
 
             <View
@@ -67,7 +74,8 @@
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_15sdp">
 
             <View
                 android:id="@+id/viewColor3"
@@ -87,7 +95,8 @@
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_15sdp">
 
             <View
                 android:id="@+id/viewColor4"
@@ -104,16 +113,100 @@
                 />
 
         </FrameLayout>
-        <TextView
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_15sdp">
+
+            <View
+                android:id="@+id/viewColor5"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@drawable/bg_note_color_3"/>
+            <ImageView
+                android:id="@+id/imageColor5"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/_10sdp"
+                app:srcCompat="@drawable/ic_done"
+                />
+
+        </FrameLayout> <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginEnd="@dimen/_15sdp">
+
+        <View
+            android:id="@+id/viewColor6"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:background="@drawable/bg_note_color_3"/>
+        <ImageView
+            android:id="@+id/imageColor6"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_10sdp"
+            app:srcCompat="@drawable/ic_done"
+            />
+
+    </FrameLayout>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_15sdp">
+
+            <View
+                android:id="@+id/viewColor7"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@drawable/bg_note_color_3"/>
+            <ImageView
+                android:id="@+id/imageColor8"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/_10sdp"
+                app:srcCompat="@drawable/ic_done"
+                />
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_15sdp">
+
+            <View
+                android:id="@+id/viewColor9"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@drawable/bg_note_color_3"/>
+            <ImageView
+                android:id="@+id/imageColor9"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/_10sdp"
+                app:srcCompat="@drawable/ic_done"
+                />
+
+        </FrameLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:includeFontPadding="false"
-            android:text="pick color"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_13ssp"/>
+            app:fabSize="mini"
+            android:layout_gravity="end"
+            app:srcCompat="@drawable/ic_image" />
 
 
-
-    </LinearLayout>
+    </TableRow>
+    </HorizontalScrollView>
 
 </LinearLayout>

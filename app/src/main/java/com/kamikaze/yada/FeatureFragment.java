@@ -81,7 +81,7 @@ public class FeatureFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        Button pathButton = (Button) view.findViewById(R.id.path_button);
+        ImageButton pathButton = (ImageButton) view.findViewById(R.id.path_button);
         pathButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
