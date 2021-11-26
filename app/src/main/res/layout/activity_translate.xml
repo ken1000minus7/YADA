@@ -8,17 +8,43 @@
     android:background="?attr/colorPrimaryVariant"
     tools:context=".TranslateActivity">
 
-    <TextView
-        android:id="@+id/translate_head"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/translate_head_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/_10sdp"
-        android:text="Translate"
-        android:textAppearance="@style/nav_rail_style"
-        android:textSize="@dimen/_35sdp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/translate_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:text="@string/translate"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:textAppearance="@style/nav_rail_style"
+            android:textSize="@dimen/_35sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/translate_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/translate_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/_30sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/translate_head"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/translate_head"
+            app:layout_constraintTop_toTopOf="@+id/translate_head"
+            app:srcCompat="@drawable/ic_translate" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <LinearLayout
         android:id="@+id/lang_layout"
@@ -28,7 +54,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/translate_head">
+        app:layout_constraintTop_toBottomOf="@+id/translate_head_bar">
 
         <Spinner
             android:id="@+id/input_langs"
@@ -65,7 +91,7 @@
         android:layout_marginHorizontal="@dimen/_5sdp"
         app:layout_constraintBottom_toTopOf="@id/output_lang_text"
         android:inputType="textMultiLine"
-        android:layout_marginVertical="@dimen/_10sdp"
+        android:layout_marginVertical="@dimen/_6sdp"
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="@dimen/_6sdp"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +108,7 @@
         android:hint="Translated text will be displayed here"
         android:layout_marginHorizontal="@dimen/_5sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginVertical="@dimen/_10sdp"
+        android:layout_marginVertical="@dimen/_6sdp"
         app:layout_constraintBottom_toTopOf="@id/translate_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_lang_text" />
@@ -93,7 +119,7 @@
         android:layout_height="wrap_content"
         android:text="Translate"
         android:textSize="@dimen/_16sdp"
-        android:layout_marginVertical="@dimen/_15sdp"
+        android:layout_marginVertical="@dimen/_20sdp"
         android:textAppearance="@style/nav_rail_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

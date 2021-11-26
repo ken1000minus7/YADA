@@ -7,17 +7,32 @@
     tools:context=".options.CustomizeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Customize"
-        android:textAppearance="@style/nav_rail_style"
-        android:textSize="@dimen/_42sdp"
+        android:orientation="vertical"
         android:layout_marginVertical="@dimen/_20sdp"
-        android:id="@+id/customize_head"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/customize_head_bar"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:id="@+id/customize_head_img"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_customize"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/customize"
+            android:layout_gravity="center"
+            android:textAppearance="@style/nav_rail_style"
+            android:textSize="@dimen/_40sdp"
+
+            android:id="@+id/customize_head"
+            />
+    </LinearLayout>
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -27,7 +42,7 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginVertical="@dimen/_10sdp"
         android:id="@+id/theme_radio_group"
-        app:layout_constraintTop_toBottomOf="@+id/customize_head">
+        app:layout_constraintTop_toBottomOf="@+id/customize_head_bar">
         <RadioButton
             android:layout_width="match_parent"
             android:layout_marginVertical="@dimen/_10sdp"

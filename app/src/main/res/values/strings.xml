@@ -30,6 +30,11 @@
     <string name="create_a_new_diary"><b>Create a new diary</b></string>
     <string name="change_password"><b>Change Password</b></string>
     <string name="change_e_mail"><b>Change E-mail</b></string>
+    <string name="translate"><b>Translate</b></string>
+    <string name="settings"><b>Settings</b></string>
+    <string name="customize"><b>Customize</b></string>
+    <string name="security"><b>Security</b></string>
+    <string name="delete_string"><b>Are you sure you want to delete your account?</b></string>
 
 
 </resources>
