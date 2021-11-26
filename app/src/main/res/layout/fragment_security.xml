@@ -7,18 +7,32 @@
     tools:context=".options.SecurityFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginVertical="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/security_head_bar"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:id="@+id/security_head_img"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_security"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Security"
+        android:text="@string/security"
+        android:layout_gravity="center"
         android:textAppearance="@style/nav_rail_style"
-        android:textSize="@dimen/_42sdp"
-        android:layout_marginVertical="@dimen/_20sdp"
-        android:id="@+id/security_head"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="@dimen/_40sdp"
 
+        android:id="@+id/security_head"
+         />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -26,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginVertical="@dimen/_20sdp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/security_head" >
+        app:layout_constraintTop_toBottomOf="@+id/security_head_bar" >
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,15 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".options.SettingsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="@dimen/_50sdp"
-        android:text="settings" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginVertical="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/settings_head_bar"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:id="@+id/settings_head_img"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_settings"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings"
+            android:layout_gravity="center"
+            android:textAppearance="@style/nav_rail_style"
+            android:textSize="@dimen/_40sdp"
 
-</FrameLayout>
+            android:id="@+id/settings_head"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginVertical="@dimen/_20sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_head_bar" >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/delete_account_button"
+            android:textAppearance="@style/nav_rail_style"
+            android:text="Delete account"
+            android:textSize="@dimen/_20sdp"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:textColor="?attr/colorControlNormal"
+            android:textAlignment="center"
+            android:backgroundTint="?attr/colorPrimaryVariant"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/aboutus_button"
+            android:textAppearance="@style/nav_rail_style"
+            android:text="About us"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:textSize="@dimen/_20sdp"
+            android:textColor="?attr/colorControlNormal"
+            android:textAlignment="center"
+            android:backgroundTint="?attr/colorPrimaryVariant"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/feedback_button"
+            android:textAppearance="@style/nav_rail_style"
+            android:text="Give feedback"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:textSize="@dimen/_20sdp"
+            android:textColor="?attr/colorControlNormal"
+            android:textAlignment="center"
+            android:backgroundTint="?attr/colorPrimaryVariant"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
