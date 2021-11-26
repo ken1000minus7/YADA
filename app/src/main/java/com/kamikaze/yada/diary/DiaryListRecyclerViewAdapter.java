@@ -105,14 +105,18 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
         this.itemList=itemList;
         this.recyclerView=recyclerView;
         inflater=LayoutInflater.from(context);
-        if(recyclerView.getParent()!=null){
-        ConstraintLayout mainLayout= (ConstraintLayout) recyclerView.getParent().getParent();
-        TextView startDiary=(TextView) mainLayout.findViewById(R.id.start_diary);
-        if(itemList.size()==0) startDiary.setVisibility(View.VISIBLE);
-        else startDiary.setVisibility(View.INVISIBLE);
-        Log.d("visibility", String.valueOf(startDiary.getVisibility()));
+
+        if(recyclerView.getParent()!=null)
+        {
+            ConstraintLayout mainLayout= (ConstraintLayout) recyclerView.getParent().getParent();
+            TextView startDiary=(TextView) mainLayout.findViewById(R.id.start_diary);
+            if(itemList.size()==0) startDiary.setVisibility(View.VISIBLE);
+            else startDiary.setVisibility(View.INVISIBLE);
+        }
+
+
         Log.d("hello",recyclerView.toString());
-    }}
+    }
     @NonNull
     @Override
     public DiaryListRecyclerViewAdapter.DiaryListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

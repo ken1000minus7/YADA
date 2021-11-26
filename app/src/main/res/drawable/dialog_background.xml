@@ -5,6 +5,6 @@
     <padding
         android:padding="@dimen/_10sdp"/>
     <solid
-        android:color="@color/primary1"/>
+        android:color="?attr/colorPrimaryVariant"/>
 
 </shape>

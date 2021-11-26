@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,6 +38,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.kamikaze.yada.MainActivity;
@@ -144,7 +146,7 @@ public class OptionsActivity extends AppCompatActivity {
         {
             if(data==null) Log.d("stopped","data null");
             else Log.d("stopped","result cancel");
-            if(data==null)Toast.makeText(this, "Didn't work, try something else maybe", Toast.LENGTH_SHORT).show();
+//            if(data==null)Toast.makeText(this, "Didn't work, try something else maybe", Toast.LENGTH_SHORT).show();
             Picasso.get().load("https://i.kym-cdn.com/photos/images/newsfeed/000/754/538/454.jpg").into(profilePic);
             nameText.setText("Dio Brando");
             aboutText.setText("You thought it was your profile pic, BUT IT WAS ME! DIO!");
@@ -177,6 +179,15 @@ public class OptionsActivity extends AppCompatActivity {
 
     private void updateProfilePic(Uri uri)
     {
+        ProgressDialog progressDialog=new ProgressDialog(this);
+        progressDialog.setTitle("Updating profile photo");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.getWindow().setBackgroundDrawableResource(R.drawable.empty_list_background);
+        progressDialog.setProgressNumberFormat(null);
+        progressDialog.setProgressPercentFormat(null);
+        progressDialog.show();
         FirebaseStorage firebaseStorage=FirebaseStorage.getInstance();
         StorageReference storage=firebaseStorage.getReference(FirebaseAuth.getInstance().getUid()+"/pfp.jpg");
         FirebaseFirestore db= FirebaseFirestore.getInstance();
@@ -195,6 +206,7 @@ public class OptionsActivity extends AppCompatActivity {
                                 document.update("imageUrl",task.getResult().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
+                                        progressDialog.cancel();
                                         if(task.isSuccessful())
                                         {
                                             Toast.makeText(getApplicationContext(), "Profile pic updated", Toast.LENGTH_SHORT).show();
@@ -202,15 +214,26 @@ public class OptionsActivity extends AppCompatActivity {
                                     }
                                 });
                             }
+                            else progressDialog.cancel();
                         }
                     });
                 }
+                else progressDialog.cancel();
             }
         });
     }
 
     private void updateProfilePic(Bitmap bitmap)
     {
+        ProgressDialog progressDialog=new ProgressDialog(this);
+        progressDialog.setTitle("Updating profile photo");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.getWindow().setBackgroundDrawableResource(R.drawable.empty_list_background);
+        progressDialog.setProgressNumberFormat(null);
+        progressDialog.setProgressPercentFormat(null);
+        progressDialog.show();
         FirebaseStorage firebaseStorage=FirebaseStorage.getInstance();
         StorageReference storage=firebaseStorage.getReference(FirebaseAuth.getInstance().getUid()+"/pfp.jpg");
         FirebaseFirestore db= FirebaseFirestore.getInstance();
@@ -232,6 +255,7 @@ public class OptionsActivity extends AppCompatActivity {
                                 document.update("imageUrl",task.getResult().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
+                                        progressDialog.cancel();
                                         if(task.isSuccessful())
                                         {
                                             Toast.makeText(getApplicationContext(), "Profile pic updated", Toast.LENGTH_SHORT).show();
@@ -239,9 +263,11 @@ public class OptionsActivity extends AppCompatActivity {
                                     }
                                 });
                             }
+                            else progressDialog.cancel();
                         }
                     });
                 }
+                else progressDialog.cancel();
             }
         });
     }
@@ -264,6 +290,8 @@ public class OptionsActivity extends AppCompatActivity {
             aboutEditButton.setVisibility(View.VISIBLE);
             nameText.setVisibility(View.VISIBLE);
             nameEdit.setVisibility(View.INVISIBLE);
+            aboutEdit.setText(aboutText.getText().toString());
+            nameEdit.setText(nameText.getText().toString());
             nameDoneButton.setVisibility(View.INVISIBLE);
             nameEditButton.setVisibility(View.VISIBLE);
         }

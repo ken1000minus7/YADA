@@ -26,14 +26,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YADA">
         <activity
-            android:name=".weather.WeatherActivity"
+            android:name=".webview.WebActivity"
             android:exported="false" />
+        <activity
+            android:name=".webview.BlogActivity"
+            android:exported="false" />
+        <activity
+            android:name=".diary.writenotes.ZoomImageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TranslateActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".weather.WeatherActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pathtracker.PathTracker"
             android:launchMode="singleTask" />
-        <activity
-            android:name=".MainActivityLangTrans"
-            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -53,7 +64,7 @@
             android:name=".diary.writenotes.WriteActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".HikersWatchActivity"
             android:exported="false"

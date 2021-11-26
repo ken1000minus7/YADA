@@ -201,6 +201,8 @@ public class ProfileFragment extends Fragment {
                     String about=(String) task.getResult().get("about");
                     aboutText.setText(about);
                     nameText.setText(name);
+                    nameEdit.setText(name);
+                    aboutEdit.setText(name);
                     if(imageUrl!=null && !imageUrl.equals("") && !imageUrl.equals("null"))
                     {
                         if(profilePic!=null)Picasso.get().load(imageUrl).into(profilePic);

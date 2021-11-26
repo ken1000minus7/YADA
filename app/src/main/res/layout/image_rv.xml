@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--<RelativeLayout android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:id="@+id/layout"-->
+<!--    android:orientation="horizontal"-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android" >-->
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="@dimen/_120sdp"-->
+<!--        android:layout_height="@dimen/_120sdp">-->
+<!--    <ImageView-->
+<!--        android:layout_height="@dimen/_120sdp"-->
+<!--        android:layout_width="@dimen/_120sdp"-->
+<!--        android:id="@+id/someimage"-->
+<!--        />-->
+<!--    </androidx.cardview.widget.CardView>-->
+<!--</RelativeLayout>-->
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/_150sdp"
+    android:id="@+id/llinwa"
+    android:layout_height="@dimen/_140sdp"
+    android:layout_margin="@dimen/_10sdp">
+
+
+        <ImageView
+            android:id="@+id/imginwa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</androidx.cardview.widget.CardView>

@@ -1,34 +1,25 @@
 package com.kamikaze.yada.diary.writenotes
 
-import android.Manifest
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.Layout
 import android.text.method.ScrollingMovementMethod
 import android.view.*
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
-import androidx.annotation.ContentView
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.ContextCompat.getSystemServiceName
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.kamikaze.yada.R
 import com.kamikaze.yada.dao.NotesDao
 import com.kamikaze.yada.databinding.FragmentWriteDiaryBinding
@@ -38,12 +29,13 @@ import com.kamikaze.yada.model.Notes
 class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     private var _binding: FragmentWriteDiaryBinding? = null
     private val binding get() = _binding!!
-    val images = mutableListOf<ImageView>()
-    lateinit var selectedNoteColor:String
+    val imagepath = ArrayList<String>()
+     var i : Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
+    @SuppressLint("WrongConstant")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,23 +50,32 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         val act = activity as WriteActivity
         topAppBar.title = act.title
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
-        val imgview = ImageView(act)
-        val layout = binding.layout
         initMisc(act.findViewById(R.id.layoutmiscnote))
-        selectedNoteColor = "#e6ba9a"
+
+        //IMAGES ADAPTER----------  -----------------------------------------------------------
+        val recyclerView = view.findViewById<RecyclerView>(R.id.rvimages)
+        recyclerView.layoutManager = LinearLayoutManager(act , OrientationHelper.HORIZONTAL , false)
+        recyclerView.adapter = ImageAdapter(imagepath, act)
+
         //----------------------------------------------------------
         //Button Clicks to change bg color
         val bgc1 = view.findViewById<ImageView>(R.id.imageColor1)
         val bgc2 = view.findViewById<ImageView>(R.id.imageColor2)
         val bgc3 = view.findViewById<ImageView>(R.id.imageColor3)
         val bgc4 = view.findViewById<ImageView>(R.id.imageColor4)
+        //Button Clicks to change bg theme
+        val bgt1 = view.findViewById<ImageView>(R.id.imageTheme1)
+        val bgt2 = view.findViewById<ImageView>(R.id.imageTheme2)
+        val bgt3 = view.findViewById<ImageView>(R.id.imageTheme3)
+        val bgt4 = view.findViewById<ImageView>(R.id.imageTheme4)
+        val bgt5 = view.findViewById<ImageView>(R.id.imageTheme5)
+        val bgt6 = view.findViewById<ImageView>(R.id.imageTheme6)
 
-        bgc1.setOnClickListener {
-            setBgColor(R.color.secondary)
-        }
-        bgc2.setOnClickListener { setBgColor(R.color.blue_light) }
+        bgc1.setOnClickListener { setBgColor(R.color.secondary)}
+        bgc2.setOnClickListener { setBgColor(R.color.blue_light)}
         bgc3.setOnClickListener { setBgColor(R.color.orange) }
         bgc4.setOnClickListener { setBgColor(R.color.green) }
+        bgt1.setOnClickListener { view.setBackgroundResource(R.drawable.bg_pp) }
         //-----------------------------------------------------------
 
         fab.setOnClickListener{
@@ -113,30 +114,19 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         } }
         return view
     }
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun addView(imageView : ImageView, width : Int, height : Int){
-
-       val layoutParams = GridLayout.LayoutParams()
-
-    imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-
-
-        imageView.layoutParams = layoutParams
-    }
-
+    //Setting Images in Recycler View------------------------------------------------------------------------------------------------------------------------------------
+    @SuppressLint("WrongConstant")
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode==RESULT_OK){
             if(requestCode==1000){
-                val returnUri = data?.data
                 val act = activity as WriteActivity
-                val bitmapImage = MediaStore.Images.Media.getBitmap(act.contentResolver,returnUri)
-                val imgview = ImageView(act)
-                imgview.setImageBitmap(bitmapImage)
-                images.add(imgview)
-
+                val returnUri = data?.data
+                val path1 = returnUri.toString()
+                imagepath.add(path1)
+                loadImages()
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //local
-               addView(imgview , FrameLayout.LayoutParams.WRAP_CONTENT,FrameLayout.LayoutParams.WRAP_CONTENT)
                 val storageRef = FirebaseStorage.getInstance().getReference(FirebaseAuth.getInstance().uid!!+"/images/asu.jpg")//asu= check inent me random string
                 storageRef.putFile(returnUri!!).addOnCompleteListener{
                     task->
@@ -151,11 +141,11 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             }
         }
     }
+
     //----------------------------------------------------------
     //Bottom Sheet Navigation
 
     private  fun initMisc(layoutmisc : LinearLayout?) {
-        val act = activity as WriteActivity
         if (layoutmisc!=null){
         val bottomSheetBehavior = BottomSheetBehavior.from(layoutmisc)
         layoutmisc.setOnClickListener{
@@ -169,11 +159,16 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     }
     private fun setBgColor(value: Int){
         view?.setBackgroundResource(value)
-
     }
 
+    @SuppressLint("WrongConstant")
+    fun loadImages(){
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.rvimages)
+        val act = activity as WriteActivity
+        recyclerView?.layoutManager = LinearLayoutManager(act , OrientationHelper.HORIZONTAL , false)
+        recyclerView?.adapter = ImageAdapter(imagepath,act)
 
-
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

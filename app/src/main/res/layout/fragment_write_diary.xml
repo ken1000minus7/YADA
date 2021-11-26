@@ -27,28 +27,18 @@
             app:title="@string/page_title" />
 
     </com.google.android.material.appbar.AppBarLayout>
-    <HorizontalScrollView
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="@dimen/_150sdp"
-        android:fillViewport="true"
+        android:id="@+id/rvimages"
         android:layout_marginTop="?attr/actionBarSize"
-        >
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/layout"
-            android:orientation="horizontal"
-            >
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
 
-        </FrameLayout>
-        </TableRow>
-    </HorizontalScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
+
 
     <TextView
         android:id="@+id/title"
@@ -60,21 +50,19 @@
         android:layout_height="?attr/actionBarSize"
         tools:ignore="NotSibling"/>
 
-        <ScrollView
+
+    <ScrollView
         android:id="@+id/imagescroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-            android:layout_marginBottom="@dimen/_40sdp"
-          >
+        android:layout_marginTop="@dimen/_190sdp"
+        android:layout_marginBottom="@dimen/_40sdp">
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/layout1"
-        android:orientation="vertical">
-
-
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/edithere"
@@ -82,19 +70,17 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_15sdp"
 
-
                 />
 
             <TextView
                 android:id="@+id/seehere"
-                android:textSize="@dimen/_15sdp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_15sdp"
+
                 />
         </LinearLayout>
-        </ScrollView>
-
-
+    </ScrollView>
 
     <include layout="@layout/layout_misc_note_"
 />
