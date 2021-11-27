@@ -140,6 +140,7 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
         Diary item=itemList.get(position);
         holder.titleView.setText(item.getTitle());
         holder.descriptionView.setText(item.getDescription());
+        holder.locationView.setText(item.getLocation());
         if(item.getLocation()!=null)
         {
             if( item.getBgImageUrl()==null) new ImageGetter(item.getLocation(),holder.locationImage,item,position).execute();
@@ -156,6 +157,7 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
         public TextView titleView;
         public TextView descriptionView;
         public ImageView locationImage;
+        public TextView locationView;
         public DiaryListRecyclerViewAdapter adapter;
         public DiaryListViewHolder(View view,DiaryListRecyclerViewAdapter adapter)
         {
@@ -163,6 +165,7 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
             titleView=(TextView) view.findViewById(R.id.title);
             descriptionView=(TextView) view.findViewById(R.id.description);
             locationImage=(ImageView) view.findViewById(R.id.location_image);
+            locationView=(TextView) view.findViewById(R.id.location);
             this.adapter=adapter;
         }
 

@@ -26,10 +26,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            android:textAppearance="?attr/textAppearanceListItem"
-            app:layout_constraintBottom_toTopOf="@+id/description"
+            android:textAppearance="@style/nav_rail_style"
+            app:layout_constraintBottom_toTopOf="@id/description"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Diary Title"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textSize="@dimen/_20sdp"/>
 
         <TextView
@@ -37,15 +39,47 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/location_lay"
+            app:layout_constraintStart_toStartOf="parent"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textAppearance="?attr/textAppearanceListItem"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_gravity="start"
+            android:textSize="@dimen/_12sdp"
+            android:textAppearance="@style/nav_rail_style"
+
 
             tools:text="This is diary about lyf" />
+        <LinearLayout
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/description"
+            android:id="@+id/location_lay"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_25sdp"
+                android:scaleType="centerCrop"
+                android:id="@+id/location_img"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_location"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textAppearance="@style/nav_rail_style"
+                tools:text="India"
+                android:ellipsize="end"
+                android:textSize="@dimen/_10sdp"
+                android:maxLines="1"
+                android:id="@+id/location"/>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

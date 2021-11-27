@@ -200,7 +200,7 @@ public class SettingsFragment extends Fragment {
         feedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                
             }
         });
         return view;
