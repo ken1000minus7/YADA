@@ -3,6 +3,7 @@ package com.kamikaze.yada.diary.writenotes
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,10 +17,8 @@ import com.kamikaze.yada.MainPageActivity
 import com.kamikaze.yada.R
 
 
-class ImageAdapter(val images:ArrayList<String>, val context: Context) : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
+class ImageAdapter(val images:List<String>, val context: Context) : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
     class ViewHolder(itemView : View): RecyclerView.ViewHolder(itemView) {
-
-        val ll = itemView.findViewById<CardView>(R.id.llinwa)
         val img = itemView.findViewById<ImageView>(R.id.imginwa)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageAdapter.ViewHolder {
@@ -33,15 +32,12 @@ val view : View = LayoutInflater.from(parent.context).inflate(R.layout.image_rv 
         holder.img.setOnClickListener {
             val intent = Intent(context , ZoomImageActivity::class.java)
         intent.putExtra("image" , image)
+            Log.d("image", "$image , $images"  )
             context.startActivity(intent)
                 }
     }
 
     override fun getItemCount(): Int {
 return images.size
-    }
-
-    public interface  PhotoListener{
-        fun onPhotoClick(path:String)
     }
 }

@@ -39,6 +39,7 @@ public class MainPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_YADA);
         setContentView(R.layout.activity_main_page);
         DrawerLayout drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView sidebar=(NavigationView) findViewById(R.id.sidebar);

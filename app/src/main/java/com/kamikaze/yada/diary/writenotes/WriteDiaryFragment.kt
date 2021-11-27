@@ -25,11 +25,11 @@ import com.kamikaze.yada.dao.NotesDao
 import com.kamikaze.yada.databinding.FragmentWriteDiaryBinding
 import com.kamikaze.yada.diary.DiaryHandler
 import com.kamikaze.yada.model.Notes
+import java.lang.StringBuilder
 
 class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     private var _binding: FragmentWriteDiaryBinding? = null
     private val binding get() = _binding!!
-    val imagepath = ArrayList<String>()
      var i : Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,10 +52,10 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
         initMisc(act.findViewById(R.id.layoutmiscnote))
 
-        //IMAGES ADAPTER----------  -----------------------------------------------------------
+        //IMAGES ADAPTER---------------------------------------------------------------------
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvimages)
         recyclerView.layoutManager = LinearLayoutManager(act , OrientationHelper.HORIZONTAL , false)
-        recyclerView.adapter = ImageAdapter(imagepath, act)
+
 
         //----------------------------------------------------------
         //Button Clicks to change bg color
@@ -91,7 +91,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     }
         //-------------------------------------------------------------
         val nd = NotesDao()
-        nd.setNote(seeTV,act.position,writeET , title )
+        nd.setNote(seeTV,act.position,writeET , title , recyclerView)
         seeTV.movementMethod = ScrollingMovementMethod()
         topAppBar.setOnMenuItemClickListener { menuItem -> when (menuItem.itemId){
             R.id.favorite ->{
@@ -121,13 +121,20 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         if (resultCode==RESULT_OK){
             if(requestCode==1000){
                 val act = activity as WriteActivity
+                val recyclerView = view?.findViewById<RecyclerView>(R.id.rvimages)
                 val returnUri = data?.data
                 val path1 = returnUri.toString()
+
+                val imgadapter = recyclerView?.adapter  as ImageAdapter?
+
+                val imagepath = imgadapter?.images as MutableList
+
                 imagepath.add(path1)
-                loadImages()
+                loadImages(imagepath)
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //local
-                val storageRef = FirebaseStorage.getInstance().getReference(FirebaseAuth.getInstance().uid!!+"/images/asu.jpg")//asu= check inent me random string
+                val storageRef = FirebaseStorage.getInstance().getReference(FirebaseAuth.getInstance().uid!!+"/images/"+ randomString(5)+".jpg")//asu= check inent me random string
                 storageRef.putFile(returnUri!!).addOnCompleteListener{
                     task->
                         if (task.isSuccessful) {
@@ -140,6 +147,14 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                 }
             }
         }
+    }
+
+    private fun randomString(i: Int): String {
+    val characters = "abcdefghijklmnopqrstuvwxyz"
+        val charset = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+
+        return List(i) { charset.random() }
+            .joinToString("")
     }
 
     //----------------------------------------------------------
@@ -162,11 +177,13 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     }
 
     @SuppressLint("WrongConstant")
-    fun loadImages(){
+    fun loadImages(imagepath :List<String>){
         val recyclerView = view?.findViewById<RecyclerView>(R.id.rvimages)
         val act = activity as WriteActivity
+
         recyclerView?.layoutManager = LinearLayoutManager(act , OrientationHelper.HORIZONTAL , false)
         recyclerView?.adapter = ImageAdapter(imagepath,act)
+
 
     }
     override fun onDestroyView() {
