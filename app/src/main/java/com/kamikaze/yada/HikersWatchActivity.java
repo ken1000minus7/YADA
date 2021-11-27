@@ -32,6 +32,7 @@ public class HikersWatchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_YADA);
         setContentView(R.layout.activity_hikers_watch);
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 

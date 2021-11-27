@@ -29,6 +29,7 @@ class WriteActivity : AppCompatActivity() {
     var title : String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_YADA)
         val binding = ActivityWriteBinding.inflate(layoutInflater)
 
         val navHostFragment = supportFragmentManager.findFragmentById(id.myNavHostFragment2) as NavHostFragment
