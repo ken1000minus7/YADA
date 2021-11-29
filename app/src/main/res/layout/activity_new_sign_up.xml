@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ecd0bc"
+    android:background="?attr/colorSecondaryVariant"
     tools:context=".auth.NewSignUp">
 
 
@@ -13,10 +13,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="name"
+        android:hint="Name"
         android:inputType="text"
         android:selectAllOnFocus="true"
-        android:textColorHint="#122a5b"
         app:boxStrokeColor="@color/primary"
         app:layout_constraintBottom_toTopOf="@id/email_new_user"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,10 +28,11 @@
             android:id="@+id/name_one_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/nav_rail_style"
+            android:textSize="@dimen/_13sdp"
             android:inputType="textEmailAddress"
             android:maxLength="100"
-            android:scrollHorizontally="false"
-            android:textColor="#000000" />
+            android:scrollHorizontally="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,7 +49,6 @@
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
-        android:textColorHint="#122a5b"
         app:boxStrokeColor="@color/primary"
         app:counterMaxLength="100"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,8 +61,9 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:maxLength="100"
-            android:scrollHorizontally="false"
-            android:textColor="#000000" />
+            android:textAppearance="@style/nav_rail_style"
+            android:textSize="@dimen/_13sdp"
+            android:scrollHorizontally="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,7 +80,6 @@
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
-        android:textColorHint="#122a5b"
         app:boxStrokeColor="@color/primary"
         app:counterMaxLength="25"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +87,6 @@
 
         app:layout_constraintTop_toBottomOf="@+id/email_new_user"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/black"
 
         >
 
@@ -97,9 +95,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:textAppearance="@style/nav_rail_style"
+            android:textSize="@dimen/_13sdp"
             android:maxLength="25"
-            android:scrollHorizontally="false"
-            android:textColor="#000000" />
+            android:scrollHorizontally="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,6 +108,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create New Account"
+        android:textAppearance="@style/nav_rail_style"
+        android:textSize="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

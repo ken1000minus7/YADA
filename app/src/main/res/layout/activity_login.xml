@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ecd0bc"
+    android:background="?attr/colorSecondaryVariant"
     android:paddingLeft="@dimen/fragment_horizontal_margin"
     android:paddingTop="@dimen/fragment_vertical_margin"
     android:paddingRight="@dimen/fragment_horizontal_margin"
@@ -17,7 +17,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
-        android:src="@drawable/peachpatch"
+        android:src="@drawable/dialog_background"
         app:layout_constraintBottom_toTopOf="@id/peach2"
         app:layout_constraintEnd_toEndOf="@id/peach4"
         app:layout_constraintStart_toStartOf="@id/peach3"
@@ -56,7 +56,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/segoeprint"
         android:text="SIGN IN"
-        android:textColor="#122a5b"
         android:textSize="@dimen/_40sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,18 +77,18 @@
         android:layout_marginStart="@dimen/_24sdp"
         android:layout_marginTop="@dimen/_150sdp"
         android:layout_marginEnd="@dimen/_24sdp"
-        app:boxStrokeColor="@color/primary"
+        app:boxStrokeColor="?attr/colorPrimary"
         app:counterMaxLength="100"
-        android:textColorHint="#122a5b"
         >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/username"
             android:scrollHorizontally="false"
             android:maxLength="100"
+            android:textAppearance="@style/nav_rail_style"
+            android:textSize="@dimen/_13sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
             android:inputType="textEmailAddress"
             />
 
@@ -109,20 +108,19 @@
         android:layout_marginEnd="@dimen/_24sdp"
         android:imeActionLabel="@string/action_sign_in_short"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/user"
         app:counterMaxLength="25"
 
         android:imeOptions="actionDone"
-        android:textColorHint="#122a5b"
-        app:boxStrokeColor="@color/primary"
+        app:boxStrokeColor="?attr/colorPrimary"
 
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+            android:textSize="@dimen/_13sdp"
+            android:textAppearance="@style/nav_rail_style"
             android:scrollHorizontally="false"
             android:maxLength="25"
             android:inputType="textPassword"
@@ -137,9 +135,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginStart="48dp"
-        android:shadowColor="@color/primary"
+        android:shadowColor="?attr/colorPrimary"
         android:layout_marginEnd="48dp"
-
+        android:textAppearance="@style/nav_rail_style"
+        android:textSize="@dimen/_15sdp"
         android:text="@string/login_back"
         app:layout_constraintBottom_toBottomOf="@id/peach2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,10 +151,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_in_google"
+        android:textAppearance="@style/nav_rail_style"
+        android:textSize="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/login_again"
         app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/login_again"
         app:layout_constraintTop_toBottomOf="@id/login_again"
         app:layout_constraintVertical_bias="0.584" />
 
@@ -175,9 +176,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/action_register"
+        android:textAppearance="@style/nav_rail_style"
+        android:textSize="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/login"
+        app:layout_constraintStart_toStartOf="@+id/login"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

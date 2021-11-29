@@ -12,7 +12,7 @@ import com.kamikaze.yada.R
 class ZoomImageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_YADA)
+//        setTheme(R.style.Theme_YADA)
         setContentView(R.layout.activity_zoom_image)
         val extras = intent.extras
         if (extras != null) {

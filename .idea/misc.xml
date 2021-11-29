@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable-night/splash_image.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/dialog_background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/empty_list_background.xml" value="0.26614583333333336" />
@@ -13,16 +14,22 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/ic_profile.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/ic_rectangle_1.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/ic_search.xml" value="1.596875" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/ic_translate.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/nav_rail_bg.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/pfp_border.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/search_bar_background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/sidebar_background.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/splash_image.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/translate_background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/translate_box_background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout-v21/fragment_login.xml" value="0.24003623188405798" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_main.xml" value="0.1766304347826087" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_main2.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_main_page.xml" value="0.264" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_maps.xml" value="0.25" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_memorable_places.xml" value="0.25" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_new_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_options.xml" value="0.23052536231884058" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_path_tracker.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_translate.xml" value="0.25" />
@@ -32,6 +39,7 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/delete_confirm_dialog.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/diary_input_dialog.xml" value="0.23097826086956522" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/email_change_dialog.xml" value="0.25" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/feedback_dialog.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_customize.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_diary_list.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_diary_list_item.xml" value="0.264" />
@@ -45,6 +53,7 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_security.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_write_diary.xml" value="0.25" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/image_rv.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/password_change_dialog.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/sidebar_header.xml" value="0.264" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/spinner_item.xml" value="0.25" />

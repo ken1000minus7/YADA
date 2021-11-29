@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +22,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigationrail.NavigationRailView;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.kamikaze.yada.Feedback;
 import com.kamikaze.yada.MainActivity;
 import com.kamikaze.yada.R;
 import com.kamikaze.yada.diary.DiaryHandler;
@@ -81,6 +86,12 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_settings, container, false);
+        NavigationRailView navRail=getActivity().findViewById(R.id.navigation_rail);
+        if(navRail.getSelectedItemId()==R.id.customize)
+        {
+            FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.option_container,CustomizeFragment.class,null).commit();
+        }
         Button deleteAccount=(Button) view.findViewById(R.id.delete_account_button);
         Button aboutUs=(Button) view.findViewById(R.id.aboutus_button);
         Button feedbackButton=(Button) view.findViewById(R.id.feedback_button);
@@ -200,9 +211,71 @@ public class SettingsFragment extends Fragment {
         feedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                View dialog=inflater.inflate(R.layout.feedback_dialog,container,false);
+                AlertDialog alertDialog=new AlertDialog.Builder(getContext()).setView(dialog).setPositiveButton("Send feedback",null).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                }).create();
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                        Button posButton=(Button) alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                        posButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                EditText feedbackText=(EditText) dialog.findViewById(R.id.feedback_input);
+                                if(feedbackText.getText().toString().equals(""))
+                                {
+                                    Toast.makeText(getContext(), "Please enter some feedback", Toast.LENGTH_SHORT).show();
+                                }
+                                else
+                                {
+                                    dialogInterface.cancel();
+                                    ProgressDialog progressDialog=new ProgressDialog(getContext());
+                                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                    progressDialog.setMessage("Sending feedback");
+                                    progressDialog.setCanceledOnTouchOutside(false);
+                                    progressDialog.getWindow().setBackgroundDrawableResource(R.drawable.empty_list_background);
+                                    progressDialog.show();
+                                    FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+                                    Feedback feedback=new Feedback(feedbackText.getText().toString(),user.getEmail(),user.getUid());
+                                    FirebaseFirestore db=FirebaseFirestore.getInstance();
+                                    db.collection("feedbacks").add(feedback).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                                            progressDialog.cancel();
+                                            if(task.isSuccessful())
+                                            {
+                                                Toast.makeText(getContext(), "Thank you for your feedback!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else
+                                                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+                                }
+                            }
+                        });
+                    }
+                });
+                alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+                alertDialog.show();
             }
         });
         return view;
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        NavigationRailView navRail=getActivity().findViewById(R.id.navigation_rail);
+        if(navRail.getSelectedItemId()==R.id.customize)
+        {
+            FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.option_container,CustomizeFragment.class,null).commit();
+        }
+
     }
 }
