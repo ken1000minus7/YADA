@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -115,7 +116,7 @@ public class DiaryListFragment extends Fragment {
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         RecyclerView recyclerView = (RecyclerView) getView();
-
+        Log.d("diary restoration","function called");
         DiaryHandler diaryHandler=new DiaryHandler(getContext());
         diaryHandler.loadData(recyclerView);
     }

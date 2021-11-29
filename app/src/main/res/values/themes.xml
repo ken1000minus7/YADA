@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.YADA" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+<!--        <item name="android:windowBackground">@drawable/splash_image</item>-->
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary1</item>
@@ -10,7 +11,7 @@
         <item name="colorSecondaryVariant">@color/primary2</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/black</item>
         <item name="colorControlNormal">@color/black</item>
@@ -70,8 +71,16 @@
         <item name="android:windowBackground">@drawable/splash_image</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary1</item>
-
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/primary2</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/black</item>
+        <item name="colorControlNormal">@color/black</item>
 
 
     </style>

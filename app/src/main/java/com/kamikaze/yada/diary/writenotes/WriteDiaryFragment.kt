@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -26,6 +27,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.kamikaze.yada.R
 import com.kamikaze.yada.dao.NotesDao
 import com.kamikaze.yada.databinding.FragmentWriteDiaryBinding
+import com.kamikaze.yada.diary.Diary
 import com.kamikaze.yada.diary.DiaryHandler
 import com.kamikaze.yada.model.Notes
 import java.lang.StringBuilder
@@ -34,6 +36,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     private var _binding: FragmentWriteDiaryBinding? = null
     private val binding get() = _binding!!
      var i : Int = 0
+    val a=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)

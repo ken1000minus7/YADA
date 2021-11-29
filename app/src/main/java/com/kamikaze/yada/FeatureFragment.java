@@ -89,6 +89,14 @@ public class FeatureFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        ImageButton memorableButton=(ImageButton) view.findViewById(R.id.memorable_button);
+        memorableButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),MemorablePlacesActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

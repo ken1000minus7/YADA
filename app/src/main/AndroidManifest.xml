@@ -24,7 +24,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_icon_round"
         android:supportsRtl="true"
-        android:theme="@style/splashScreenTheme">
+        android:theme="@style/Theme.YADA">
+        <activity
+            android:name=".MapsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MemorablePlacesActivity"
+            android:exported="false" />
         <activity
             android:name=".webview.WebActivity"
             android:exported="false" />

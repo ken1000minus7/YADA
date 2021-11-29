@@ -122,7 +122,7 @@ public class DiaryHandler {
             }
         });
     }
-
+    public static  int a;
     public ArrayList<Diary> getDiaries()
     {
         if(currentUser !=null)
