@@ -21,5 +21,6 @@ class WebActivity : AppCompatActivity() {
         webView.loadUrl(url.toString())
 
 
+
     }
 }

@@ -1,6 +1,8 @@
 package com.kamikaze.yada.pathtracker
 
+import android.content.Context
 import android.content.Intent
+import android.location.Location
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,6 +22,8 @@ import com.kamikaze.yada.pathtracker.TrackingService
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
 import com.kamikaze.yada.R
 import com.kamikaze.yada.databinding.FragmentLandingBinding
 import com.kamikaze.yada.databinding.FragmentTrackingBinding
@@ -32,6 +36,12 @@ import com.kamikaze.yada.pathtracker.Constants.POLYLINE_WIDTH
 import com.kamikaze.yada.pathtracker.TrackingService.Companion.isTracking
 import java.util.*
 import kotlin.math.round
+import android.graphics.Bitmap
+import android.os.Environment
+import android.widget.Toast
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.Exception
 
 
 class TrackingFragment : Fragment(R.layout.fragment_tracking) {
@@ -51,7 +61,11 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         _binding = FragmentTrackingBinding.inflate(inflater, container, false)
         val view = binding.root
         btnFinishRun = view.findViewById(R.id.btnFinishRun)
+        btnFinishRun.setOnClickListener{
+            zoomToSeeWholeTrack()
+            endRunAndSaveToDb()
 
+        }
         return view
     }
 
@@ -134,6 +148,21 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             btnFinishRun.visibility = View.GONE
         }
     }
+    fun calculatePolylineLength(polyline: Polyline):Float{
+        var dis = 0F
+        for (i in 0..polyline.size -2){
+            val pos1 = polyline[i]
+            val pos2 = polyline[i+1]
+            val result = FloatArray(1)
+            Location.distanceBetween(
+                pos1.latitude,
+                pos1.longitude,pos2.latitude,pos2.longitude, result
+            )
+            dis+=result[0]
+        }
+        return dis
+    }
+
     private fun showCancelTrackingDialog() {
         val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
             .setTitle("Cancel the Run?")
@@ -158,10 +187,31 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             for(polyline in pathPoints) {
                 distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
             }
-            val dateTimestamp = Calendar.getInstance().timeInMillis
+         //   val storageRef = FirebaseStorage.getInstance().getReference(FirebaseAuth.getInstance().uid!!+"/images/maps/"+ randomString(5)+".jpg")//asu= check inent me random string
+            if (bmp != null) {
+                saveImage(  bmp)
+            }
 
-            stopRun()
         }
+    }
+    fun saveImage( bitmap: Bitmap) {
+        val dir = File(Environment.getDataDirectory(),"SavedMaps")
+        if(!dir.exists()){
+            dir.mkdir()
+        }
+        val file = File(dir,System.currentTimeMillis().toString()+".jpg")
+
+        val outputStream = FileOutputStream(file)
+        bitmap.compress(Bitmap.CompressFormat.JPEG , 100 , outputStream)
+        Toast.makeText(activity, "Map Successfully save to local storage", Toast.LENGTH_LONG).show()
+        outputStream.close()
+    }
+    private fun randomString(i: Int): String {
+        val characters = "abcdefghijklmnopqrstuvwxyz"
+        val charset = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+
+        return List(i) { charset.random() }
+            .joinToString("")
     }
 
     private fun addAllPolylines(){
@@ -192,6 +242,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             )
         )
     }
+
 
     override fun onResume() {
         super.onResume()

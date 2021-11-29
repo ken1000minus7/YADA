@@ -86,9 +86,10 @@ public class MapsFragment extends Fragment {
                 @Override
                 public void onMapReady(@NonNull GoogleMap googleMap) {
                     ViewPager2 viewPager=(ViewPager2) getActivity().findViewById(R.id.main_fragment_container);
+                    if (viewPager!=null){
                     viewPager.setUserInputEnabled(false);
                     mMap = googleMap;
-                    locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                    locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);}
                     locationListener = new LocationListener() {
                         @Override
                         public void onLocationChanged(Location location) {

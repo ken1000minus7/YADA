@@ -97,7 +97,7 @@
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/email_change_dialog.xml" value="0.190625" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_customize.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_diary_list.xml" value="0.1" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_diary_list_item.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_diary_list_item.xml" value="0.1" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_feature.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_landing.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_main.xml" value="0.25416666666666665" />
@@ -115,6 +115,7 @@
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/spinner_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/switch_item.xml" value="0.264" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/switch_layout.xml" value="0.1" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/web_items.xml" value="0.190625" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/menu/sidebar_menu.xml" value="0.1" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/menu/sidebar_menu_note.xml" value="0.13385416666666666" />

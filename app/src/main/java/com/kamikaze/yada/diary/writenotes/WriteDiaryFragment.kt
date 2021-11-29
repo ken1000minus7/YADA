@@ -2,6 +2,7 @@ package com.kamikaze.yada.diary.writenotes
 
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -9,9 +10,11 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.method.ScrollingMovementMethod
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.OrientationHelper
@@ -97,6 +100,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             R.id.favorite ->{
                 writeET.visibility = View.GONE
                 seeTV.text = writeET.text
+                      handleKeyEvent(view , KeyEvent.KEYCODE_ENTER)
                 seeTV.visibility = View.VISIBLE
                 val note  = Notes(title.text.toString(),"Random","Random0",writeET.text.toString()  )
                 val act = activity as WriteActivity
@@ -105,6 +109,13 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                 true
             }
             R.id.edit ->{
+                writeET.isSelected = true
+                val inputMethodManager =
+                    activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+
+
                 seeTV.visibility = View.GONE
                 writeET.setText(seeTV.text.toString())
                 writeET.visibility = View.VISIBLE
@@ -134,7 +145,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //local
-                val storageRef = FirebaseStorage.getInstance().getReference(FirebaseAuth.getInstance().uid!!+"/images/"+ randomString(5)+".jpg")//asu= check inent me random string
+                val storageRef = FirebaseStorage.getInstance().getReference(FirebaseAuth.getInstance().uid!!+"/images/"+ randomString(5)+".jpg")//asu= check intent me random string
                 storageRef.putFile(returnUri!!).addOnCompleteListener{
                     task->
                         if (task.isSuccessful) {
@@ -186,8 +197,25 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
 
     }
-    override fun onDestroyView() {
+    private fun handleKeyEvent(view: View, keyCode: Int ):Boolean{
+        if (keyCode == KeyEvent.KEYCODE_ENTER){
+            //Hide Keyboard
+            val inputMethodManager =
+                activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0 )
+            inputMethodManager.showSoftInput(view,0)
+            return true
+
+
+        }
+        return false
+    }
+
+
+
+override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }
