@@ -67,6 +67,11 @@
     <style name="nav_rail_style">
         <item name="android:fontFamily">@font/segoeprint</item>
     </style>
+
+    <style name="app_bar_style">
+        <item name="android:fontFamily">@font/segoeprint</item>
+        <item name="android:textSize">@dimen/_20sdp</item>
+    </style>
     <style name="splashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_image</item>
         <item name="colorPrimary">@color/primary</item>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/writefragment"
-    android:background="@color/secondary"
+    android:background="?attr/colorSecondaryVariant"
     tools:context=".diary.writenotes.WriteDiaryFragment"
     android:orientation="vertical"
     android:isScrollContainer="true">
@@ -29,7 +29,8 @@
             android:layout_height="?attr/actionBarSize"
             android:visibility="visible"
             app:menu="@menu/top_app_bar"
-            app:title="@string/page_title" />
+            app:titleTextAppearance="@style/app_bar_style"
+            app:title="Title" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -37,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_150sdp"
         android:id="@+id/rvimages"
+        android:visibility="gone"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/topAppBarLayout"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,10 +51,9 @@
 
     <TextView
         android:id="@+id/title"
-
         android:layout_width="@dimen/_100sdp"
         app:layout_constraintTop_toBottomOf="@id/imagescroll"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_height="?attr/actionBarSize"
         tools:ignore="NotSibling"/>
@@ -70,6 +71,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout1"
+            android:layout_marginHorizontal="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -78,8 +80,9 @@
                 android:id="@+id/edithere"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/_15sdp"
+                android:textSize="@dimen/_12sdp"
                 android:gravity="top|start"
+                android:textAppearance="@style/nav_rail_style"
                 android:inputType="textMultiLine|textCapSentences"
                 />
 
@@ -87,13 +90,17 @@
                 android:id="@+id/seehere"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/_15sdp"
+                android:textAppearance="@style/nav_rail_style"
+                android:textSize="@dimen/_13sdp"
+                tools:text="ok vai"
 
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <include layout="@layout/layout_misc_note_"
+        android:id="@+id/customize_options"
+        android:visibility="gone"
 />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

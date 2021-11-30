@@ -16,18 +16,22 @@
 <!--    </androidx.cardview.widget.CardView>-->
 <!--</RelativeLayout>-->
 
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="@dimen/_150sdp"
+    android:layout_width="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/llinwa"
-    android:layout_height="@dimen/_140sdp"
-    android:layout_margin="@dimen/_10sdp">
+    android:background="@android:color/transparent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/_5sdp">
 
 
         <ImageView
             android:id="@+id/imginwa"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:src="@drawable/travel"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"/>
 
 </androidx.cardview.widget.CardView>
