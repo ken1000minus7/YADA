@@ -10,11 +10,16 @@
     tools:context=".diary.writenotes.WriteDiaryFragment"
     android:orientation="vertical"
     android:isScrollContainer="true">
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/topAppBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         >
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -32,8 +37,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_150sdp"
         android:id="@+id/rvimages"
-        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/topAppBarLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
 
@@ -53,12 +60,15 @@
 
     <ScrollView
         android:id="@+id/imagescroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_190sdp"
-        android:layout_marginBottom="@dimen/_40sdp">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvimages">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,21 +77,22 @@
             <EditText
                 android:id="@+id/edithere"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textSize="@dimen/_15sdp"
-
+                android:gravity="top|start"
+                android:inputType="textMultiLine|textCapSentences"
                 />
 
             <TextView
                 android:id="@+id/seehere"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textSize="@dimen/_15sdp"
 
                 />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <include layout="@layout/layout_misc_note_"
 />
 
