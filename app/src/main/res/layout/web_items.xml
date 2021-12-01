@@ -21,14 +21,10 @@
             android:id="@+id/titleweb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="212dp"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="@dimen/_20sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.9"
+            tools:layout_editor_absoluteY="169dp"
             tools:text="Diary Title" />
 
 

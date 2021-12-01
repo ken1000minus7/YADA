@@ -57,6 +57,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         topAppBar.title = act.title
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
         initMisc(act.findViewById(R.id.layoutmiscnote))
+        //fab and bottom sheet----------------------------------------------------------------
+
 
         //IMAGES ADAPTER---------------------------------------------------------------------
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvimages)
@@ -83,6 +85,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         bgc4.setOnClickListener { setBgColor(R.color.green) }
         bgt1.setOnClickListener { view.setBackgroundResource(R.drawable.bg_pp) }
         //-----------------------------------------------------------
+
+        //------------------------------------------------------------
 
         fab.setOnClickListener{
             if (ActivityCompat.checkSelfPermission(act,android.Manifest.permission.READ_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
@@ -180,9 +184,15 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         layoutmisc.setOnClickListener{
             if(bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED ){
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                val fab = view?.findViewById<FloatingActionButton>(R.id.fab)
+                    fab?.visibility = View.GONE
             }
             else{
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                val fab = view?.findViewById<FloatingActionButton>(R.id.fab)
+
+                    fab?.visibility = View.VISIBLE
+
             }
     }}
     }

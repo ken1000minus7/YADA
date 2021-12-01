@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:elevation="@dimen/_36sdp"
     android:id="@+id/layoutmiscnote"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -219,15 +220,6 @@
                 />
 
         </FrameLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="mini"
-            android:layout_gravity="end"
-            app:srcCompat="@drawable/ic_image" />
-
 
     </TableRow>
     </HorizontalScrollView>

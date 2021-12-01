@@ -63,7 +63,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         btnFinishRun = view.findViewById(R.id.btnFinishRun)
         btnFinishRun.setOnClickListener{
             zoomToSeeWholeTrack()
-            endRunAndSaveToDb()
+           stopRun()
+
 
         }
         return view
@@ -79,7 +80,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         }
         btnFinishRun.setOnClickListener {
             zoomToSeeWholeTrack()
-            endRunAndSaveToDb()
+
         }
         mapView = view.findViewById<MapView>(R.id.mapView)
         mapView.onCreate(savedInstanceState)
@@ -180,32 +181,10 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     private fun stopRun() {
         sendCommandToService(ACTION_STOP_SERVICE)
         findNavController().navigate(R.id.action_trackingFragment_to_featureFragment)
-    }
-    private fun endRunAndSaveToDb() {
-        map?.snapshot { bmp ->
-            var distanceInMeters = 0
-            for(polyline in pathPoints) {
-                distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
-            }
-         //   val storageRef = FirebaseStorage.getInstance().getReference(FirebaseAuth.getInstance().uid!!+"/images/maps/"+ randomString(5)+".jpg")//asu= check inent me random string
-            if (bmp != null) {
-                saveImage(  bmp)
-            }
 
-        }
     }
-    fun saveImage( bitmap: Bitmap) {
-        val dir = File(Environment.getDataDirectory(),"SavedMaps")
-        if(!dir.exists()){
-            dir.mkdir()
-        }
-        val file = File(dir,System.currentTimeMillis().toString()+".jpg")
 
-        val outputStream = FileOutputStream(file)
-        bitmap.compress(Bitmap.CompressFormat.JPEG , 100 , outputStream)
-        Toast.makeText(activity, "Map Successfully save to local storage", Toast.LENGTH_LONG).show()
-        outputStream.close()
-    }
+
     private fun randomString(i: Int): String {
         val characters = "abcdefghijklmnopqrstuvwxyz"
         val charset = ('a'..'z') + ('A'..'Z') + ('0'..'9')

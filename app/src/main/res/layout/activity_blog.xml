@@ -6,15 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".webview.BlogActivity"
     android:background="@color/secondary">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/headingblog"
+        android:text="Travel Guides and Stories"
+        android:textAlignment="center"
+        android:textSize="@dimen/_20sdp"
+        android:fontFamily="@font/segoeprint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/webrv"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/webrv"
         android:layout_width="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/headingblog" />
 </androidx.constraintlayout.widget.ConstraintLayout>
