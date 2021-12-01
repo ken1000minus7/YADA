@@ -127,5 +127,16 @@
         android:visibility="gone"
         tools:visibility="visible"
 />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:elevation="@dimen/_35sdp"
+        android:id="@+id/fab"
 
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        app:srcCompat="@drawable/ic_plus_button"
+        android:layout_marginRight="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_50sdp"
+
+        />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
