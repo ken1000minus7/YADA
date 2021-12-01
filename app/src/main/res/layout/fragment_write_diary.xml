@@ -6,15 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/writefragment"
-    android:background="@color/secondary"
+    android:background="?attr/colorSecondaryVariant"
     tools:context=".diary.writenotes.WriteDiaryFragment"
     android:orientation="vertical"
     android:isScrollContainer="true">
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/topAppBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         >
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -24,7 +29,8 @@
             android:layout_height="?attr/actionBarSize"
             android:visibility="visible"
             app:menu="@menu/top_app_bar"
-            app:title="@string/page_title" />
+            app:titleTextAppearance="@style/app_bar_style"
+            app:title="Title" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -32,8 +38,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_150sdp"
         android:id="@+id/rvimages"
-        android:layout_marginTop="?attr/actionBarSize"
+        android:visibility="gone"
         android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/topAppBarLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
 
@@ -42,10 +51,9 @@
 
     <TextView
         android:id="@+id/title"
-
         android:layout_width="@dimen/_100sdp"
         app:layout_constraintTop_toBottomOf="@id/imagescroll"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_height="?attr/actionBarSize"
         tools:ignore="NotSibling"/>
@@ -53,13 +61,17 @@
 
     <ScrollView
         android:id="@+id/imagescroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_190sdp"
-        android:layout_marginBottom="@dimen/_40sdp">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvimages">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout1"
+            android:layout_marginHorizontal="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -67,24 +79,29 @@
             <EditText
                 android:id="@+id/edithere"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_15sdp"
-
+                android:layout_height="match_parent"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="top|start"
+                android:textAppearance="@style/nav_rail_style"
+                android:inputType="textMultiLine|textCapSentences"
                 />
 
             <TextView
                 android:id="@+id/seehere"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_15sdp"
+                android:layout_height="match_parent"
+                android:textAppearance="@style/nav_rail_style"
+                android:textSize="@dimen/_13sdp"
+                tools:text="ok vai"
 
                 />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <include layout="@layout/layout_misc_note_"
+        android:id="@+id/customize_options"
+        android:visibility="gone"
 
 />
     <com.google.android.material.floatingactionbutton.FloatingActionButton

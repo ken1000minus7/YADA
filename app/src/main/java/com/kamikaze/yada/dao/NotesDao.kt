@@ -1,6 +1,7 @@
 package com.kamikaze.yada.dao
 
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.GridLayout
 import android.widget.TextView
@@ -33,7 +34,7 @@ class NotesDao {
                    val lis = diary.images //list of images which contains url
 
                     rv.adapter = ImageAdapter(lis,rv.context)
-
+                   if(lis.size>0) rv.visibility=View.VISIBLE
 
 
                    tv.text = textnote

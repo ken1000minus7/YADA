@@ -57,9 +57,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         topAppBar.title = act.title
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
         initMisc(act.findViewById(R.id.layoutmiscnote))
-        //fab and bottom sheet----------------------------------------------------------------
 
-
+        val custops=view.findViewById<View>(R.id.customize_options)
         //IMAGES ADAPTER---------------------------------------------------------------------
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvimages)
         recyclerView.layoutManager = LinearLayoutManager(act , OrientationHelper.HORIZONTAL , false)
@@ -109,6 +108,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                 seeTV.text = writeET.text
                       handleKeyEvent(view , KeyEvent.KEYCODE_ENTER)
                 seeTV.visibility = View.VISIBLE
+                custops.visibility=View.GONE
                 val note  = Notes(title.text.toString(),"Random","Random0",writeET.text.toString()  )
                 val act = activity as WriteActivity
                 val diaryins:DiaryHandler = DiaryHandler(activity)
@@ -117,15 +117,16 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             }
             R.id.edit ->{
                 writeET.isSelected = true
-                val inputMethodManager =
-                    activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-
-                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+//                val inputMethodManager =
+//                    activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//
+//                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 
 
                 seeTV.visibility = View.GONE
                 writeET.setText(seeTV.text.toString())
                 writeET.visibility = View.VISIBLE
+                custops.visibility=View.VISIBLE
                 true
             }
             else   -> false
@@ -145,8 +146,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
                 val imgadapter = recyclerView?.adapter  as ImageAdapter?
 
-                val imagepath = imgadapter?.images as MutableList
-
+                var imagepath = imgadapter?.images as MutableList?
+                if(imagepath==null) imagepath= mutableListOf<String>()
                 imagepath.add(path1)
                 loadImages(imagepath)
 
@@ -207,7 +208,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
         recyclerView?.layoutManager = LinearLayoutManager(act , OrientationHelper.HORIZONTAL , false)
         recyclerView?.adapter = ImageAdapter(imagepath,act)
-
+        if(imagepath.size>0) recyclerView?.visibility=View.VISIBLE
 
     }
     private fun handleKeyEvent(view: View, keyCode: Int ):Boolean{

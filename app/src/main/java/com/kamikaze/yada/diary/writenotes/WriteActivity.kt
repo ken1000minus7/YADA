@@ -52,9 +52,11 @@ class WriteActivity : AppCompatActivity() {
 
         val et = findViewById<EditText>(R.id.edithere)
         val tv = findViewById<TextView>(R.id.seehere)
+        val custops=findViewById<View>(R.id.customize_options)
         if (et.isVisible){
             et.visibility = View.GONE
             tv.visibility = View.VISIBLE
+            custops.visibility=View.GONE
         }
         else{
             super.onBackPressed()

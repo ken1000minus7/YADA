@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -29,6 +30,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kamikaze.yada.diary.MainFragment;
 
@@ -89,6 +91,11 @@ public class MapsFragment extends Fragment {
                     if (viewPager!=null){
                     viewPager.setUserInputEnabled(false);
                     mMap = googleMap;
+                    int nightModeFlags = getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                    if(nightModeFlags==Configuration.UI_MODE_NIGHT_YES)
+                    {
+                        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getContext(),R.raw.map_style_night));
+                    }
                     locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);}
                     locationListener = new LocationListener() {
                         @Override
@@ -96,7 +103,7 @@ public class MapsFragment extends Fragment {
                             mMap.clear();
                             LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                             mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+//                            mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
                             Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
                             try {
                                 List<Address> listAddress = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
