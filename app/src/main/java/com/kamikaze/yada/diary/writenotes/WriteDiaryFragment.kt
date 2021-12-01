@@ -24,6 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
+import com.kamikaze.yada.MemorablePlacesActivity
 import com.kamikaze.yada.R
 import com.kamikaze.yada.dao.NotesDao
 import com.kamikaze.yada.databinding.FragmentWriteDiaryBinding
@@ -48,17 +49,20 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     ): View {
         _binding = FragmentWriteDiaryBinding.inflate(inflater, container, false)
         val view = binding.root
-        val topAppBar = binding.topAppBar
+//        val topAppBar = binding.topAppBar
         val writeET = binding.edithere
         writeET.visibility = View.GONE
         val seeTV = binding.seehere
-        val title = binding.title
+        val title = binding.diaryTitle
         val act = activity as WriteActivity
-        topAppBar.title = act.title
+//        topAppBar.title = act.title
+        title.text=act.title
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
         initMisc(act.findViewById(R.id.layoutmiscnote))
 
         val custops=view.findViewById<View>(R.id.customize_options)
+        val editimg=view.findViewById<ImageView>(R.id.edit_diary)
+        val doneimg=view.findViewById<ImageView>(R.id.done_edit_diary)
         //IMAGES ADAPTER---------------------------------------------------------------------
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvimages)
         recyclerView.layoutManager = LinearLayoutManager(act , OrientationHelper.HORIZONTAL , false)
@@ -102,35 +106,56 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         val nd = NotesDao()
         nd.setNote(seeTV,act.position,writeET , title , recyclerView)
         seeTV.movementMethod = ScrollingMovementMethod()
-        topAppBar.setOnMenuItemClickListener { menuItem -> when (menuItem.itemId){
-            R.id.favorite ->{
-                writeET.visibility = View.GONE
-                seeTV.text = writeET.text
-                      handleKeyEvent(view , KeyEvent.KEYCODE_ENTER)
-                seeTV.visibility = View.VISIBLE
-                custops.visibility=View.GONE
-                val note  = Notes(title.text.toString(),"Random","Random0",writeET.text.toString()  )
-                val act = activity as WriteActivity
-                val diaryins:DiaryHandler = DiaryHandler(activity)
-                diaryins.updateDiary(act.position, note)
-                true
-            }
-            R.id.edit ->{
-                writeET.isSelected = true
+//        topAppBar.setOnMenuItemClickListener { menuItem -> when (menuItem.itemId){
+//            R.id.favorite ->{
+//                writeET.visibility = View.GONE
+//                seeTV.text = writeET.text
+//                      handleKeyEvent(view , KeyEvent.KEYCODE_ENTER)
+//                seeTV.visibility = View.VISIBLE
+//                custops.visibility=View.GONE
+//                val note  = Notes(title.text.toString(),"Random","Random0",writeET.text.toString()  )
+//                val act = activity as WriteActivity
+//                val diaryins:DiaryHandler = DiaryHandler(activity)
+//                diaryins.updateDiary(act.position, note)
+//                true
+//            }
+//            R.id.edit ->{
+//                writeET.isSelected = true
 //                val inputMethodManager =
 //                    activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //
 //                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 
 
-                seeTV.visibility = View.GONE
-                writeET.setText(seeTV.text.toString())
-                writeET.visibility = View.VISIBLE
-                custops.visibility=View.VISIBLE
-                true
-            }
-            else   -> false
-        } }
+//                seeTV.visibility = View.GONE
+//                writeET.setText(seeTV.text.toString())
+//                writeET.visibility = View.VISIBLE
+//                custops.visibility=View.VISIBLE
+//                true
+//            }
+//            else   -> false
+//        } }
+        editimg.setOnClickListener(View.OnClickListener {
+            seeTV.visibility = View.GONE
+            writeET.setText(seeTV.text.toString())
+            writeET.visibility = View.VISIBLE
+            custops.visibility=View.VISIBLE
+            editimg.visibility=View.GONE
+            doneimg.visibility=View.VISIBLE
+        })
+        doneimg.setOnClickListener(View.OnClickListener {
+            writeET.visibility = View.GONE
+            seeTV.text = writeET.text
+            handleKeyEvent(view , KeyEvent.KEYCODE_ENTER)
+            seeTV.visibility = View.VISIBLE
+            custops.visibility=View.GONE
+            editimg.visibility=View.VISIBLE
+            doneimg.visibility=View.GONE
+            val note  = Notes(title.text.toString(),"Random","Random0",writeET.text.toString()  )
+            val act = activity as WriteActivity
+            val diaryins:DiaryHandler = DiaryHandler(activity)
+            diaryins.updateDiary(act.position, note)
+        })
         return view
     }
     //Setting Images in Recycler View------------------------------------------------------------------------------------------------------------------------------------

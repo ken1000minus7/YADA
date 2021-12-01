@@ -70,7 +70,7 @@
 
     <style name="app_bar_style">
         <item name="android:fontFamily">@font/segoeprint</item>
-        <item name="android:textSize">@dimen/_20sdp</item>
+        <item name="android:textSize">@dimen/_32sdp</item>
     </style>
     <style name="splashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_image</item>

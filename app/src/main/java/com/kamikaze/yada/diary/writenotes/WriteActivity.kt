@@ -9,10 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.Switch
-import android.widget.TextView
-import android.widget.Toolbar
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -53,10 +50,14 @@ class WriteActivity : AppCompatActivity() {
         val et = findViewById<EditText>(R.id.edithere)
         val tv = findViewById<TextView>(R.id.seehere)
         val custops=findViewById<View>(R.id.customize_options)
+        val editimg=findViewById<ImageView>(R.id.edit_diary)
+        val doneimg=findViewById<ImageView>(R.id.done_edit_diary)
         if (et.isVisible){
             et.visibility = View.GONE
             tv.visibility = View.VISIBLE
             custops.visibility=View.GONE
+            editimg.visibility=View.VISIBLE
+            doneimg.visibility=View.GONE
         }
         else{
             super.onBackPressed()
