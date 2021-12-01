@@ -142,6 +142,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             custops.visibility=View.VISIBLE
             editimg.visibility=View.GONE
             doneimg.visibility=View.VISIBLE
+            fab.visibility=View.VISIBLE
         })
         doneimg.setOnClickListener(View.OnClickListener {
             writeET.visibility = View.GONE
@@ -151,6 +152,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             custops.visibility=View.GONE
             editimg.visibility=View.VISIBLE
             doneimg.visibility=View.GONE
+            fab.visibility=View.GONE
             val note  = Notes(title.text.toString(),"Random","Random0",writeET.text.toString()  )
             val act = activity as WriteActivity
             val diaryins:DiaryHandler = DiaryHandler(activity)

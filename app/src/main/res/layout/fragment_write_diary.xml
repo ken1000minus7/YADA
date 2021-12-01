@@ -134,9 +134,10 @@
 
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
-        app:srcCompat="@drawable/ic_plus_button"
-        android:layout_marginRight="@dimen/_15sdp"
+        app:srcCompat="@drawable/ic_image"
+        app:maxImageSize="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
         android:layout_marginBottom="@dimen/_50sdp"
-
+        android:visibility="gone"
         />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

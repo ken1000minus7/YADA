@@ -14,6 +14,8 @@ import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.kamikaze.yada.R
 import com.kamikaze.yada.R.*
@@ -52,12 +54,19 @@ class WriteActivity : AppCompatActivity() {
         val custops=findViewById<View>(R.id.customize_options)
         val editimg=findViewById<ImageView>(R.id.edit_diary)
         val doneimg=findViewById<ImageView>(R.id.done_edit_diary)
-        if (et.isVisible){
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        val bottomSheetBehavior = BottomSheetBehavior.from(custops)
+        if(bottomSheetBehavior.state==BottomSheetBehavior.STATE_EXPANDED)
+        {
+            bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED;
+        }
+        else if (et.isVisible){
             et.visibility = View.GONE
             tv.visibility = View.VISIBLE
             custops.visibility=View.GONE
             editimg.visibility=View.VISIBLE
             doneimg.visibility=View.GONE
+            fab.visibility=View.GONE
         }
         else{
             super.onBackPressed()

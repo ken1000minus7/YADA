@@ -54,6 +54,7 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/fragment_write_diary.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/image_rv.xml" value="0.25" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/layout_misc_note_.xml" value="0.12708333333333333" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/password_change_dialog.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/sidebar_header.xml" value="0.264" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/spinner_item.xml" value="0.25" />
@@ -69,11 +70,9 @@
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/bg_note_color_2.xml" value="0.2703125" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/bg_note_color_3.xml" value="0.2703125" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/bg_note_color_4.xml" value="0.1859375" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/col_cyan.xml" value="0.202734375" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_favorite.xml" value="0.2703125" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_image.xml" value="0.2703125" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_security.xml" value="0.15" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_blog.xml" value="0.1" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_check.xml" value="0.176" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_hikers_watch.xml" value="0.2341485507246377" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
@@ -94,7 +93,7 @@
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_maps.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_tracking.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_write_diary.xml" value="0.16" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_write_diary.xml" value="0.1" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/image_grid.xml" value="0.1" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/layout_misc_note_.xml" value="0.264" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/sidebar_header.xml" value="0.25416666666666665" />

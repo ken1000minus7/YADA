@@ -87,6 +87,7 @@
         android:tooltipText="Weather"
         app:maxImageSize="@dimen/_38sdp"
         app:fabSize="mini"
+        app:tint="?attr/colorControlNormal"
         app:backgroundTint="@android:color/transparent"
         android:outlineSpotShadowColor="@android:color/transparent"
         android:outlineProvider="none"/>
@@ -102,6 +103,7 @@
         android:tooltipText="News"
         app:maxImageSize="@dimen/_36sdp"
         app:fabSize="mini"
+        app:tint="?attr/colorControlNormal"
         app:backgroundTint="@android:color/transparent"
         android:outlineSpotShadowColor="@android:color/transparent"
         android:outlineProvider="none"/>
@@ -116,6 +118,7 @@
         app:srcCompat="@drawable/ic_translate"
         app:maxImageSize="@dimen/_36sdp"
         app:fabSize="mini"
+        app:tint="?attr/colorControlNormal"
         app:backgroundTint="@android:color/transparent"
         android:outlineSpotShadowColor="@android:color/transparent"
         android:outlineProvider="none"
@@ -130,6 +133,7 @@
         android:layout_marginBottom="@dimen/_23sdp"
         app:srcCompat="@drawable/ic_add_diary"
         app:maxImageSize="@dimen/_38sdp"
+        app:tint="?attr/colorControlNormal"
         android:outlineSpotShadowColor="@android:color/transparent"
         android:outlineProvider="none"
         app:fabSize="mini"
