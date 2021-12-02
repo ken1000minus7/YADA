@@ -87,7 +87,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
         //----------------------------------------------------------
         // Colors ,Colors everywhere
-            var currcolor =R.color.secondary
+            var currcolor : Int =-1
 
             val window: Window = (activity as WriteActivity).window
 
@@ -343,18 +343,22 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         })
         doneimg.setOnClickListener(View.OnClickListener {
             writeET.visibility = View.GONE
-            seeTV.text = writeET.text
+            val textstuff=writeET.text.toString()
+            seeTV.text = textstuff
             handleKeyEvent(view , KeyEvent.KEYCODE_ENTER)
             seeTV.visibility = View.VISIBLE
             custops.visibility=View.GONE
             editimg.visibility=View.VISIBLE
             doneimg.visibility=View.GONE
             fab.visibility=View.GONE
-            val note  = Notes(title.text.toString(),"Random","Random0",writeET.text.toString())
+            val bottomSheetBehavior = BottomSheetBehavior.from(custops)
+            if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED ) bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            val note  = Notes(title.text.toString(),"Random","Random0",textstuff)
             val act = activity as WriteActivity
             val diaryins:DiaryHandler = DiaryHandler(activity)
-            diaryins.updateDiary(act.position, note)
-            diaryins.updateDiary(act.position ,currcolor , R.color.cyan_light9 )
+            if(note==null) Log.d("note","null")
+            else Log.d("note",note.textnote)
+            diaryins.updateDiary(act.position, note,currcolor)
             Log.d("oof clor","$currcolor")
         })
         return view

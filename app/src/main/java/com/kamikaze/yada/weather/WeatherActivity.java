@@ -87,7 +87,7 @@ public class WeatherActivity extends AppCompatActivity {
 
     @SuppressLint("MissingPermission")
     public void getWeatherDetails() {
-        fusedLocationProviderClient.getCurrentLocation(LocationRequest.QUALITY_BALANCED_POWER_ACCURACY, null).addOnCompleteListener(new OnCompleteListener<Location>() {
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
                 if(task.isSuccessful())
