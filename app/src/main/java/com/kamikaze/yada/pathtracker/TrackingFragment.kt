@@ -39,6 +39,7 @@ import kotlin.math.round
 import android.graphics.Bitmap
 import android.os.Environment
 import android.widget.Toast
+import com.kamikaze.yada.FeatureFragment
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
@@ -180,7 +181,9 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     }
     private fun stopRun() {
         sendCommandToService(ACTION_STOP_SERVICE)
-        findNavController().navigate(R.id.action_trackingFragment_to_featureFragment)
+       val intent = Intent(activity , FeatureFragment::class.java )
+        activity?.startActivity(intent)
+        activity?.finish()
 
     }
 

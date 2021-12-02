@@ -11,4 +11,6 @@ data class Notes (
     var location : String,
     var textnote : String,
 
+
+
         )

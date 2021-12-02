@@ -169,6 +169,27 @@
                 android:layout_height="@dimen/_35sdp"
                 android:background="@drawable/lgcyan"/>
             <ImageView
+                android:id="@+id/imageColor7"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/_10sdp"
+                app:srcCompat="@drawable/ic_done"
+                />
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_15sdp">
+
+            <View
+                android:id="@+id/viewColor8"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@drawable/purple"/>
+            <ImageView
                 android:id="@+id/imageColor8"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
@@ -188,7 +209,7 @@
                 android:id="@+id/viewColor9"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
-                android:background="@drawable/purple"/>
+                android:background="@drawable/yellow"/>
             <ImageView
                 android:id="@+id/imageColor9"
                 android:layout_width="@dimen/_35sdp"

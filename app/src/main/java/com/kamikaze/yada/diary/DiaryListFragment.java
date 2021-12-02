@@ -3,10 +3,12 @@ package com.kamikaze.yada.diary;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -51,6 +53,7 @@ public class DiaryListFragment extends Fragment {
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -60,9 +63,11 @@ public class DiaryListFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,6 +83,8 @@ public class DiaryListFragment extends Fragment {
             diaryHandler.loadData(recyclerView);
             DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaryHandler.getDiaries());
             recyclerView.setAdapter(adapter);
+            int col =  getActivity().getWindow().getStatusBarColor();
+            Log.d("color opnt",col+"" );
 
             ItemTouchHelper.SimpleCallback itemTouchCallback=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
                 @Override
