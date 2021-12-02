@@ -205,6 +205,7 @@ public class DiaryHandler {
         });
     }
 
+
     public void updateDiary(int position,Notes note)
     {
         FirebaseFirestore db= FirebaseFirestore.getInstance();

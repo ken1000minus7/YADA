@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="40sp"
+        android:textColor="?attr/colorControlNormal"
         android:text="Weather Update"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,22 +25,22 @@
             android:layout_height="0dp"
             android:layout_weight="1">
         </View>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/etCity"
-            android:layout_marginBottom="10dp"
-            android:ems="10"
-            android:hint="Enter City Name"
-            android:inputType="textPersonName" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/etCountry"
-            android:layout_marginBottom="10dp"
-            android:ems="10"
-            android:hint="Enter Country Code (Optional)"
-            android:inputType="textPersonName" />
+<!--        <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/etCity"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:ems="10"-->
+<!--            android:hint="Enter City Name"-->
+<!--            android:inputType="textPersonName" />-->
+<!--        <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/etCountry"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:ems="10"-->
+<!--            android:hint="Enter Country Code (Optional)"-->
+<!--            android:inputType="textPersonName" />-->
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +48,6 @@
             android:layout_marginBottom="10dp"
             android:background="#0070c7"
             android:textColor="@android:color/white"
-            android:onClick="getWeatherDetails"
             android:text="Get"
             app:backgroundTint="@null" />
         <ScrollView
@@ -56,6 +56,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="?attr/colorControlNormal"
                 android:id="@+id/tvResult" />
         </ScrollView>
 

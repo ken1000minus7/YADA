@@ -91,11 +91,15 @@ public class MapsFragment extends Fragment {
                     if (viewPager!=null){
                     viewPager.setUserInputEnabled(false);
                     mMap = googleMap;
+
+
                     int nightModeFlags = getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
                     if(nightModeFlags==Configuration.UI_MODE_NIGHT_YES)
                     {
                         googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getContext(),R.raw.map_style_night));
                     }
+
+
                     locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);}
                     locationListener = new LocationListener() {
                         @Override
