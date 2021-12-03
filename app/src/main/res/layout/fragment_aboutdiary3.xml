@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/about_3"
+    tools:context=".aboutdiary.aboutdiary3">
+<ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/play"
+    android:id="@+id/next3"
+    android:layout_gravity="right"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_415sdp"
+        android:layout_marginLeft="@dimen/_166sdp"
+        android:src="@drawable/circleabt" />
+
+
+</FrameLayout>

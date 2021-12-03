@@ -10,6 +10,7 @@
     <color name="primary">#f8ac64</color>
     <color name="secondary">#e6ba9a</color>
     <color name="primary1">#FFF0E5</color>
+    <color name="pink">#e13b73</color>
 
     <!--Colors here light-->
     <color name="lavender_light1">#cfa9fc</color>
@@ -20,7 +21,11 @@
     <color name="lightergreen_light6">#d1fc8c</color>
     <color name="purple_light7">#d97ef0</color>
     <color name="lightyellow_light8">#fcf18c</color>
-    <color name="cyan_light9">#B2FCEA</color>
+    <color name="cyan_light9">#a9fde8</color>
+    <color name="tprim">#ffdec6</color>
+    <color name="tlight1">#ffc9bd</color>
+    <color name="tlight2">#ffebc9</color>
+    <color name="tlight3">#ff9fc0</color>
     <!--till here-->
     
     <!--Colors here dark-->
@@ -33,6 +38,11 @@
     <color name="purple_dark7">#aa61bd</color>
     <color name="lightyellow_dark8">#e2d667</color>
     <color name="cyan_dark9">#72BDAA</color>
+    <color name="tbrown">#957962</color>
+    <color name="tdark1">#b48e86</color>
+    <color name="tdark2">#beac8d</color>
+    <color name="tdark3">#c3748f</color>
+
     <!--till here-->
 
     <color name="githubcolor2">#0d1117</color>

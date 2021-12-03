@@ -109,12 +109,15 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
 
         //Button Clicks to change bg theme
+        val bgt0 = view.findViewById<ImageView>(R.id.imageTheme0)
         val bgt1 = view.findViewById<ImageView>(R.id.imageTheme1)
         val bgt2 = view.findViewById<ImageView>(R.id.imageTheme2)
         val bgt3 = view.findViewById<ImageView>(R.id.imageTheme3)
         val bgt4 = view.findViewById<ImageView>(R.id.imageTheme4)
         val bgt5 = view.findViewById<ImageView>(R.id.imageTheme5)
         val bgt6 = view.findViewById<ImageView>(R.id.imageTheme6)
+        val bgt7 = view.findViewById<ImageView>(R.id.imageTheme7)
+
         //night mode toggler
         val nightModeFlags =
             requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
@@ -128,6 +131,9 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                     View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;//  set status text dark
 
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                //la la some colors hahahha
+             //  bgt0.setImageResource(R.drawable.ic_tbrown)
+                bgt0.setBackgroundResource(R.drawable.ic_tbrown)
 
                 bgc0.setOnClickListener {
                     setBgColor(R.color.secondary)
@@ -194,10 +200,31 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                     window.navigationBarColor = resources.getColor(R.color.cyan_dark9)
                     currcolor = R.color.cyan_dark9
                 }
-
-
-            }
-        }
+                bgt0.setOnClickListener { view.setBackgroundResource(R.drawable.tbrown)
+                window.statusBarColor=resources.getColor(R.color.tbrown)
+                window.navigationBarColor=resources.getColor(R.color.tbrown)}
+                bgt1.setOnClickListener { view.setBackgroundResource(R.drawable.tdark1)
+                    window.statusBarColor=resources.getColor(R.color.tdark1)
+                    window.navigationBarColor=resources.getColor(R.color.tdark1)}
+                bgt2.setOnClickListener { view.setBackgroundResource(R.drawable.tdark2)
+                    window.statusBarColor=resources.getColor(R.color.tdark2)
+                    window.navigationBarColor=resources.getColor(R.color.tdark2)}
+                bgt3.setOnClickListener { view.setBackgroundResource(R.drawable.tdark3)
+                    window.statusBarColor=resources.getColor(R.color.tdark3)
+                    window.navigationBarColor=resources.getColor(R.color.tdark3)}
+                bgt4.setOnClickListener { view.setBackgroundResource(R.drawable.themew)
+                    window.statusBarColor = resources.getColor(R.color.rose_dark2)
+                    window.navigationBarColor = resources.getColor(R.color.rose_dark2)}
+                bgt5.setOnClickListener { view.setBackgroundResource(R.drawable.themex)
+                    window.statusBarColor = resources.getColor(R.color.lightyellow_light8)
+                    window.navigationBarColor = resources.getColor(R.color.pink)}
+                bgt6.setOnClickListener { view.setBackgroundResource(R.drawable.themey)
+                    window.statusBarColor = resources.getColor(R.color.pink)
+                    window.navigationBarColor = resources.getColor(R.color.lightyellow_light8)}
+                bgt7.setOnClickListener { view.setBackgroundResource(R.drawable.themez)
+                    window.statusBarColor = resources.getColor(R.color.rose_dark2)
+                    window.navigationBarColor = resources.getColor(R.color.rose_dark2)}
+        }}
         else{
             //lightmode
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -205,6 +232,9 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;//  set status text dark
 
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                //la la la color swap
+                bgt0.setBackgroundResource(R.drawable.ic_tprim)
+
 
                 bgc0.setOnClickListener {
                     setBgColor(R.color.secondary)
@@ -266,8 +296,31 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                     window.navigationBarColor = resources.getColor(R.color.cyan_light9)
                     currcolor = R.color.cyan_light9
                 }
-                bgt1.setOnClickListener { view.setBackgroundResource(R.drawable.bg_pp) }
+                bgt0.setOnClickListener { view.setBackgroundResource(R.drawable.tprim)
+                    window.statusBarColor=resources.getColor(R.color.tprim)
+                    window.navigationBarColor=resources.getColor(R.color.tprim)}
+                bgt1.setOnClickListener { view.setBackgroundResource(R.drawable.tlight1)
+                    window.statusBarColor=resources.getColor(R.color.tlight1)
+                    window.navigationBarColor=resources.getColor(R.color.tlight1)}
+                bgt2.setOnClickListener { view.setBackgroundResource(R.drawable.tlight2)
+                    window.statusBarColor=resources.getColor(R.color.tlight2)
+                    window.navigationBarColor=resources.getColor(R.color.tlight2)}
+                bgt3.setOnClickListener { view.setBackgroundResource(R.drawable.tlight3)
+                    window.statusBarColor=resources.getColor(R.color.tlight3)
+                    window.navigationBarColor=resources.getColor(R.color.tlight3)}
             }
+            bgt4.setOnClickListener { view.setBackgroundResource(R.drawable.themew)
+                window.statusBarColor = resources.getColor(R.color.rose_dark2)
+                window.navigationBarColor = resources.getColor(R.color.rose_dark2)}
+            bgt5.setOnClickListener { view.setBackgroundResource(R.drawable.themex)
+                window.statusBarColor = resources.getColor(R.color.lightyellow_light8)
+                window.navigationBarColor = resources.getColor(R.color.pink)}
+            bgt6.setOnClickListener { view.setBackgroundResource(R.drawable.themey)
+                window.statusBarColor = resources.getColor(R.color.pink)
+                window.navigationBarColor = resources.getColor(R.color.lightyellow_light8)}
+            bgt7.setOnClickListener { view.setBackgroundResource(R.drawable.themez)
+                window.statusBarColor = resources.getColor(R.color.rose_dark2)
+                window.navigationBarColor = resources.getColor(R.color.rose_dark2)}
 
         }
 
@@ -289,19 +342,11 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     }
         //-------------------------------------------------------------
         val nd = NotesDao()
-        val colorMutList = mutableListOf<String>(window.statusBarColor.toString())
         nd.setNote(view, act,seeTV,act.position,writeET , title , recyclerView)
-        if (colorMutList.size!=0){
-            window.statusBarColor = colorMutList[0].toInt()
-            setBgColor(colorMutList[0].toInt())
-            window.navigationBarColor = resources.getColor(R.color.black)
-        }
-        else{
-            setBgColor(R.color.secondary)
-            window.statusBarColor = resources.getColor(R.color.secondary)
-            window.navigationBarColor = resources.getColor(R.color.secondary)
-        }
 
+
+
+            window.navigationBarColor = resources.getColor(R.color.black)
         seeTV.movementMethod = ScrollingMovementMethod()
 //        topAppBar.setOnMenuItemClickListener { menuItem -> when (menuItem.itemId){
 //            R.id.favorite ->{
@@ -358,7 +403,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             val act = activity as WriteActivity
             val diaryins:DiaryHandler = DiaryHandler(activity)
             if(note==null) Log.d("note","null")
-            else Log.d("note",note.textnote)
+            else Log.d("note","$note.textnote")
             diaryins.updateDiary(act.position, note,currcolor)
             Log.d("oof clor","$currcolor")
         })

@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_landingFragment_to_loginActivity"
             app:destination="@id/loginActivity" />
+        <action
+            android:id="@+id/action_landingFragment_to_aboutdiary1"
+            app:destination="@id/aboutdiary1" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -28,5 +31,32 @@
         android:name="com.kamikaze.yada.auth.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/aboutdiary1"
+        android:name="com.kamikaze.yada.aboutdiary.aboutdiary1"
+        android:label="fragment_aboutdiary1"
+        tools:layout="@layout/fragment_aboutdiary1" >
+        <action
+            android:id="@+id/action_aboutdiary1_to_aboutdiary2"
+            app:destination="@id/aboutdiary2" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutdiary2"
+        android:name="com.kamikaze.yada.aboutdiary.aboutdiary2"
+        android:label="fragment_aboutdiary2"
+        tools:layout="@layout/fragment_aboutdiary2" >
+        <action
+            android:id="@+id/action_aboutdiary2_to_aboutdiary3"
+            app:destination="@id/aboutdiary3" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutdiary3"
+        android:name="com.kamikaze.yada.aboutdiary.aboutdiary3"
+        android:label="fragment_aboutdiary3"
+        tools:layout="@layout/fragment_aboutdiary3" >
+        <action
+            android:id="@+id/action_aboutdiary3_to_loginActivity"
+            app:destination="@id/loginActivity" />
+    </fragment>
 
 </navigation>

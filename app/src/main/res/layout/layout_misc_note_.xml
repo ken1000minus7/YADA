@@ -47,7 +47,6 @@
                 android:layout_height="@dimen/_35sdp"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_10sdp"
-                app:srcCompat="@drawable/ic_done"
                 />
 
         </FrameLayout>
@@ -70,7 +69,6 @@
                 android:layout_height="@dimen/_35sdp"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_10sdp"
-                app:srcCompat="@drawable/ic_done"
                 />
 
         </FrameLayout>
@@ -91,7 +89,6 @@
                 android:layout_height="@dimen/_35sdp"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_10sdp"
-                app:srcCompat="@drawable/ic_done"
                 />
 
         </FrameLayout>
@@ -112,7 +109,6 @@
                 android:layout_height="@dimen/_35sdp"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_10sdp"
-                app:srcCompat="@drawable/ic_done"
                 />
 
         </FrameLayout>
@@ -133,7 +129,6 @@
                 android:layout_height="@dimen/_35sdp"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_10sdp"
-                app:srcCompat="@drawable/ic_done"
                 />
 
         </FrameLayout> <FrameLayout
@@ -153,7 +148,6 @@
             android:layout_height="@dimen/_35sdp"
             android:contentDescription="@string/app_name"
             android:padding="@dimen/_10sdp"
-            app:srcCompat="@drawable/ic_done"
             />
 
     </FrameLayout>
@@ -167,14 +161,13 @@
                 android:id="@+id/viewColor7"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
-                android:background="@drawable/lgcyan"/>
+                android:background="@drawable/lglime"/>
             <ImageView
                 android:id="@+id/imageColor7"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_10sdp"
-                app:srcCompat="@drawable/ic_done"
                 />
 
         </FrameLayout>
@@ -195,7 +188,6 @@
                 android:layout_height="@dimen/_35sdp"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_10sdp"
-                app:srcCompat="@drawable/ic_done"
                 />
 
         </FrameLayout>
@@ -216,7 +208,6 @@
                 android:layout_height="@dimen/_35sdp"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_10sdp"
-                app:srcCompat="@drawable/ic_done"
                 />
 
         </FrameLayout>
@@ -230,14 +221,13 @@
                 android:id="@+id/viewColor10"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
-                android:background="@drawable/yellow"/>
+                android:background="@drawable/lgcyan"/>
             <ImageView
                 android:id="@+id/imageColor10"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_10sdp"
-                app:srcCompat="@drawable/ic_done"
                 />
 
         </FrameLayout>
@@ -265,17 +255,36 @@
                 android:layout_marginEnd="@dimen/_15sdp">
 
                 <View
+                    android:id="@+id/viewTheme0"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:background="@drawable/ic_tprim"/>
+                <ImageView
+                    android:id="@+id/imageTheme0"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:contentDescription="@string/app_name"
+                    android:padding="@dimen/_10sdp"
+                    />
+
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/_15sdp">
+
+                <View
                     android:id="@+id/viewTheme1"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    android:background="@drawable/circle_pp"/>
+                    android:background="@drawable/ic_t1"/>
                 <ImageView
                     android:id="@+id/imageTheme1"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/app_name"
                     android:padding="@dimen/_10sdp"
-                    app:srcCompat="@drawable/ic_done"
                     />
 
             </FrameLayout>
@@ -296,7 +305,6 @@
                     android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/app_name"
                     android:padding="@dimen/_10sdp"
-                    app:srcCompat="@drawable/ic_done"
                     />
 
             </FrameLayout>
@@ -310,14 +318,13 @@
                     android:id="@+id/viewTheme3"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    android:background="@drawable/circle_yy"/>
+                    android:background="@drawable/ic_t3"/>
                 <ImageView
                     android:id="@+id/imageTheme3"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/app_name"
                     android:padding="@dimen/_10sdp"
-                    app:srcCompat="@drawable/ic_done"
                     />
 
             </FrameLayout>
@@ -331,14 +338,13 @@
                     android:id="@+id/viewTheme4"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    android:background="@drawable/bg_note_color_4"/>
+                    android:background="@drawable/ic_bgt4"/>
                 <ImageView
                     android:id="@+id/imageTheme4"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/app_name"
                     android:padding="@dimen/_10sdp"
-                    app:srcCompat="@drawable/ic_done"
                     />
 
             </FrameLayout>
@@ -352,14 +358,13 @@
                     android:id="@+id/viewTheme5"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    android:background="@drawable/bg_note_color_3"/>
+                    android:background="@drawable/ic_bgt5"/>
                 <ImageView
                     android:id="@+id/imageTheme5"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/app_name"
                     android:padding="@dimen/_10sdp"
-                    app:srcCompat="@drawable/ic_done"
                     />
 
             </FrameLayout> <FrameLayout
@@ -372,14 +377,13 @@
                 android:id="@+id/viewTheme6"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
-                android:background="@drawable/bg_note_color_3"/>
+                android:background="@drawable/ic_bgt6"/>
             <ImageView
                 android:id="@+id/imageTheme6"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_10sdp"
-                app:srcCompat="@drawable/ic_done"
                 />
 
         </FrameLayout>
@@ -393,41 +397,16 @@
                     android:id="@+id/viewTheme7"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    android:background="@drawable/bg_note_color_3"/>
+                    android:background="@drawable/ic_bgt7"/>
                 <ImageView
                     android:id="@+id/imageTheme7"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/app_name"
                     android:padding="@dimen/_10sdp"
-                    app:srcCompat="@drawable/ic_done"
                     />
 
             </FrameLayout>
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="@dimen/_15sdp">
-
-                <View
-                    android:id="@+id/viewTheme8"
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:background="@drawable/bg_note_color_3"/>
-                <ImageView
-                    android:id="@+id/imageTheme8"
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:contentDescription="@string/app_name"
-                    android:padding="@dimen/_10sdp"
-                    app:srcCompat="@drawable/ic_done"
-                    />
-
-            </FrameLayout>
-
-
-
         </TableRow>
     </HorizontalScrollView>
 

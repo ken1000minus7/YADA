@@ -44,9 +44,11 @@ class NotesDao {
                         Log.d("color ","${diary.color}")
                         win.statusBarColor = act.resources.getColor(diary.color)
                         view.setBackgroundColor(act.resources.getColor(diary.color))
+                        win.navigationBarColor = act.resources.getColor(diary.color)
                         Log.d("sdad","${view.background}")
                     }
                    val note = diary.note
+                    Log.d("notes","${note?.textnote}")
                    val textnote = note?.textnote
                    val lis = diary.images //list of images which contains url
                     rv.adapter = ImageAdapter(lis,rv.context)

@@ -25,6 +25,7 @@ public class Diary {
         this.images = images;
     }
 
+
     public Diary(String title, String description, String location, String bgImageUrl, Notes note, List<String> images, int color) {
         this.title = title;
         this.description = description;
