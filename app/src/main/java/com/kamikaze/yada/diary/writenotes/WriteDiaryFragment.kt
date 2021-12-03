@@ -126,6 +126,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                     View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;//  set status text dark
 
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                //la la some colors hahahha
+           //     bgt1.setImageResource(R.drawable.ic_tbrown)
 
                 bgc0.setOnClickListener {
                     setBgColor(R.color.secondary)
@@ -192,8 +194,10 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                     window.navigationBarColor = resources.getColor(R.color.cyan_dark9)
                     currcolor = R.color.cyan_dark9
                 }
-
-
+                bgt1.setOnClickListener { view.setBackgroundResource(R.drawable.tbrown) }
+                bgt2.setOnClickListener { view.setBackgroundResource(R.drawable.tdark1) }
+                bgt3.setOnClickListener { view.setBackgroundResource(R.drawable.tdark2) }
+                bgt4.setOnClickListener { view.setBackgroundResource(R.drawable.tdark3) }
             }
         }
         else{
@@ -264,7 +268,11 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                     window.navigationBarColor = resources.getColor(R.color.cyan_light9)
                     currcolor = R.color.cyan_light9
                 }
-                bgt1.setOnClickListener { view.setBackgroundResource(R.drawable.bg_pp) }
+                bgt1.setOnClickListener { view.setBackgroundResource(R.drawable.tprim)
+                    Log.d("hehe","brr")}
+                bgt2.setOnClickListener { view.setBackgroundResource(R.drawable.tlight1) }
+                bgt3.setOnClickListener { view.setBackgroundResource(R.drawable.tlight2) }
+                bgt4.setOnClickListener { view.setBackgroundResource(R.drawable.tlight3) }
             }
 
         }
@@ -287,19 +295,11 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     }
         //-------------------------------------------------------------
         val nd = NotesDao()
-        val colorMutList = mutableListOf<String>(window.statusBarColor.toString())
         nd.setNote(view, act,seeTV,act.position,writeET , title , recyclerView)
-        if (colorMutList.size!=0){
-            window.statusBarColor = colorMutList[0].toInt()
-            setBgColor(colorMutList[0].toInt())
-            window.navigationBarColor = resources.getColor(R.color.black)
-        }
-        else{
-            setBgColor(R.color.secondary)
-            window.statusBarColor = resources.getColor(R.color.secondary)
-            window.navigationBarColor = resources.getColor(R.color.secondary)
-        }
 
+
+
+            window.navigationBarColor = resources.getColor(R.color.black)
         seeTV.movementMethod = ScrollingMovementMethod()
 //        topAppBar.setOnMenuItemClickListener { menuItem -> when (menuItem.itemId){
 //            R.id.favorite ->{
@@ -354,7 +354,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             val act = activity as WriteActivity
             val diaryins:DiaryHandler = DiaryHandler(activity)
             diaryins.updateDiary(act.position, note)
-            diaryins.updateDiary(act.position ,currcolor , R.color.cyan_light9 )
+            Log.d("xyznote","${note.textnote}")
+        //    diaryins.updateDiary(act.position ,currcolor,R.color.cyan_light9 )
             Log.d("oof clor","$currcolor")
         })
         return view

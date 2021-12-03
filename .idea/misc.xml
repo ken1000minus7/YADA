@@ -73,6 +73,9 @@
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_favorite.xml" value="0.2703125" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_image.xml" value="0.2703125" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_security.xml" value="0.15" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_t1.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_t3.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/tlight1.xml" value="0.14427083333333332" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_check.xml" value="0.176" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_hikers_watch.xml" value="0.2341485507246377" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
@@ -95,7 +98,7 @@
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_tracking.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/fragment_write_diary.xml" value="0.1" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/image_grid.xml" value="0.1" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/layout_misc_note_.xml" value="0.10475482912332838" />
+        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/layout_misc_note_.xml" value="0.264" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/sidebar_header.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/spinner_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/switch_item.xml" value="0.264" />

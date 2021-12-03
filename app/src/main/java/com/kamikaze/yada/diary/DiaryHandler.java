@@ -226,7 +226,7 @@ public class DiaryHandler {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful())
-                            {
+                            {   Log.d("xxyznote",note+"");
                                 Log.d("Updation","Diary note updated successfully");
                             }
                         }

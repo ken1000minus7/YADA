@@ -10,7 +10,4 @@ data class Notes (
     var description : String,
     var location : String,
     var textnote : String,
-
-
-
         )
