@@ -36,6 +36,7 @@
     <string name="security"><b>Security</b></string>
     <string name="delete_string"><b>Are you sure you want to delete your account?</b></string>
     <string name="feedback"><b>Feedback</b></string>
+    <string name="weather"><b>Weather</b></string>
 
 
 </resources>

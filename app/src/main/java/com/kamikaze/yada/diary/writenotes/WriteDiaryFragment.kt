@@ -52,6 +52,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     private val binding get() = _binding!!
      var i : Int = 0
     val a=0
+    var currcolor : Int =-1
+    var oldcolor : Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -87,7 +89,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
         //----------------------------------------------------------
         // Colors ,Colors everywhere
-            var currcolor : Int =-1
+
 
             val window: Window = (activity as WriteActivity).window
 
@@ -125,8 +127,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             //darkmode
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Log.d("build what", "is it working")
-                window.decorView.systemUiVisibility =
-                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;//  set status text dark
+//                window.decorView.systemUiVisibility =
+//                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;//  set status text dark
 
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
                 //la la some colors hahahha
@@ -340,7 +342,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     }
         //-------------------------------------------------------------
         val nd = NotesDao()
-        nd.setNote(view, act,seeTV,act.position,writeET , title , recyclerView)
+        nd.setNote(view, act,seeTV,act.position,writeET , title , recyclerView,this)
 
 
 
@@ -377,7 +379,6 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 //        } }
         editimg.setOnClickListener(View.OnClickListener {
             window.navigationBarColor=resources.getColor(R.color.black)
-
             seeTV.visibility = View.GONE
             writeET.setText(seeTV.text.toString())
             writeET.visibility = View.VISIBLE
@@ -385,6 +386,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             editimg.visibility=View.GONE
             doneimg.visibility=View.VISIBLE
             fab.visibility=View.VISIBLE
+            oldcolor=currcolor
+            Log.d("fragment real", currcolor.toString())
         })
         doneimg.setOnClickListener(View.OnClickListener {
             writeET.visibility = View.GONE
@@ -403,6 +406,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             val diaryins:DiaryHandler = DiaryHandler(activity)
             if(note==null) Log.d("note","null")
             else Log.d("note","$note.textnote")
+            oldcolor=-1
             diaryins.updateDiary(act.position, note,currcolor)
             Log.d("oof clor","$currcolor")
         })
@@ -507,5 +511,9 @@ override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
+fun restoreBg()
+{
+    if(oldcolor>0) setBgColor(oldcolor)
+    currcolor=-1
+}
 }

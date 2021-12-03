@@ -20,6 +20,7 @@ import com.kamikaze.yada.auth.LoginActivity.Companion.TAG
 import com.kamikaze.yada.diary.DiaryHandler
 import com.kamikaze.yada.diary.writenotes.ImageAdapter
 import com.kamikaze.yada.diary.writenotes.WriteActivity
+import com.kamikaze.yada.diary.writenotes.WriteDiaryFragment
 
 class NotesDao {
     val  auth : FirebaseAuth  = FirebaseAuth.getInstance()
@@ -27,7 +28,7 @@ class NotesDao {
 
     private val idk = db.collection("users").document(auth.currentUser!!.uid)
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public fun setNote(view:View, act: Activity, tv: TextView, position: Int, et: EditText, title : TextView, rv : RecyclerView){
+    public fun setNote(view:View, act: Activity, tv: TextView, position: Int, et: EditText, title : TextView, rv : RecyclerView,fragment: WriteDiaryFragment){
 
         idk.get().addOnCompleteListener { document ->
             if (document != null) {
@@ -44,6 +45,7 @@ class NotesDao {
                         Log.d("color ","${diary.color}")
                         win.statusBarColor = act.resources.getColor(diary.color)
                         view.setBackgroundColor(act.resources.getColor(diary.color))
+                        fragment.currcolor=diary.color
                         win.navigationBarColor = act.resources.getColor(diary.color)
                         Log.d("sdad","${view.background}")
                     }
