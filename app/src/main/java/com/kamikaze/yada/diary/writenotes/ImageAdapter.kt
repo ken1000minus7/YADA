@@ -1,5 +1,6 @@
 package com.kamikaze.yada.diary.writenotes
 
+import android.animation.Animator
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -18,6 +19,8 @@ import com.kamikaze.yada.R
 
 
 class ImageAdapter(val images:List<String>, val context: Context) : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
+
+
     class ViewHolder(itemView : View): RecyclerView.ViewHolder(itemView) {
         val img = itemView.findViewById<ImageView>(R.id.imginwa)
     }
@@ -29,11 +32,13 @@ val view : View = LayoutInflater.from(parent.context).inflate(R.layout.image_rv 
 
         val image = images[position]
         Glide.with(context).load(image).into(holder.img)
+
         holder.img.setOnClickListener {
-            val intent = Intent(context , ZoomImageActivity::class.java)
-        intent.putExtra("image" , image)
-            Log.d("image", "$image , $images"  )
-            context.startActivity(intent)
+//            val intent = Intent(context , ZoomImageActivity::class.java)
+//        intent.putExtra("image" , image)
+//            Log.d("image", "$image , $images"  )
+//            context.startActivity(intent)
+            WriteActivity.openZoomed(holder.img,image)
                 }
     }
 

@@ -132,6 +132,7 @@ dependencies {
     //volley
     implementation 'com.android.volley:volley:1.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.0"
+    implementation 'com.commit451:PhotoView:1.2.4'
 
 
 }

@@ -165,6 +165,10 @@ public class WeatherActivity extends AppCompatActivity {
                     String mins=String.valueOf(offset%60);
                     if(mins.length()==1) mins="0"+mins;
                     timezone+=(offset/60)+":"+mins;
+                    String minutes=String.valueOf(date.getMinutes());
+                    if(minutes.length()==1) minutes="0"+minutes;
+                    String hours=String.valueOf(date.getHours());
+                    if(hours.length()==1) hours="0"+hours;
 
                     TextView tempText=(TextView) findViewById(R.id.temperature);
                     TextView tempMinmax=(TextView) findViewById(R.id.temperature_minmax);
@@ -187,7 +191,7 @@ public class WeatherActivity extends AppCompatActivity {
                     cityText.setText(cityName);
                     countryText.setText(countryName);
                     dateText.setText(getMonth(date.getMonth()+1)+" "+date.getDate()+", "+(date.getYear()+1900));
-                    timeText.setText(date.getHours()+":"+date.getMinutes());
+                    timeText.setText(hours+":"+minutes);
                     dayText.setText(getDay(date.getDay()));
                     humidityText.setText(humidity+"%");
                     pressureText.setText(String.format("%.0f",pressure)+"hPa");
