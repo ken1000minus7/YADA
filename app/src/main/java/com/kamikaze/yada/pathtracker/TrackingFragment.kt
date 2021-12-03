@@ -50,7 +50,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         val backgo = binding.goback
         backgo.setOnClickListener {
             stopRun()
-            Navigation.findNavController(view).navigate(R.id.action_trackingFragment_to_featureFragment)
+//            Navigation.findNavController(view).navigate(R.id.action_trackingFragment_to_featureFragment)
+            activity?.finish()
         }
         btnToggleRun.setOnClickListener {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
