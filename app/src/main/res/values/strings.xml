@@ -14,7 +14,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="default_web_client" translatable="false">891929709408-1qivi9tr5d9o50ff3tfqdvlsj2b7nkd0.apps.googleusercontent.com</string>
     <string name="sign_in_google">Sign In With Google</string>
-    <string name="login_back">Login Back</string>
+    <string name="login_back">Login</string>
     <string name="title_activity_main_page">MainPageActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

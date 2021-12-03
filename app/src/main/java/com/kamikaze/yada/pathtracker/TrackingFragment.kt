@@ -47,7 +47,11 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         super.onViewCreated(view, savedInstanceState)
         btnToggleRun = view.findViewById<MaterialButton>(R.id.btnToggleRun)
         val btnFinishRun = binding.btnFinishRun
-        val act = activity as PathTracker
+        val backgo = binding.goback
+        backgo.setOnClickListener {
+            stopRun()
+            Navigation.findNavController(view).navigate(R.id.action_trackingFragment_to_featureFragment)
+        }
         btnToggleRun.setOnClickListener {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
             toggleRun()
@@ -114,10 +118,10 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
         this.isTracking = isTracking
         if(!isTracking) {
-            btnToggleRun.text = "Start"
+            btnToggleRun.text = "Start Tracking"
             btnFinishRun.visibility = View.VISIBLE
         } else {
-            btnToggleRun.text = "Stop"
+            btnToggleRun.text = "Stop Tracking"
             btnFinishRun.visibility = View.GONE
         }
     }

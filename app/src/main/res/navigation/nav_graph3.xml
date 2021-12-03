@@ -12,6 +12,8 @@
         <action
             android:id="@+id/action_trackingFragment_to_featureFragment"
             app:destination="@id/featureFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:launchSingleTop="false"
             app:popUpTo="@id/trackingFragment"
             app:popUpToInclusive="true" />
     </fragment>
