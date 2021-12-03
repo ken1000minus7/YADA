@@ -56,4 +56,6 @@
     <color name="nightPrimary1">#352518</color>
     <color name="nightPrimary2">#1c140c</color>
     <color name="primary2">#ECD0BC</color>
+    <color name="weather_light">#9DD8F9</color>
+    <color name="weather_dark">#0B3A55</color>
 </resources>
