@@ -41,6 +41,7 @@ typealias Polylines = MutableList<Polyline>
 class TrackingService : LifecycleService() {
 
     var isFirstRun = true
+    var serviceKilled = false
 
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
@@ -64,6 +65,7 @@ class TrackingService : LifecycleService() {
         })
     }
 
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.let {
             when (it.action) {
@@ -82,6 +84,7 @@ class TrackingService : LifecycleService() {
                 }
                 ACTION_STOP_SERVICE -> {
                     Timber.d("Stopped service")
+                    killService()
                 }
             }
         }
@@ -127,6 +130,15 @@ class TrackingService : LifecycleService() {
             }
         }
     }
+    private fun killService() {
+        serviceKilled = true
+        isFirstRun = true
+        pauseService()
+        postInitialValues()
+        stopForeground(true)
+        stopSelf()
+    }
+
 
     private fun addPathPoint(location: Location?) {
         location?.let {
@@ -182,4 +194,6 @@ class TrackingService : LifecycleService() {
         )
         notificationManager.createNotificationChannel(channel)
     }
+
+
 }

@@ -151,7 +151,7 @@ public class MapsFragment extends Fragment {
 
                         }
                     };
-
+                    if(locationManager!=null){
                     if (Build.VERSION.SDK_INT < 23) {
                         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             // TODO: Consider calling
@@ -177,7 +177,7 @@ public class MapsFragment extends Fragment {
                             mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
                         }}
-                    }
+                    }}
                 }
             });
         }
