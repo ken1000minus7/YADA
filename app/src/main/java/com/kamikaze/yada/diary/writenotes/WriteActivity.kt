@@ -68,8 +68,10 @@ class WriteActivity : AppCompatActivity() {
             editimg.visibility=View.VISIBLE
             doneimg.visibility=View.GONE
             fab.visibility=View.GONE
-            val fragment =supportFragmentManager.findFragmentById(id.writeDiaryFragment) as WriteDiaryFragment?
+            val fragment =WriteDiaryFragment()
             if(fragment==null) Log.d("fragment","sadge")
+            else Log.d("fragment", fragment.currcolor.toString())
+            fragment.restoreBg()
         }
         else{
             super.onBackPressed()

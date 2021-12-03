@@ -127,8 +127,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             //darkmode
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Log.d("build what", "is it working")
-                window.decorView.systemUiVisibility =
-                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;//  set status text dark
+//                window.decorView.systemUiVisibility =
+//                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;//  set status text dark
 
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
                 //la la some colors hahahha
@@ -342,7 +342,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     }
         //-------------------------------------------------------------
         val nd = NotesDao()
-        nd.setNote(view, act,seeTV,act.position,writeET , title , recyclerView)
+        nd.setNote(view, act,seeTV,act.position,writeET , title , recyclerView,this)
 
 
 
@@ -386,6 +386,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             editimg.visibility=View.GONE
             doneimg.visibility=View.VISIBLE
             fab.visibility=View.VISIBLE
+            oldcolor=currcolor
+            Log.d("fragment real", currcolor.toString())
         })
         doneimg.setOnClickListener(View.OnClickListener {
             writeET.visibility = View.GONE
@@ -404,6 +406,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             val diaryins:DiaryHandler = DiaryHandler(activity)
             if(note==null) Log.d("note","null")
             else Log.d("note","$note.textnote")
+            oldcolor=-1
             diaryins.updateDiary(act.position, note,currcolor)
             Log.d("oof clor","$currcolor")
         })
@@ -510,7 +513,7 @@ override fun onDestroyView() {
     }
 fun restoreBg()
 {
-    setBgColor(oldcolor)
+    if(oldcolor>0) setBgColor(oldcolor)
     currcolor=-1
 }
 }
