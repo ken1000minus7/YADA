@@ -52,6 +52,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     private val binding get() = _binding!!
      var i : Int = 0
     val a=0
+    var currcolor : Int =-1
+    var oldcolor : Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -87,7 +89,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
         //----------------------------------------------------------
         // Colors ,Colors everywhere
-            var currcolor : Int =-1
+
 
             val window: Window = (activity as WriteActivity).window
 
@@ -332,7 +334,6 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 //        } }
         editimg.setOnClickListener(View.OnClickListener {
             window.navigationBarColor=resources.getColor(R.color.black)
-
             seeTV.visibility = View.GONE
             writeET.setText(seeTV.text.toString())
             writeET.visibility = View.VISIBLE
@@ -462,5 +463,9 @@ override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
+fun restoreBg()
+{
+    setBgColor(oldcolor)
+    currcolor=-1
+}
 }

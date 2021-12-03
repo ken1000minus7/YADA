@@ -11,6 +11,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.appbar.MaterialToolbar
@@ -67,6 +68,8 @@ class WriteActivity : AppCompatActivity() {
             editimg.visibility=View.VISIBLE
             doneimg.visibility=View.GONE
             fab.visibility=View.GONE
+            val fragment =supportFragmentManager.findFragmentById(id.writeDiaryFragment) as WriteDiaryFragment?
+            if(fragment==null) Log.d("fragment","sadge")
         }
         else{
             super.onBackPressed()
