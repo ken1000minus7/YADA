@@ -37,6 +37,7 @@
     <string name="delete_string"><b>Are you sure you want to delete your account?</b></string>
     <string name="feedback"><b>Feedback</b></string>
     <string name="weather"><b>Weather</b></string>
+    <string name="travel_guides_and_stories"><b>Travel Guides and Stories</b></string>
 
 
 </resources>

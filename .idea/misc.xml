@@ -26,6 +26,8 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/translate_background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/drawable/translate_box_background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout-v21/fragment_login.xml" value="0.24003623188405798" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout-v21/fragment_write_diary.xml" value="0.25" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_blog.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_main.xml" value="0.1766304347826087" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_main2.xml" value="0.25" />
@@ -37,6 +39,7 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_path_tracker.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_translate.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_weather.xml" value="0.25" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_web.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/activity_write.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/confirm_dialog.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/delete_account_dialog.xml" value="0.25" />
@@ -64,6 +67,7 @@
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/sidebar_header.xml" value="0.264" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/spinner_item.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/switch_item.xml" value="0.25" />
+        <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/layout/web_items.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/menu/nav_rail_menu.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/menu/sidebar_menu.xml" value="0.25" />
         <entry key="..\:/Users/Manjot/AndroidStudioProjects/YADA/app/src/main/res/menu/top_app_bar.xml" value="0.25" />
@@ -78,18 +82,6 @@
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_favorite.xml" value="0.2703125" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_image.xml" value="0.2703125" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_security.xml" value="0.15" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_t1.xml" value="0.26979166666666665" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_t3.xml" value="0.26979166666666665" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_tbrown.xml" value="0.2703125" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ic_tprim.xml" value="0.2703125" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/ptracker_bg.xml" value="0.23378378378378378" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/tbrown.xml" value="0.2703125" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/tdark1.xml" value="0.2703125" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/tdark2.xml" value="0.2703125" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/tlight1.xml" value="0.14427083333333332" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/tlight2.xml" value="0.2703125" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/drawable/tprim.xml" value="0.2703125" />
-        <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout-v21/fragment_write_diary.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_check.xml" value="0.176" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_hikers_watch.xml" value="0.2341485507246377" />
         <entry key="..\:/Users/ashua/Github Repos/YADA/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />

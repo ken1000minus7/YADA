@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".webview.BlogActivity"
-    android:background="@color/secondary">
+    android:background="?attr/colorSecondaryVariant">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/headingblog"
-        android:text="Travel Guides and Stories"
+        android:text="@string/travel_guides_and_stories"
         android:textAlignment="center"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_22sdp"
+        android:layout_marginVertical="@dimen/_5sdp"
         android:fontFamily="@font/segoeprint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,6 +26,7 @@
         android:layout_width="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_height="0dp"
+        tools:listitem="@layout/web_items"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

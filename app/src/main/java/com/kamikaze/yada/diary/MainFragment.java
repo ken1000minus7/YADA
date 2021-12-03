@@ -95,7 +95,7 @@ public class MainFragment extends Fragment {
                     diaryButton.animate().translationY(-getResources().getDimension(R.dimen._168sdp));
                     translateButton.animate().translationY(-getResources().getDimension(R.dimen._126sdp));
                     newsButton.animate().translationY(-getResources().getDimension(R.dimen._84sdp));
-                    weatherButton.animate().translationY(-getResources().getDimension(R.dimen._42sdp));
+                    weatherButton.animate().translationY(-getResources().getDimension(R.dimen._44sdp));
                     floatingActionButton.setImageResource(R.drawable.ic_close);
                     floatingActionButton.setBackgroundColor(Color.BLACK);
                 }

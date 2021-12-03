@@ -187,7 +187,7 @@ public class WeatherActivity extends AppCompatActivity {
                     cityText.setText(cityName);
                     countryText.setText(countryName);
                     dateText.setText(getMonth(date.getMonth()+1)+" "+date.getDate()+", "+(date.getYear()+1900));
-                    timeText.setText(date.getHours()+":"+date.getHours());
+                    timeText.setText(date.getHours()+":"+date.getMinutes());
                     dayText.setText(getDay(date.getDay()));
                     humidityText.setText(humidity+"%");
                     pressureText.setText(String.format("%.0f",pressure)+"hPa");
