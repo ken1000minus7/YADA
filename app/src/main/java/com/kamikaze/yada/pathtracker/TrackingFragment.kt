@@ -1,6 +1,5 @@
 package com.kamikaze.yada.pathtracker
 
-import android.content.Context
 import android.content.Intent
 import android.location.Location
 import android.os.Bundle
@@ -8,24 +7,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
-import com.kamikaze.yada.pathtracker.TrackingService
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.storage.FirebaseStorage
 import com.kamikaze.yada.R
-import com.kamikaze.yada.databinding.FragmentLandingBinding
 import com.kamikaze.yada.databinding.FragmentTrackingBinding
 import com.kamikaze.yada.pathtracker.Constants.ACTION_PAUSE_SERVICE
 import com.kamikaze.yada.pathtracker.Constants.ACTION_START_OR_RESUME_SERVICE
@@ -33,26 +24,15 @@ import com.kamikaze.yada.pathtracker.Constants.ACTION_STOP_SERVICE
 import com.kamikaze.yada.pathtracker.Constants.MAP_ZOOM
 import com.kamikaze.yada.pathtracker.Constants.POLYLINE_COLOR
 import com.kamikaze.yada.pathtracker.Constants.POLYLINE_WIDTH
-import com.kamikaze.yada.pathtracker.TrackingService.Companion.isTracking
-import java.util.*
-import kotlin.math.round
-import android.graphics.Bitmap
-import android.os.Environment
-import android.widget.Toast
-import com.kamikaze.yada.FeatureFragment
-import java.io.File
-import java.io.FileOutputStream
-import java.lang.Exception
 
 
 class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     private var _binding: FragmentTrackingBinding? = null
     private val binding get() = _binding!!
-    private var map : GoogleMap? = null
+    lateinit var map : GoogleMap
     private var isTracking = false
     private var pathPoints = mutableListOf<Polyline>()
     lateinit var mapView:MapView
-    lateinit var btnFinishRun : MaterialButton
     lateinit var btnToggleRun : MaterialButton
 
     override fun onCreateView(
@@ -60,39 +40,28 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTrackingBinding.inflate(inflater, container, false)
-        val view = binding.root
-        btnFinishRun = view.findViewById(R.id.btnFinishRun)
-        btnFinishRun.setOnClickListener{
-            zoomToSeeWholeTrack()
-           stopRun()
-
-
-        }
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnToggleRun = view.findViewById<MaterialButton>(R.id.btnToggleRun)
-        btnFinishRun = view.findViewById(R.id.btnFinishRun)
+        val btnFinishRun = binding.btnFinishRun
+        val act = activity as PathTracker
         btnToggleRun.setOnClickListener {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
             toggleRun()
         }
         btnFinishRun.setOnClickListener {
-            zoomToSeeWholeTrack()
-
+            showCancelTrackingDialog(view)
         }
         mapView = view.findViewById<MapView>(R.id.mapView)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync{
             map = it
             addAllPolylines()
-
         }
         subscribeToObservers()
-
-
     }
     private fun addLatestPolyline(){
         if(pathPoints.isNotEmpty() && pathPoints.last().size>1){
@@ -125,7 +94,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         }
     }
     private fun sendCommandToService(action: String) =
-        Intent(requireContext(), TrackingService::class.java).also {
+        Intent(activity as PathTracker, TrackingService::class.java).also {
             it.action = action
             requireContext().startService(it)
         }
@@ -141,6 +110,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         }
     }
     private fun updateTracking(isTracking: Boolean) {
+        val btnFinishRun = binding.btnFinishRun
+
         this.isTracking = isTracking
         if(!isTracking) {
             btnToggleRun.text = "Start"
@@ -150,28 +121,31 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             btnFinishRun.visibility = View.GONE
         }
     }
-    fun calculatePolylineLength(polyline: Polyline):Float{
-        var dis = 0F
-        for (i in 0..polyline.size -2){
-            val pos1 = polyline[i]
-            val pos2 = polyline[i+1]
-            val result = FloatArray(1)
-            Location.distanceBetween(
-                pos1.latitude,
-                pos1.longitude,pos2.latitude,pos2.longitude, result
-            )
-            dis+=result[0]
-        }
-        return dis
-    }
+//    fun calculatePolylineLength(polyline: Polyline):Float{
+//        var dis = 0F
+//        for (i in 0..polyline.size -2){
+//            val pos1 = polyline[i]
+//            val pos2 = polyline[i+1]
+//            val result = FloatArray(1)
+//            Location.distanceBetween(
+//                pos1.latitude,
+//                pos1.longitude,pos2.latitude,pos2.longitude, result
+//            )
+//            dis+=result[0]
+//        }
+//        return dis
+//    }
 
-    private fun showCancelTrackingDialog() {
-        val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+    private fun showCancelTrackingDialog(view: View) {
+        val act = activity as PathTracker
+        val dialog = MaterialAlertDialogBuilder(act, R.style.AlertDialogTheme)
             .setTitle("Cancel the Run?")
             .setMessage("Are you sure to cancel the current run and delete all its data?")
             .setIcon(R.drawable.ic_delete)
             .setPositiveButton("Yes") { _, _ ->
                 stopRun()
+                Navigation.findNavController(view).navigate(R.id.action_trackingFragment_to_featureFragment)
+
             }
             .setNegativeButton("No") { dialogInterface, _ ->
                 dialogInterface.cancel()
@@ -181,9 +155,9 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     }
     private fun stopRun() {
         sendCommandToService(ACTION_STOP_SERVICE)
-       val intent = Intent(activity , FeatureFragment::class.java )
-        activity?.startActivity(intent)
-        activity?.finish()
+//       val intent = Intent(activity , FeatureFragment::class.java )
+//        activity?.startActivity(intent)
+//        activity?.finish()
 
     }
 
@@ -238,7 +212,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     override fun onStop() {
         super.onStop()
-        mapView?.onStop()
+        mapView.onStop()
     }
 
     override fun onPause() {

@@ -12,9 +12,9 @@
         android:background="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mapView">
+        app:layout_constraintTop_toBottomOf="@id/line">
 
 
         <com.google.android.material.button.MaterialButton
@@ -26,8 +26,7 @@
             app:layout_constraintEnd_toStartOf="@+id/btnFinishRun"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/clInnerLayout"
-            />
+            app:layout_constraintTop_toTopOf="@id/clInnerLayout" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnFinishRun"
@@ -40,7 +39,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btnToggleRun"
             app:layout_constraintTop_toTopOf="@id/clInnerLayout" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -63,10 +61,16 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/clInnerLayout"
+        app:layout_constraintBottom_toTopOf="@id/line"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
