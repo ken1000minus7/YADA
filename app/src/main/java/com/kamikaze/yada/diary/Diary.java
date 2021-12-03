@@ -14,7 +14,6 @@ public class Diary {
     private String bgImageUrl=null;
     private Notes note=null ;
     private int color=-1;
-    private  int fabcolor=-1;
     private List<String> images=new ArrayList<>();
 
     public Diary(String title, String description, String location, String bgImageUrl, Notes note, List<String> images) {
@@ -26,7 +25,8 @@ public class Diary {
         this.images = images;
     }
 
-    public Diary(String title, String description, String location, String bgImageUrl, Notes note, List<String> images, int color , int fabcolor) {
+
+    public Diary(String title, String description, String location, String bgImageUrl, Notes note, List<String> images, int color) {
         this.title = title;
         this.description = description;
         this.location = location;
@@ -34,7 +34,6 @@ public class Diary {
         this.note = note;
         this.images = images;
         this.color = color;
-        this.fabcolor = fabcolor;
     }
 
     public int  getColor() {
@@ -45,13 +44,6 @@ public class Diary {
         this.color = color;
     }
 
-    public int getFabcolor() {
-        return fabcolor;
-    }
-
-    public void setFabcolor(int fabcolor) {
-        this.fabcolor = fabcolor;
-    }
 
     public List<String> getImages() {
         return images;
