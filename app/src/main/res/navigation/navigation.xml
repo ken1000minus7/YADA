@@ -55,8 +55,8 @@
         android:label="fragment_aboutdiary3"
         tools:layout="@layout/fragment_aboutdiary3" >
         <action
-            android:id="@+id/action_aboutdiary3_to_loginActivity"
-            app:destination="@id/loginActivity" />
+            android:id="@+id/action_aboutdiary3_to_landingFragment"
+            app:destination="@id/landingFragment" />
     </fragment>
 
 </navigation>
