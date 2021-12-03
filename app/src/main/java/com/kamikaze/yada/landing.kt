@@ -22,7 +22,10 @@ class LandingFragment : Fragment(R.layout.fragment_landing){
     ): View {
         _binding = FragmentLandingBinding.inflate(inflater, container, false)
         val view = binding.root
-
+        val aboutdiary = binding.play
+        aboutdiary.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_landingFragment_to_aboutdiary1)
+        }
         binding.google.setOnClickListener {view: View ->
             Navigation.findNavController(view).navigate(R.id.action_landingFragment_to_loginActivity)
 

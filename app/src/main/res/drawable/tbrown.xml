@@ -13,6 +13,6 @@
         android:strokeWidth="1"
         android:pathData="M60.25,184.5C24.047,28.804 41.861,-65.911 180.25,-164V-212L512.75,-184L496.75,845H118.25C83.414,630.368 64.743,510.789 300.75,534.5C375.579,284.89 325.961,207.626 60.25,184.5Z"
         android:fillColor="#1C140C"
-        android:strokeColor="#EC1E1E"/>
+        android:strokeColor="@color/black"/>
   </group>
 </vector>

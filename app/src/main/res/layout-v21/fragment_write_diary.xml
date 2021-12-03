@@ -131,15 +131,15 @@
         android:layout_width="wrap_content"
         android:elevation="@dimen/_35sdp"
         android:id="@+id/fab"
-        app:borderWidth="0dp"
         android:backgroundTint="@color/white"
         android:tint="@color/white"
+        app:borderWidth="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
+        android:layout_gravity="right|bottom"
         app:srcCompat="@drawable/ic_image_white"
         app:maxImageSize="@dimen/_30sdp"
         android:layout_marginEnd="@dimen/_15sdp"
         android:layout_marginBottom="@dimen/_50sdp"
-        android:visibility="visible"
+        android:visibility="gone"
         />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
