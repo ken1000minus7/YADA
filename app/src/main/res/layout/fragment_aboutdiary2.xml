@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/about_2"
@@ -11,14 +13,40 @@
      android:id="@+id/next2"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-        android:layout_gravity="end"
-     android:src="@drawable/play"/>
+     android:src="@drawable/play"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintTop_toTopOf="parent" />
 
  <ImageView
+     android:id="@+id/imageView3"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:layout_marginTop="@dimen/_415sdp"
-     android:layout_marginLeft="@dimen/_152sdp"
-     android:src="@drawable/circleabt" />
 
-</FrameLayout>
+     android:src="@drawable/circleabt"
+     app:layout_constraintBottom_toBottomOf="@id/down"
+     app:layout_constraintEnd_toEndOf="@id/right" />
+
+
+
+ <androidx.constraintlayout.widget.Guideline
+     android:id="@+id/down"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     app:layout_constraintGuide_percent="0.757" />
+
+ <androidx.constraintlayout.widget.Guideline
+     android:id="@+id/left"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:orientation="vertical"
+     app:layout_constraintGuide_percent="0.48" />
+
+ <androidx.constraintlayout.widget.Guideline
+     android:id="@+id/right"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:orientation="vertical"
+     app:layout_constraintGuide_percent="0.52" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,7 +46,7 @@ class aboutdiary3 : Fragment(R.layout.fragment_aboutdiary3) {
         val view = binding.root
         val next = view.findViewById<ImageButton>(R.id.next3)
         next?.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_aboutdiary3_to_loginActivity)
+            Navigation.findNavController(view).navigate(R.id.action_aboutdiary3_to_landingFragment)
         }
         return view
     }
