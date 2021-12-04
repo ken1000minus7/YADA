@@ -143,9 +143,6 @@ public class ProfileFragment extends Fragment {
                 });
             }
         });
-
-
-
         ImageView nameEditButton=(ImageView) view.findViewById(R.id.name_edit_img);
         ImageView nameDoneButton=(ImageView) view.findViewById(R.id.name_done_img);
         EditText nameEdit=(EditText) view.findViewById(R.id.name_edit);
