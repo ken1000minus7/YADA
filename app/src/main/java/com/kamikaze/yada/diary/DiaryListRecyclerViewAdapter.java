@@ -127,8 +127,26 @@ public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryList
             public void onClick(View view) {
                 int position=recyclerView.getChildLayoutPosition(view);
                 Intent intent=new Intent(recyclerView.getContext(), WriteActivity.class);
+                if(MainFragment.originalList!=null)
+                {
+                    String title = ((TextView) view.findViewById(R.id.title)).getText().toString();
+                    String description = ((TextView) view.findViewById(R.id.description)).getText().toString();
+                    String location = ((TextView) view.findViewById(R.id.location)).getText().toString();
+                    for(int i=0;i<itemList.size();i++)
+                    {
+                        Diary diary= itemList.get(i);
+                        if(diary.getTitle().equals(title) && diary.getLocation().equals(location) && diary.getDescription().equals(description))
+                        {
+                            position=i;
+                            break;
+                        }
+                    }
+//
+                }
+
                 intent.putExtra("title",itemList.get(position).getTitle());
                 intent.putExtra("position",position);
+
                 recyclerView.getContext().startActivity(intent);
             }
         });
