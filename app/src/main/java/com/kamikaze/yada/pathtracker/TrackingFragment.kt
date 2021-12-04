@@ -161,8 +161,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             .setIcon(R.drawable.ic_delete)
             .setPositiveButton("Yes") { _, _ ->
                 stopRun()
-                Navigation.findNavController(view).navigate(R.id.action_trackingFragment_to_featureFragment)
-
+//                Navigation.findNavController(view).navigate(R.id.action_trackingFragment_to_featureFragment)
+                activity?.finish()
             }
             .setNegativeButton("No") { dialogInterface, _ ->
                 dialogInterface.cancel()
