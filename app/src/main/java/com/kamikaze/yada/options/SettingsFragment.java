@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.kamikaze.yada.Feedback;
 import com.kamikaze.yada.MainActivity;
 import com.kamikaze.yada.R;
+import com.kamikaze.yada.TeamKamikaze;
 import com.kamikaze.yada.diary.DiaryHandler;
 
 /**
@@ -205,7 +206,13 @@ public class SettingsFragment extends Fragment {
         aboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "We are good people", Toast.LENGTH_SHORT).show();
+               Toast.makeText(getContext(), "We are good people", Toast.LENGTH_SHORT).show();
+                if (getActivity()!=null) {
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.option_container, TeamKamikaze.class, null)
+                            .setReorderingAllowed(true).commit();
+
+                }
             }
         });
         feedbackButton.setOnClickListener(new View.OnClickListener() {
