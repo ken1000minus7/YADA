@@ -1,11 +1,18 @@
 package com.kamikaze.yada
 
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -59,5 +66,11 @@ class MainActivity : AppCompatActivity() {
         }
         startActivity(Intent(this, MainPageActivity::class.java))
         finish()
+    }
+
+    override fun onBackPressed() {
+        val lander = findViewById<ConstraintLayout>(R.id.titleConstraint)
+        if(lander!=null) finish()
+        else super.onBackPressed()
     }
 }

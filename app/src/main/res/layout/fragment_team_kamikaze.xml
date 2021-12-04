@@ -19,18 +19,18 @@
         android:textSize="@dimen/_35sdp" />
 
     <TextView
-        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         android:id="@+id/leader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Kavya Rishi (Leader)"
         app:layout_constraintTop_toBottomOf="@id/teamname"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_18sdp"
         android:fontFamily="@font/segoeprint"
         android:layout_marginTop="@dimen/_20sdp"/>
     <TextView
-        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Manjot Singh Oberoi"
@@ -41,7 +41,7 @@
         android:fontFamily="@font/segoeprint"
         android:layout_marginTop="@dimen/_20sdp"/>
     <TextView
-        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rijul Singla"
@@ -53,7 +53,7 @@
         android:layout_marginTop="@dimen/_20sdp"
         />
     <TextView
-        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ashutosh Aswal"
@@ -65,10 +65,10 @@
         android:layout_marginTop="@dimen/_20sdp"
         />
     <TextView
-        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_18sdp"
         android:id="@+id/pm"
         android:text="Priyanshu Meharada"
         app:layout_constraintTop_toBottomOf="@id/ashu"

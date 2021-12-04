@@ -13,9 +13,12 @@
      android:id="@+id/next2"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
+     android:background="@android:color/transparent"
      android:src="@drawable/play"
+     app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintEnd_toEndOf="parent"
-     app:layout_constraintTop_toTopOf="parent" />
+     android:layout_marginEnd="@dimen/_20sdp"
+     android:layout_marginBottom="@dimen/_20sdp"/>
 
  <ImageView
      android:id="@+id/imageView3"
