@@ -1,5 +1,7 @@
 # YADA
 
+[![Join the chat at https://gitter.im/YADA_/community](https://badges.gitter.im/YADA_/community.svg)](https://gitter.im/YADA_/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Yet Another Diary App created for travelers who want to write about their experiences. Customizable themes with the fusion of maps and path tracking make it all the more interesting! 
 
 
