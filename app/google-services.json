@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "891929709408",
+    "firebase_url": "https://yada-c192a-default-rtdb.firebaseio.com",
+    "project_id": "yada-c192a",
+    "storage_bucket": "yada-c192a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891929709408:android:1c79670c9e2761a373ec05",
+        "android_client_info": {
+          "package_name": "com.kamikaze.yada"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891929709408-ilj9frsj6fi78gb87jjhjacjsfoojkat.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kamikaze.yada",
+            "certificate_hash": "ebd59f5c1e7313ffd6f881cfdcbf5136bbf3e184"
+          }
+        },
+        {
+          "client_id": "891929709408-vob1ophlbg8qo7m326sjeattql0ag9c3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kamikaze.yada",
+            "certificate_hash": "9402c206775402cc44585b8e146d553a02138b44"
+          }
+        },
+        {
+          "client_id": "891929709408-1qivi9tr5d9o50ff3tfqdvlsj2b7nkd0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLUM-kARMiQ8IKn9bIxhLiTWlf_PhU5WI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891929709408-1qivi9tr5d9o50ff3tfqdvlsj2b7nkd0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
