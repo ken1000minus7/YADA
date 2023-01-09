@@ -39,7 +39,6 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
-
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("WrongConstant")
     override fun onCreateView(
@@ -53,14 +52,15 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         val seeTV = binding.seehere
         val title = binding.diaryTitle
         val act = activity as WriteActivity
-        val window: Window = (activity as WriteActivity).window
         title.text = act.title
         val fab = binding.fab
+        initMisc(act.findViewById(R.id.layoutmiscnote))
+
+        val window: Window = (activity as WriteActivity).window
         val custops = binding.customizeOptions
         val editimg = binding.editDiary
         val doneimg = binding.doneEditDiary
-        initMisc(act.findViewById(R.id.layoutmiscnote))
-
+        //IMAGES ADAPTER
         val recyclerView = binding.rvimages
         recyclerView.layoutManager = LinearLayoutManager(act, OrientationHelper.HORIZONTAL, false)
 
@@ -342,7 +342,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             seeTV.visibility = View.GONE
             writeET.setText(seeTV.text.toString())
             writeET.visibility = View.VISIBLE
-            custops.visibility = View.VISIBLE
+            custops.root.visibility = View.VISIBLE
             editimg.visibility = View.GONE
             doneimg.visibility = View.VISIBLE
             fab.visibility = View.VISIBLE
@@ -354,11 +354,11 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
             seeTV.text = textstuff
             handleKeyEvent(view, KeyEvent.KEYCODE_ENTER)
             seeTV.visibility = View.VISIBLE
-            custops.visibility = View.GONE
+            custops.root.visibility = View.GONE
             editimg.visibility = View.VISIBLE
             doneimg.visibility = View.GONE
             fab.visibility = View.GONE
-            val bottomSheetBehavior = BottomSheetBehavior.from(custops)
+            val bottomSheetBehavior = BottomSheetBehavior.from(custops.root)
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) bottomSheetBehavior.state =
                 BottomSheetBehavior.STATE_COLLAPSED
             val note = Notes(title.text.toString(), "Random", "Random0", textstuff)
@@ -453,10 +453,12 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         }
         return false
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
     fun restoreBg() {
         if (oldcolor > 0) setBgColor(oldcolor)
         currcolor = -1
