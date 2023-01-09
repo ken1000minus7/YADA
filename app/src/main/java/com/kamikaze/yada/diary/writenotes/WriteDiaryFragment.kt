@@ -1,24 +1,20 @@
 package com.kamikaze.yada.diary.writenotes
 
 import android.annotation.SuppressLint
-import android.app.ActionBar
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.method.ScrollingMovementMethod
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.OrientationHelper
@@ -27,39 +23,23 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
-import com.kamikaze.yada.MemorablePlacesActivity
 import com.kamikaze.yada.R
 import com.kamikaze.yada.dao.NotesDao
 import com.kamikaze.yada.databinding.FragmentWriteDiaryBinding
-import com.kamikaze.yada.diary.Diary
 import com.kamikaze.yada.diary.DiaryHandler
 import com.kamikaze.yada.model.Notes
-import java.lang.StringBuilder
 import android.view.WindowManager
-import android.graphics.drawable.ColorDrawable
-import androidx.core.content.ContextCompat
-
-
-
-
-
-
-
-
 
 class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     private var _binding: FragmentWriteDiaryBinding? = null
     private val binding get() = _binding!!
-     var i : Int = 0
-    val a=0
-    var currcolor : Int =-1
-    var oldcolor : Int = -1
+    var currcolor: Int = -1
+    var oldcolor: Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
-    //@RequiresApi(Build.VERSION_CODES.M)
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("WrongConstant")
     override fun onCreateView(
@@ -68,32 +48,21 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     ): View {
         _binding = FragmentWriteDiaryBinding.inflate(inflater, container, false)
         val view = binding.root
-//        val topAppBar = binding.topAppBar
         val writeET = binding.edithere
         writeET.visibility = View.GONE
         val seeTV = binding.seehere
         val title = binding.diaryTitle
         val act = activity as WriteActivity
-//        topAppBar.title = act.title
-        title.text=act.title
-        val fab = view.findViewById<FloatingActionButton>(R.id.fab)
+        val window: Window = (activity as WriteActivity).window
+        title.text = act.title
+        val fab = binding.fab
+        val custops = binding.customizeOptions
+        val editimg = binding.editDiary
+        val doneimg = binding.doneEditDiary
         initMisc(act.findViewById(R.id.layoutmiscnote))
 
-        val custops=view.findViewById<View>(R.id.customize_options)
-        val editimg=view.findViewById<ImageView>(R.id.edit_diary)
-        val doneimg=view.findViewById<ImageView>(R.id.done_edit_diary)
-        //IMAGES ADAPTER---------------------------------------------------------------------
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rvimages)
-        recyclerView.layoutManager = LinearLayoutManager(act , OrientationHelper.HORIZONTAL , false)
-
-
-        //----------------------------------------------------------
-        // Colors ,Colors everywhere
-
-
-            val window: Window = (activity as WriteActivity).window
-
-        //window.statusBarColor = Color.BLUE
+        val recyclerView = binding.rvimages
+        recyclerView.layoutManager = LinearLayoutManager(act, OrientationHelper.HORIZONTAL, false)
 
         //Button Clicks to change bg color
         val bgc0 = view.findViewById<ImageView>(R.id.imageColor1)
@@ -106,7 +75,6 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
         val bgc7 = view.findViewById<ImageView>(R.id.imageColor8)
         val bgc8 = view.findViewById<ImageView>(R.id.imageColor9)
         val bgc9 = view.findViewById<ImageView>(R.id.imageColor10)
-
 
         //Button Clicks to change bg theme
         val bgt0 = view.findViewById<ImageView>(R.id.imageTheme0)
@@ -126,13 +94,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
             //darkmode
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Log.d("build what", "is it working")
-//                window.decorView.systemUiVisibility =
-//                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;//  set status text dark
-
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                //la la some colors hahahha
-             //  bgt0.setImageResource(R.drawable.ic_tbrown)
                 bgt0.setBackgroundResource(R.drawable.ic_tbrown)
 
                 bgc0.setOnClickListener {
@@ -200,36 +162,52 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                     window.navigationBarColor = resources.getColor(R.color.cyan_dark9)
                     currcolor = R.color.cyan_dark9
                 }
-                bgt0.setOnClickListener { view.setBackgroundResource(R.drawable.tbrown)
-                window.statusBarColor=resources.getColor(R.color.tbrown)
-                window.navigationBarColor=resources.getColor(R.color.tbrown)}
-                bgt1.setOnClickListener { view.setBackgroundResource(R.drawable.tdark1)
-                    window.statusBarColor=resources.getColor(R.color.tdark1)
-                    window.navigationBarColor=resources.getColor(R.color.tdark1)}
-                bgt2.setOnClickListener { view.setBackgroundResource(R.drawable.tdark2)
-                    window.statusBarColor=resources.getColor(R.color.tdark2)
-                    window.navigationBarColor=resources.getColor(R.color.tdark2)}
-                bgt3.setOnClickListener { view.setBackgroundResource(R.drawable.tdark3)
-                    window.statusBarColor=resources.getColor(R.color.tdark3)
-                    window.navigationBarColor=resources.getColor(R.color.tdark3)}
-                bgt4.setOnClickListener { view.setBackgroundResource(R.drawable.themew)
+                bgt0.setOnClickListener {
+                    view.setBackgroundResource(R.drawable.tbrown)
+                    window.statusBarColor = resources.getColor(R.color.tbrown)
+                    window.navigationBarColor = resources.getColor(R.color.tbrown)
+                }
+                bgt1.setOnClickListener {
+                    view.setBackgroundResource(R.drawable.tdark1)
+                    window.statusBarColor = resources.getColor(R.color.tdark1)
+                    window.navigationBarColor = resources.getColor(R.color.tdark1)
+                }
+                bgt2.setOnClickListener {
+                    view.setBackgroundResource(R.drawable.tdark2)
+                    window.statusBarColor = resources.getColor(R.color.tdark2)
+                    window.navigationBarColor = resources.getColor(R.color.tdark2)
+                }
+                bgt3.setOnClickListener {
+                    view.setBackgroundResource(R.drawable.tdark3)
+                    window.statusBarColor = resources.getColor(R.color.tdark3)
+                    window.navigationBarColor = resources.getColor(R.color.tdark3)
+                }
+                bgt4.setOnClickListener {
+                    view.setBackgroundResource(R.drawable.themew)
                     window.statusBarColor = resources.getColor(R.color.rose_dark2)
-                    window.navigationBarColor = resources.getColor(R.color.rose_dark2)}
-                bgt5.setOnClickListener { view.setBackgroundResource(R.drawable.themex)
+                    window.navigationBarColor = resources.getColor(R.color.rose_dark2)
+                }
+                bgt5.setOnClickListener {
+                    view.setBackgroundResource(R.drawable.themex)
                     window.statusBarColor = resources.getColor(R.color.lightyellow_light8)
-                    window.navigationBarColor = resources.getColor(R.color.pink)}
-                bgt6.setOnClickListener { view.setBackgroundResource(R.drawable.themey)
+                    window.navigationBarColor = resources.getColor(R.color.pink)
+                }
+                bgt6.setOnClickListener {
+                    view.setBackgroundResource(R.drawable.themey)
                     window.statusBarColor = resources.getColor(R.color.pink)
-                    window.navigationBarColor = resources.getColor(R.color.lightyellow_light8)}
-                bgt7.setOnClickListener { view.setBackgroundResource(R.drawable.themez)
+                    window.navigationBarColor = resources.getColor(R.color.lightyellow_light8)
+                }
+                bgt7.setOnClickListener {
+                    view.setBackgroundResource(R.drawable.themez)
                     window.statusBarColor = resources.getColor(R.color.rose_dark2)
-                    window.navigationBarColor = resources.getColor(R.color.rose_dark2)}
-        }}
-        else{
+                    window.navigationBarColor = resources.getColor(R.color.rose_dark2)
+                }
+            }
+        } else {
             //lightmode
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Log.d("build what", "is it working")
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;//  set status text dark
+                window.decorView.systemUiVisibility =
+                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;//  set status text dark
 
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
                 //la la la color swap
@@ -238,14 +216,14 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
                 bgc0.setOnClickListener {
                     setBgColor(R.color.secondary)
-                   window.statusBarColor=resources.getColor(R.color.secondary)
-                    window.navigationBarColor=resources.getColor(R.color.secondary)
+                    window.statusBarColor = resources.getColor(R.color.secondary)
+                    window.navigationBarColor = resources.getColor(R.color.secondary)
                     currcolor = R.color.secondary
                 }
                 bgc1.setOnClickListener {
                     setBgColor(R.color.lavender_light1)
-                    window.statusBarColor=resources.getColor(R.color.lavender_light1)
-                    window.navigationBarColor=resources.getColor(R.color.lavender_light1)
+                    window.statusBarColor = resources.getColor(R.color.lavender_light1)
+                    window.navigationBarColor = resources.getColor(R.color.lavender_light1)
                     currcolor = R.color.lavender_light1
                 }
                 bgc2.setOnClickListener {
@@ -296,224 +274,191 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
                     window.navigationBarColor = resources.getColor(R.color.cyan_light9)
                     currcolor = R.color.cyan_light9
                 }
-                bgt0.setOnClickListener { view.setBackgroundResource(R.drawable.tprim)
-                    window.statusBarColor=resources.getColor(R.color.tprim)
-                    window.navigationBarColor=resources.getColor(R.color.tprim)}
-                bgt1.setOnClickListener { view.setBackgroundResource(R.drawable.tlight1)
-                    window.statusBarColor=resources.getColor(R.color.tlight1)
-                    window.navigationBarColor=resources.getColor(R.color.tlight1)}
-                bgt2.setOnClickListener { view.setBackgroundResource(R.drawable.tlight2)
-                    window.statusBarColor=resources.getColor(R.color.tlight2)
-                    window.navigationBarColor=resources.getColor(R.color.tlight2)}
-                bgt3.setOnClickListener { view.setBackgroundResource(R.drawable.tlight3)
-                    window.statusBarColor=resources.getColor(R.color.tlight3)
-                    window.navigationBarColor=resources.getColor(R.color.tlight3)}
+                bgt0.setOnClickListener {
+                    view.setBackgroundResource(R.drawable.tprim)
+                    window.statusBarColor = resources.getColor(R.color.tprim)
+                    window.navigationBarColor = resources.getColor(R.color.tprim)
+                }
+                bgt1.setOnClickListener {
+                    view.setBackgroundResource(R.drawable.tlight1)
+                    window.statusBarColor = resources.getColor(R.color.tlight1)
+                    window.navigationBarColor = resources.getColor(R.color.tlight1)
+                }
+                bgt2.setOnClickListener {
+                    view.setBackgroundResource(R.drawable.tlight2)
+                    window.statusBarColor = resources.getColor(R.color.tlight2)
+                    window.navigationBarColor = resources.getColor(R.color.tlight2)
+                }
+                bgt3.setOnClickListener {
+                    view.setBackgroundResource(R.drawable.tlight3)
+                    window.statusBarColor = resources.getColor(R.color.tlight3)
+                    window.navigationBarColor = resources.getColor(R.color.tlight3)
+                }
             }
-            bgt4.setOnClickListener { view.setBackgroundResource(R.drawable.themew)
+            bgt4.setOnClickListener {
+                view.setBackgroundResource(R.drawable.themew)
                 window.statusBarColor = resources.getColor(R.color.rose_dark2)
-                window.navigationBarColor = resources.getColor(R.color.rose_dark2)}
-            bgt5.setOnClickListener { view.setBackgroundResource(R.drawable.themex)
+                window.navigationBarColor = resources.getColor(R.color.rose_dark2)
+            }
+            bgt5.setOnClickListener {
+                view.setBackgroundResource(R.drawable.themex)
                 window.statusBarColor = resources.getColor(R.color.lightyellow_light8)
-                window.navigationBarColor = resources.getColor(R.color.pink)}
-            bgt6.setOnClickListener { view.setBackgroundResource(R.drawable.themey)
+                window.navigationBarColor = resources.getColor(R.color.pink)
+            }
+            bgt6.setOnClickListener {
+                view.setBackgroundResource(R.drawable.themey)
                 window.statusBarColor = resources.getColor(R.color.pink)
-                window.navigationBarColor = resources.getColor(R.color.lightyellow_light8)}
-            bgt7.setOnClickListener { view.setBackgroundResource(R.drawable.themez)
+                window.navigationBarColor = resources.getColor(R.color.lightyellow_light8)
+            }
+            bgt7.setOnClickListener {
+                view.setBackgroundResource(R.drawable.themez)
                 window.statusBarColor = resources.getColor(R.color.rose_dark2)
-                window.navigationBarColor = resources.getColor(R.color.rose_dark2)}
-
+                window.navigationBarColor = resources.getColor(R.color.rose_dark2)
+            }
         }
 
-
-
-        //-----------------------------------------------------------
-        //------------------------------------------------------------
-
-        fab.setOnClickListener{
-            if (ActivityCompat.checkSelfPermission(act,android.Manifest.permission.READ_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
-                requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),2000)
-            }
-            else{
-                val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        fab.setOnClickListener {
+            if (ActivityCompat.checkSelfPermission(
+                    act,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 2000)
+            } else {
+                val intent =
+                    Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                 intent.type = "image/*"
                 intent.action = Intent.ACTION_GET_CONTENT
-                startActivityForResult(Intent.createChooser(intent , "Select Picture"),1000)
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1000)
             }
-    }
-        //-------------------------------------------------------------
+        }
         val nd = NotesDao()
-        nd.setNote(view, act,seeTV,act.position,writeET , title , recyclerView,this)
+        nd.setNote(view, act, seeTV, act.position, writeET, title, recyclerView, this)
 
-
-
-            window.navigationBarColor = resources.getColor(R.color.black)
+        window.navigationBarColor = resources.getColor(R.color.black)
         seeTV.movementMethod = ScrollingMovementMethod()
-//        topAppBar.setOnMenuItemClickListener { menuItem -> when (menuItem.itemId){
-//            R.id.favorite ->{
-//                writeET.visibility = View.GONE
-//                seeTV.text = writeET.text
-//                      handleKeyEvent(view , KeyEvent.KEYCODE_ENTER)
-//                seeTV.visibility = View.VISIBLE
-//                custops.visibility=View.GONE
-//                val note  = Notes(title.text.toString(),"Random","Random0",writeET.text.toString()  )
-//                val act = activity as WriteActivity
-//                val diaryins:DiaryHandler = DiaryHandler(activity)
-//                diaryins.updateDiary(act.position, note)
-//                true
-//            }
-//            R.id.edit ->{
-//                writeET.isSelected = true
-//                val inputMethodManager =
-//                    activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//
-//                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
-
-
-//                seeTV.visibility = View.GONE
-//                writeET.setText(seeTV.text.toString())
-//                writeET.visibility = View.VISIBLE
-//                custops.visibility=View.VISIBLE
-//                true
-//            }
-//            else   -> false
-//        } }
-        editimg.setOnClickListener(View.OnClickListener {
-            window.navigationBarColor=resources.getColor(R.color.black)
+        editimg.setOnClickListener {
+            window.navigationBarColor = resources.getColor(R.color.black)
             seeTV.visibility = View.GONE
             writeET.setText(seeTV.text.toString())
             writeET.visibility = View.VISIBLE
-            custops.visibility=View.VISIBLE
-            editimg.visibility=View.GONE
-            doneimg.visibility=View.VISIBLE
-            fab.visibility=View.VISIBLE
-            oldcolor=currcolor
-            Log.d("fragment real", currcolor.toString())
-        })
-        doneimg.setOnClickListener(View.OnClickListener {
+            custops.visibility = View.VISIBLE
+            editimg.visibility = View.GONE
+            doneimg.visibility = View.VISIBLE
+            fab.visibility = View.VISIBLE
+            oldcolor = currcolor
+        }
+        doneimg.setOnClickListener {
             writeET.visibility = View.GONE
-            val textstuff=writeET.text.toString()
+            val textstuff = writeET.text.toString()
             seeTV.text = textstuff
-            handleKeyEvent(view , KeyEvent.KEYCODE_ENTER)
+            handleKeyEvent(view, KeyEvent.KEYCODE_ENTER)
             seeTV.visibility = View.VISIBLE
-            custops.visibility=View.GONE
-            editimg.visibility=View.VISIBLE
-            doneimg.visibility=View.GONE
-            fab.visibility=View.GONE
+            custops.visibility = View.GONE
+            editimg.visibility = View.VISIBLE
+            doneimg.visibility = View.GONE
+            fab.visibility = View.GONE
             val bottomSheetBehavior = BottomSheetBehavior.from(custops)
-            if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED ) bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            val note  = Notes(title.text.toString(),"Random","Random0",textstuff)
+            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) bottomSheetBehavior.state =
+                BottomSheetBehavior.STATE_COLLAPSED
+            val note = Notes(title.text.toString(), "Random", "Random0", textstuff)
             val act = activity as WriteActivity
-            val diaryins:DiaryHandler = DiaryHandler(activity)
-            if(note==null) Log.d("note","null")
-            else Log.d("note","$note.textnote")
-            oldcolor=-1
-            diaryins.updateDiary(act.position, note,currcolor)
-            Log.d("oof clor","$currcolor")
-        })
+            val diaryins = DiaryHandler(activity)
+
+            oldcolor = -1
+            diaryins.updateDiary(act.position, note, currcolor)
+        }
         return view
     }
-    //Setting Images in Recycler View------------------------------------------------------------------------------------------------------------------------------------
-    @SuppressLint("WrongConstant")
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode==RESULT_OK){
-            if(requestCode==1000){
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1000) {
                 val act = activity as WriteActivity
                 val recyclerView = view?.findViewById<RecyclerView>(R.id.rvimages)
                 val returnUri = data?.data
                 val path1 = returnUri.toString()
 
-                val imgadapter = recyclerView?.adapter  as ImageAdapter?
+                val imgadapter = recyclerView?.adapter as ImageAdapter?
 
                 var imagepath = imgadapter?.images as MutableList?
-                if(imagepath==null) imagepath= mutableListOf<String>()
+                if (imagepath == null) imagepath = mutableListOf<String>()
                 imagepath.add(path1)
                 loadImages(imagepath)
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //local
-                val storageRef = FirebaseStorage.getInstance().getReference(FirebaseAuth.getInstance().uid!!+"/images/"+ randomString(5)+".jpg")//asu= check intent me random string
-                storageRef.putFile(returnUri!!).addOnCompleteListener{
-                    task->
-                        if (task.isSuccessful) {
-                            task.result.storage.downloadUrl.addOnCompleteListener { task ->
-                                    val url = task.result.toString()
-                                    val diaryobj = DiaryHandler(act)
-                                    diaryobj.updateDiary(act.position , url)
-                            }
+                val storageRef = FirebaseStorage.getInstance()
+                    .getReference(FirebaseAuth.getInstance().uid!! + "/images/" + randomString(5) + ".jpg")
+                storageRef.putFile(returnUri!!).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        task.result.storage.downloadUrl.addOnCompleteListener { task ->
+                            val url = task.result.toString()
+                            val diaryobj = DiaryHandler(act)
+                            diaryobj.updateDiary(act.position, url)
                         }
+                    }
                 }
             }
         }
     }
 
     private fun randomString(i: Int): String {
-    val characters = "abcdefghijklmnopqrstuvwxyz"
         val charset = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-
         return List(i) { charset.random() }
             .joinToString("")
     }
 
-    //----------------------------------------------------------
-    //Bottom Sheet Navigation
-
-    private  fun initMisc(layoutmisc : LinearLayout?) {
-        if (layoutmisc!=null){
-        val bottomSheetBehavior = BottomSheetBehavior.from(layoutmisc)
-        layoutmisc.setOnClickListener{
-            if(bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED ){
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                val fab = view?.findViewById<FloatingActionButton>(R.id.fab)
+    private fun initMisc(layoutmisc: LinearLayout?) {
+        if (layoutmisc != null) {
+            val bottomSheetBehavior = BottomSheetBehavior.from(layoutmisc)
+            layoutmisc.setOnClickListener {
+                if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                    val fab = view?.findViewById<FloatingActionButton>(R.id.fab)
                     fab?.visibility = View.GONE
-            }
-            else{
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                val fab = view?.findViewById<FloatingActionButton>(R.id.fab)
+                } else {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                    val fab = view?.findViewById<FloatingActionButton>(R.id.fab)
 
                     fab?.visibility = View.VISIBLE
 
+                }
             }
-    }}
+        }
     }
-    private fun setBgColor(value: Int){
+
+    private fun setBgColor(value: Int) {
         view?.setBackgroundResource(value)
     }
 
-
     @SuppressLint("WrongConstant")
-    fun loadImages(imagepath :List<String>){
+    fun loadImages(imagepath: List<String>) {
         val recyclerView = view?.findViewById<RecyclerView>(R.id.rvimages)
         val act = activity as WriteActivity
 
-        recyclerView?.layoutManager = LinearLayoutManager(act , OrientationHelper.HORIZONTAL , false)
-        recyclerView?.adapter = ImageAdapter(imagepath,act)
-        if(imagepath.size>0) recyclerView?.visibility=View.VISIBLE
-
+        recyclerView?.layoutManager = LinearLayoutManager(act, OrientationHelper.HORIZONTAL, false)
+        recyclerView?.adapter = ImageAdapter(imagepath, act)
+        if (imagepath.isNotEmpty()) recyclerView?.visibility = View.VISIBLE
     }
-    private fun handleKeyEvent(view: View, keyCode: Int ):Boolean{
-        if (keyCode == KeyEvent.KEYCODE_ENTER){
+
+    private fun handleKeyEvent(view: View, keyCode: Int): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_ENTER) {
             //Hide Keyboard
             val inputMethodManager =
                 activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0 )
-            inputMethodManager.showSoftInput(view,0)
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+            inputMethodManager.showSoftInput(view, 0)
             return true
-
-
         }
         return false
     }
-
-
-
-override fun onDestroyView() {
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-fun restoreBg()
-{
-    if(oldcolor>0) setBgColor(oldcolor)
-    currcolor=-1
-}
+    fun restoreBg() {
+        if (oldcolor > 0) setBgColor(oldcolor)
+        currcolor = -1
+    }
 }

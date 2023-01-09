@@ -30,37 +30,10 @@ import com.kamikaze.yada.webview.BlogActivity;
 import java.util.ArrayList;
 
 public class MainFragment extends Fragment {
-
-
     public static ArrayList<Diary> originalList=null;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     boolean fabOpen=false;
     public MainFragment() {
 
-    }
-
-    public static MainFragment newInstance(String param1, String param2) {
-        MainFragment fragment = new MainFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
     public FloatingActionButton floatingActionButton;
     @Override
@@ -68,8 +41,6 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_main, container, false);
-
-
         floatingActionButton=(FloatingActionButton) view.findViewById(R.id.floating_button);
         FloatingActionButton diaryButton=(FloatingActionButton) view.findViewById(R.id.floating_diary_button);
         FloatingActionButton translateButton=(FloatingActionButton) view.findViewById(R.id.floating_translate_button);
@@ -137,14 +108,11 @@ public class MainFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         DiaryHandler diaryHandler=new DiaryHandler(getContext());
-//                        Notes note=new Notes("Trip to New York","Very good trip","New York","I went to new york and saw spidey boi");
                         Diary diary=new Diary(titleView.getText().toString(),descriptionView.getText().toString(), location.getText().toString());
-//                        diaryHandler.loadData(view.findViewById(R.id.list));
                         RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.list);
                         int position=recyclerView.getAdapter().getItemCount();
                         diaryHandler.addDiary(diary,recyclerView);
                         diaryHandler.loadData();
-
                         Intent intent1 = new Intent(getActivity() , WriteActivity.class);
                         intent1.putExtra("position",position);
                         intent1.putExtra("title",titleView.getText().toString());

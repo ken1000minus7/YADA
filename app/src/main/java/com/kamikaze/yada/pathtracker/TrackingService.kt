@@ -15,15 +15,12 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.model.LatLng
-import com.kamikaze.yada.R
 import com.kamikaze.yada.pathtracker.Constants.ACTION_PAUSE_SERVICE
 import com.kamikaze.yada.pathtracker.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import com.kamikaze.yada.pathtracker.Constants.ACTION_START_OR_RESUME_SERVICE
@@ -60,9 +57,9 @@ class TrackingService : LifecycleService() {
         postInitialValues()
         fusedLocationProviderClient = FusedLocationProviderClient(this)
 
-        isTracking.observe(this, Observer {
+        isTracking.observe(this) {
             updateLocationTracking(it)
-        })
+        }
     }
 
 
@@ -70,7 +67,7 @@ class TrackingService : LifecycleService() {
         intent?.let {
             when (it.action) {
                 ACTION_START_OR_RESUME_SERVICE -> {
-                    if(isFirstRun) {
+                    if (isFirstRun) {
                         startForegroundService()
                         isFirstRun = false
                     } else {
@@ -78,10 +75,12 @@ class TrackingService : LifecycleService() {
                         startForegroundService()
                     }
                 }
+
                 ACTION_PAUSE_SERVICE -> {
                     Timber.d("Paused service")
                     pauseService()
                 }
+
                 ACTION_STOP_SERVICE -> {
                     Timber.d("Stopped service")
                     killService()
@@ -92,15 +91,14 @@ class TrackingService : LifecycleService() {
     }
 
 
-
     private fun pauseService() {
         isTracking.postValue(false)
     }
 
     @SuppressLint("MissingPermission")
     private fun updateLocationTracking(isTracking: Boolean) {
-        if(isTracking) {
-            if(TrackingUtility.hasLocationPermissions(this)) {
+        if (isTracking) {
+            if (TrackingUtility.hasLocationPermissions(this)) {
                 val request = LocationRequest().apply {
                     interval = LOCATION_UPDATE_INTERVAL
                     fastestInterval = FASTEST_LOCATION_INTERVAL
@@ -117,12 +115,12 @@ class TrackingService : LifecycleService() {
         }
     }
 
-    val locationCallback = object : LocationCallback() {
-        override fun onLocationResult(result: LocationResult?) {
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(result: LocationResult) {
             super.onLocationResult(result)
-            if(isTracking.value!!) {
-                result?.locations?.let { locations ->
-                    for(location in locations) {
+            if (isTracking.value!!) {
+                result.locations.let { locations ->
+                    for (location in locations) {
                         addPathPoint(location)
                         Timber.d("NEW LOCATION: ${location.latitude}, ${location.longitude}")
                     }
@@ -130,6 +128,7 @@ class TrackingService : LifecycleService() {
             }
         }
     }
+
     private fun killService() {
         serviceKilled = true
         isFirstRun = true
@@ -162,7 +161,7 @@ class TrackingService : LifecycleService() {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
                 as NotificationManager
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel(notificationManager)
         }
 
@@ -171,7 +170,7 @@ class TrackingService : LifecycleService() {
             .setOngoing(true)
             .setContentTitle("Running App")
             .setContentText("00:00:00")
-          .setContentIntent(getMainActivityPendingIntent())
+            .setContentIntent(getMainActivityPendingIntent())
 
         startForeground(NOTIFICATION_ID, notificationBuilder.build())
     }
@@ -194,6 +193,4 @@ class TrackingService : LifecycleService() {
         )
         notificationManager.createNotificationChannel(channel)
     }
-
-
 }

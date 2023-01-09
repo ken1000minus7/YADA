@@ -28,7 +28,6 @@ class LandingFragment : Fragment(R.layout.fragment_landing){
         }
         binding.google.setOnClickListener {view: View ->
             Navigation.findNavController(view).navigate(R.id.action_landingFragment_to_loginActivity)
-
         }
         return view
     }
@@ -38,6 +37,4 @@ class LandingFragment : Fragment(R.layout.fragment_landing){
         super.onDestroyView()
         _binding = null
     }
-
-
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/about_2"
-    tools:context=".aboutdiary.aboutdiary2">
+    tools:context=".onboarding.SecondOnboardingFragment">
 
 
  <ImageButton

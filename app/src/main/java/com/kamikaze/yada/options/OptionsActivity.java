@@ -12,37 +12,29 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigationrail.NavigationRailView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.kamikaze.yada.MainActivity;
-import com.kamikaze.yada.MainPageActivity;
 import com.kamikaze.yada.R;
 import com.squareup.picasso.Picasso;
 
@@ -81,54 +73,51 @@ public class OptionsActivity extends AppCompatActivity {
                 item.setChecked(true);
                 break;
         }
-        navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentManager fragmentManager=getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                if(navRail.getSelectedItemId()==item.getItemId() && navRail.getSelectedItemId()!=R.id.settings) return false;
-                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                switch(item.getItemId())
-                {
-                    case R.id.profile:
-                        fragmentTransaction.replace(R.id.option_container,ProfileFragment.class,null).commit();
-                        break;
+        navRail.setOnItemSelectedListener(item1 -> {
+            FragmentManager fragmentManager1 =getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction1 = fragmentManager1.beginTransaction();
+            if(navRail.getSelectedItemId()== item1.getItemId() && navRail.getSelectedItemId()!=R.id.settings) return false;
+            fragmentTransaction1.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            switch(item1.getItemId())
+            {
+                case R.id.profile:
+                    fragmentTransaction1.replace(R.id.option_container,ProfileFragment.class,null).commit();
+                    break;
 
-                    case R.id.security:
-                        fragmentTransaction.replace(R.id.option_container,SecurityFragment.class,null).commit();
-                        break;
+                case R.id.security:
+                    fragmentTransaction1.replace(R.id.option_container,SecurityFragment.class,null).commit();
+                    break;
 
-                    case R.id.customize:
-                        fragmentTransaction.replace(R.id.option_container,CustomizeFragment.class,null).commit();
-                        break;
+                case R.id.customize:
+                    fragmentTransaction1.replace(R.id.option_container,CustomizeFragment.class,null).commit();
+                    break;
 
-                    case R.id.settings:
-                        fragmentTransaction.replace(R.id.option_container,SettingsFragment.class,null).commit();
-                        break;
+                case R.id.settings:
+                    fragmentTransaction1.replace(R.id.option_container,SettingsFragment.class,null).commit();
+                    break;
 
-                    case R.id.logout:
-                        View confirmDialog= LayoutInflater.from(OptionsActivity.this).inflate(R.layout.confirm_dialog,rootLayout,false);
-                        new AlertDialog.Builder(OptionsActivity.this).setView(confirmDialog).setTitle("Are you sure you want to log out?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent=new Intent(OptionsActivity.this, MainActivity.class);
-                                FirebaseAuth.getInstance().signOut();
-                                Toast.makeText(OptionsActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                            }
-                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                case R.id.logout:
+                    View confirmDialog= LayoutInflater.from(OptionsActivity.this).inflate(R.layout.confirm_dialog,rootLayout,false);
+                    new AlertDialog.Builder(OptionsActivity.this).setView(confirmDialog).setTitle("Are you sure you want to log out?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent1 =new Intent(OptionsActivity.this, MainActivity.class);
+                            FirebaseAuth.getInstance().signOut();
+                            Toast.makeText(OptionsActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                            intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent1);
+                        }
+                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                            }
-                        }).show();
-                        return false;
+                        }
+                    }).show();
+                    return false;
 
-                }
-                item.setChecked(true);
-                return false;
             }
+            item1.setChecked(true);
+            return false;
         });
     }
 
@@ -146,7 +135,6 @@ public class OptionsActivity extends AppCompatActivity {
         {
             if(data==null) Log.d("stopped","data null");
             else Log.d("stopped","result cancel");
-//            if(data==null)Toast.makeText(this, "Didn't work, try something else maybe", Toast.LENGTH_SHORT).show();
             Picasso.get().load("https://i.kym-cdn.com/photos/images/newsfeed/000/754/538/454.jpg").into(profilePic);
             nameText.setText("Dio Brando");
             aboutText.setText("You thought it was your profile pic, BUT IT WAS ME! DIO!");
@@ -241,34 +229,25 @@ public class OptionsActivity extends AppCompatActivity {
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
         byte[] pfp=baos.toByteArray();
-        storage.putBytes(pfp).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                if(task.isSuccessful())
-                {
-                    task.getResult().getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            if(task.isSuccessful())
+        storage.putBytes(pfp).addOnCompleteListener(task -> {
+            if(task.isSuccessful())
+            {
+                task.getResult().getStorage().getDownloadUrl().addOnCompleteListener(task1 -> {
+                    if(task1.isSuccessful())
+                    {
+                        pfpUrl= task1.getResult().toString();
+                        document.update("imageUrl", task1.getResult().toString()).addOnCompleteListener(task11 -> {
+                            progressDialog.cancel();
+                            if(task11.isSuccessful())
                             {
-                                pfpUrl=task.getResult().toString();
-                                document.update("imageUrl",task.getResult().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        progressDialog.cancel();
-                                        if(task.isSuccessful())
-                                        {
-                                            Toast.makeText(getApplicationContext(), "Profile pic updated", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
+                                Toast.makeText(getApplicationContext(), "Profile pic updated", Toast.LENGTH_SHORT).show();
                             }
-                            else progressDialog.cancel();
-                        }
-                    });
-                }
-                else progressDialog.cancel();
+                        });
+                    }
+                    else progressDialog.cancel();
+                });
             }
+            else progressDialog.cancel();
         });
     }
 
