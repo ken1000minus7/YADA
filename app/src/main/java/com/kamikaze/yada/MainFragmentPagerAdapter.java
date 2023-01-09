@@ -3,7 +3,6 @@ package com.kamikaze.yada;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.kamikaze.yada.diary.MainFragment;

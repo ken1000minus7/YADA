@@ -1,9 +1,6 @@
 package com.kamikaze.yada.diary;
 
-import android.widget.EditText;
-
 import com.kamikaze.yada.model.Notes;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,9 +1,7 @@
 package com.kamikaze.yada.webview
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.kamikaze.yada.R
 
@@ -21,9 +19,5 @@ class BlogActivity : AppCompatActivity() {
         val datanames: ArrayList<String> = arrayListOf("Rough Guides","TimesTravel","Nomadic Matt","Travel and Leisure","Lonely Planet","Yatra","WikiTravel")
         val recyclerView = findViewById<RecyclerView>(R.id.webrv)
         recyclerView.adapter = WebAdapter(this,dataset,datanames)
-
-
     }
-
-
 }

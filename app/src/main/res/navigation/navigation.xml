@@ -33,7 +33,7 @@
         tools:layout="@layout/activity_login" />
     <fragment
         android:id="@+id/aboutdiary1"
-        android:name="com.kamikaze.yada.aboutdiary.aboutdiary1"
+        android:name="com.kamikaze.yada.onboarding.FirstOnboardingFragment"
         android:label="fragment_aboutdiary1"
         tools:layout="@layout/fragment_aboutdiary1" >
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/aboutdiary2"
-        android:name="com.kamikaze.yada.aboutdiary.aboutdiary2"
+        android:name="com.kamikaze.yada.onboarding.SecondOnboardingFragment"
         android:label="fragment_aboutdiary2"
         tools:layout="@layout/fragment_aboutdiary2" >
         <action
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/aboutdiary3"
-        android:name="com.kamikaze.yada.aboutdiary.aboutdiary3"
+        android:name="com.kamikaze.yada.onboarding.ThirdOnboardingFragment"
         android:label="fragment_aboutdiary3"
         tools:layout="@layout/fragment_aboutdiary3" >
         <action

@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -17,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.kamikaze.yada.MainPageActivity
@@ -80,26 +78,27 @@ class LoginActivity : AppCompatActivity() {
 
     private fun connectuser(username_text: String, epass_text: String, username: EditText , epass: EditText) {
 
-        if (username_text.isEmpty()){
+        if (username_text.isEmpty()) {
             username.error = "Please enter email"
             username.requestFocus()
             return
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(username_text).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(username_text).matches()) {
             username.error = "Please enter valid email"
             username.requestFocus()
             return
         }
-        if(epass_text.isEmpty()){
+        if (epass_text.isEmpty()) {
             epass.error = "Please enter password"
             epass.requestFocus()
             return
         }
 
-        val credential = EmailAuthProvider.getCredential(username_text,epass_text)
+        val credential = EmailAuthProvider.getCredential(username_text, epass_text)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    val res = task.result.additionalUserInfo?.isNewUser
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
@@ -111,25 +110,6 @@ class LoginActivity : AppCompatActivity() {
                     updateUI(null)
                 }
             }
-//        auth.signInWithEmailAndPassword(username_text, epass_text)
-//            .addOnCompleteListener(this) { task ->
-//                if (task.isSuccessful) {
-//                    // Sign in success, update UI with the signed-in user's information
-//                    Log.d(TAG, "signInWithEmail:success")
-//
-//
-//                    val user = auth.currentUser
-//                    updateUI(user)
-//                } else {
-//                    // If sign in fails, display a message to the user.
-//                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-//                    Toast.makeText(baseContext, "Authentication failed.",
-//                        Toast.LENGTH_SHORT).show()
-//                    updateUI(null)
-//                }
-//            }
-
-
     }
 
 

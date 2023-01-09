@@ -3,9 +3,6 @@ package com.kamikaze.yada.diary;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
-import android.util.TypedValue;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,8 +41,6 @@ public class DiaryHandler {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setMessage("Loading");
-//        TypedValue typedValue=new TypedValue();
-//        context.getTheme().resolveAttribute(R.attr.colorPrimaryVariant,typedValue,true);
         progressDialog.getWindow().setBackgroundDrawableResource(R.drawable.empty_list_background);
         progressDialog.show();
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
@@ -74,19 +69,16 @@ public class DiaryHandler {
     {
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db=FirebaseFirestore.getInstance();
-        db.collection("users").document(firebaseUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful())
-                {
-                    DocumentSnapshot documentSnapshot= task.getResult();
-                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
-                    currentUser.setDiaries(diaries);
-                }
-                else
-                {
-                    Toast.makeText(context, "You failed, failure", Toast.LENGTH_SHORT).show();
-                }
+        db.collection("users").document(firebaseUser.getUid()).get().addOnCompleteListener(task -> {
+            if(task.isSuccessful())
+            {
+                DocumentSnapshot documentSnapshot= task.getResult();
+                ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
+                currentUser.setDiaries(diaries);
+            }
+            else
+            {
+                Toast.makeText(context, "You failed, failure", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -95,30 +87,23 @@ public class DiaryHandler {
     {
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         DocumentReference documentReference=db.collection("users").document(currentUser.getUid());
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful())
-                {
-//                    currentUser.getDiaries().add(diary);
-                    DocumentSnapshot documentSnapshot=task.getResult();
-                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
-                    diaries.remove(position);
-                    DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries,recyclerView);
-                    recyclerView.swapAdapter(adapter,false);
-                    currentUser.setDiaries(diaries);
-                    Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
-                    documentReference.update("diaries",diaries).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful())
-                            {
-                                Toast.makeText(context, "Diary deleted successfully", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+        documentReference.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful())
+            {
+                DocumentSnapshot documentSnapshot=task.getResult();
+                ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
+                diaries.remove(position);
+                DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries,recyclerView);
+                recyclerView.swapAdapter(adapter,false);
+                currentUser.setDiaries(diaries);
+                Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
+                documentReference.update("diaries",diaries).addOnCompleteListener(task1 -> {
+                    if(task1.isSuccessful())
+                    {
+                        Toast.makeText(context, "Diary deleted successfully", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-                }
             }
         });
     }
@@ -139,33 +124,28 @@ public class DiaryHandler {
         return null;
     }
 
-    public void addDiary(Diary diary, RecyclerView recyclerView)
-    {
-        FirebaseFirestore db= FirebaseFirestore.getInstance();
-        DocumentReference documentReference=db.collection("users").document(currentUser.getUid());
+    public void addDiary(Diary diary, RecyclerView recyclerView) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = db.collection("users").document(currentUser.getUid());
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful())
-                {
-//                 currentUser.getDiaries().add(diary);
-                    DocumentSnapshot documentSnapshot=task.getResult();
-                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
+                if (task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    ArrayList<Diary> diaries = convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
                     diaries.add(diary);
                     currentUser.setDiaries(diaries);
-                    DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries,recyclerView);
-                    recyclerView.swapAdapter(adapter,false);
+                    DiaryListRecyclerViewAdapter adapter = new DiaryListRecyclerViewAdapter(context, diaries, recyclerView);
+                    recyclerView.swapAdapter(adapter, false);
                     Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
-                    documentReference.update("diaries",diaries).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    documentReference.update("diaries", diaries).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful())
-                            {
+                            if (task.isSuccessful()) {
                                 Toast.makeText(context, "New diary created successfully", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
-
                 }
             }
         });
@@ -175,32 +155,25 @@ public class DiaryHandler {
     {
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         DocumentReference documentReference=db.collection("users").document(currentUser.getUid());
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful())
-                {
-//                    currentUser.getDiaries().add(diary);
-                    DocumentSnapshot documentSnapshot=task.getResult();
-                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
-                    Diary item= diaries.get(position);
-                    item.setBgImageUrl(bgImageUrl);
-                    diaries.set(position,item);
-                    currentUser.setDiaries(diaries);
-                    DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries,recyclerView);
-                    recyclerView.swapAdapter(adapter,false);
-                    Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
-                    documentReference.update("diaries",diaries).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful())
-                            {
-                                Log.d("Updation","Diary bgImageUrl updated successfully");
-                            }
-                        }
-                    });
+        documentReference.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful())
+            {
+                DocumentSnapshot documentSnapshot=task.getResult();
+                ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
+                Diary item= diaries.get(position);
+                item.setBgImageUrl(bgImageUrl);
+                diaries.set(position,item);
+                currentUser.setDiaries(diaries);
+                DiaryListRecyclerViewAdapter adapter=new DiaryListRecyclerViewAdapter(context,diaries,recyclerView);
+                recyclerView.swapAdapter(adapter,false);
+                Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
+                documentReference.update("diaries",diaries).addOnCompleteListener(task1 -> {
+                    if(task1.isSuccessful())
+                    {
+                        Log.d("Updation","Diary bgImageUrl updated successfully");
+                    }
+                });
 
-                }
             }
         });
     }
@@ -210,33 +183,26 @@ public class DiaryHandler {
     {
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         DocumentReference documentReference=db.collection("users").document(currentUser.getUid());
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful())
-                {
-//                    currentUser.getDiaries().add(diary);
-                    DocumentSnapshot documentSnapshot=task.getResult();
-                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
-                    Diary item= diaries.get(position);
-                    if(note==null) Log.d("note","null");
-                    else Log.d("note",note.getTextnote());
-                    item.setNote(note);
-                    if(color>0) item.setColor(color);
-                    diaries.set(position,item);
-                    currentUser.setDiaries(diaries);
-                    Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
-                    documentReference.update("diaries",diaries).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful())
-                            {   Log.d("xxyznote",note+"");
-                                Log.d("Updation","Diary note updated successfully");
-                            }
-                        }
-                    });
+        documentReference.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful())
+            {
+                DocumentSnapshot documentSnapshot=task.getResult();
+                ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
+                Diary item= diaries.get(position);
+                if(note==null) Log.d("note","null");
+                else Log.d("note",note.getTextnote());
+                item.setNote(note);
+                if(color>0) item.setColor(color);
+                diaries.set(position,item);
+                currentUser.setDiaries(diaries);
+                Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
+                documentReference.update("diaries",diaries).addOnCompleteListener(task1 -> {
+                    if(task1.isSuccessful())
+                    {   Log.d("xxyznote",note+"");
+                        Log.d("Updation","Diary note updated successfully");
+                    }
+                });
 
-                }
             }
         });
     }
@@ -245,32 +211,25 @@ public class DiaryHandler {
     {
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         DocumentReference documentReference=db.collection("users").document(currentUser.getUid());
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful())
-                {
-//                    currentUser.getDiaries().add(diary);
-                    DocumentSnapshot documentSnapshot=task.getResult();
-                    ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
-                    Diary item= diaries.get(position);
-                    List<String> images=item.getImages();
-                    images.add(imageUrl);
-                    item.setImages(images);
-                    diaries.set(position,item);
-                    currentUser.setDiaries(diaries);
-                    Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
-                    documentReference.update("diaries",diaries).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful())
-                            {
-                                Log.d("Updation","Diary images updated successfully");
-                            }
-                        }
-                    });
+        documentReference.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful())
+            {
+                DocumentSnapshot documentSnapshot=task.getResult();
+                ArrayList<Diary> diaries= convertToDiary((List<HashMap<String, Object>>) documentSnapshot.get("diaries"));
+                Diary item= diaries.get(position);
+                List<String> images=item.getImages();
+                images.add(imageUrl);
+                item.setImages(images);
+                diaries.set(position,item);
+                currentUser.setDiaries(diaries);
+                Log.d("Size", String.valueOf(currentUser.getDiaries().size()));
+                documentReference.update("diaries",diaries).addOnCompleteListener(task1 -> {
+                    if(task1.isSuccessful())
+                    {
+                        Log.d("Updation","Diary images updated successfully");
+                    }
+                });
 
-                }
             }
         });
     }
@@ -289,7 +248,6 @@ public class DiaryHandler {
             String dlocation=null;
             String dbgImageUrl=null;
             int color=-1;
-//            int fabcolor = -1;
             List<String> dimages=new ArrayList<>();
             if(diaryContent.get(i).get("title")!=null) dtitle=diaryContent.get(i).get("title").toString();
             if(diaryContent.get(i).get("description")!=null) ddescription=diaryContent.get(i).get("description").toString();
@@ -298,7 +256,6 @@ public class DiaryHandler {
             if(diaryContent.get(i).get("images")!=null) dimages=(List<String>) diaryContent.get(i).get("images");
 
             if(diaryContent.get(i).get("color")!=null) color= Integer.parseInt(diaryContent.get(i).get("color").toString()) ;
-//            if(diaryContent.get(i).get("fabcolor")!=null) fabcolor = Integer.parseInt(diaryContent.get(i).get("fabcolor").toString());
 
             if(noteContent!=null) note=new Notes(noteContent.get("topic"),noteContent.get("description"),noteContent.get("location"),noteContent.get("textnote"));
 

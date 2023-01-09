@@ -5,14 +5,10 @@ import android.os.Bundle
 import android.widget.Button
 import com.kamikaze.yada.R
 import android.widget.Toast
-
-import com.google.firebase.auth.FirebaseUser
-
 import android.content.Intent
 import android.util.Log
 import android.util.Patterns
 import android.widget.EditText
-import androidx.annotation.DrawableRes
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -34,20 +30,20 @@ class NewSignUp : AppCompatActivity() {
         val epass = findViewById<EditText>(R.id.password_email)
         val signButton = findViewById<Button>(R.id.email_new_signin)
         val newuser = findViewById<EditText>(R.id.name_one_tv)
-        signButton.setOnClickListener{
+        signButton.setOnClickListener {
 
 
             val username_text = username.text.toString()
             val epass_text = epass.text.toString()
-            if (username_text.isEmpty()){
+            if (username_text.isEmpty()) {
                 username.error = "Please enter email"
                 username.requestFocus()
             }
-            if (!Patterns.EMAIL_ADDRESS.matcher(username_text).matches()){
+            if (!Patterns.EMAIL_ADDRESS.matcher(username_text).matches()) {
                 username.error = "Please enter valid email"
                 username.requestFocus()
             }
-            if(epass_text.isEmpty()){
+            if (epass_text.isEmpty()) {
                 epass.error = "Please enter password"
                 epass.requestFocus()
             }
@@ -59,7 +55,11 @@ class NewSignUp : AppCompatActivity() {
                         Log.d(TAG, "signInWithEmail:success")
                         val firebaseUser = task.result.user!!
 
-                        val user = User(firebaseUser.uid , newuser.text.toString(), firebaseUser.photoUrl.toString())
+                        val user = User(
+                            firebaseUser.uid,
+                            newuser.text.toString(),
+                            firebaseUser.photoUrl.toString()
+                        )
                         val userDao = UserDao()
                         userDao.addUser(user)
 
@@ -82,26 +82,8 @@ class NewSignUp : AppCompatActivity() {
                             baseContext, "Authentication failed.",
                             Toast.LENGTH_SHORT
                         ).show()
-
                     }
                 }
-
-
-        }
-
-
-    }
-    override fun onStart() {
-        super.onStart()
-
-    }
-    private fun updateUI(currentUser: FirebaseUser?){
-        if (currentUser!= null){
-            startActivity(Intent(this, Check::class.java))
-        }
-        else{
-            Toast.makeText(baseContext , "Login Failed!", Toast.LENGTH_LONG).show()
         }
     }
-
 }

@@ -18,12 +18,10 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,22 +30,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.kamikaze.yada.diary.MainFragment;
 
 import java.util.List;
 import java.util.Locale;
 
 public class MapsFragment extends Fragment {
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_maps, container, false);
 
-        return view;
+        return inflater.inflate(R.layout.fragment_maps, container, false);
     }
 
     LocationManager locationManager;
@@ -77,7 +72,6 @@ public class MapsFragment extends Fragment {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 view.getParent().getParent().getParent().requestDisallowInterceptTouchEvent(true);
-                Log.d("lyfop",view.getParent().getParent().getParent().toString());
                 return false;
             }
         });
@@ -87,27 +81,24 @@ public class MapsFragment extends Fragment {
             mapFragment.getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(@NonNull GoogleMap googleMap) {
-                    ViewPager2 viewPager=(ViewPager2) getActivity().findViewById(R.id.main_fragment_container);
-                    if (viewPager!=null){
-                    viewPager.setUserInputEnabled(false);
-                    mMap = googleMap;
+                    ViewPager2 viewPager = (ViewPager2) getActivity().findViewById(R.id.main_fragment_container);
+                    if (viewPager != null) {
+                        viewPager.setUserInputEnabled(false);
+                        mMap = googleMap;
 
 
-                    int nightModeFlags = getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-                    if(nightModeFlags==Configuration.UI_MODE_NIGHT_YES)
-                    {
-                        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getContext(),R.raw.map_style_night));
+                        int nightModeFlags = getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+                            googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getContext(), R.raw.map_style_night));
+                        }
+                        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     }
-
-
-                    locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);}
                     locationListener = new LocationListener() {
                         @Override
                         public void onLocationChanged(Location location) {
                             mMap.clear();
                             LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                             mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
-//                            mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
                             Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
                             try {
                                 List<Address> listAddress = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
@@ -132,8 +123,6 @@ public class MapsFragment extends Fragment {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-
-
                         }
 
                         @Override
@@ -151,37 +140,30 @@ public class MapsFragment extends Fragment {
 
                         }
                     };
-                    if(locationManager!=null){
-                    if (Build.VERSION.SDK_INT < 23) {
-                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            // TODO: Consider calling
-                            //    ActivityCompat#requestPermissions
-                            // here to request the missing permissions, and then overriding
-                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                            //                                          int[] grantResults)
-                            // to handle the case where the user grants the permission. See the documentation
-                            // for ActivityCompat#requestPermissions for more details.
-                            return;
-                        }
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, locationListener);
-                    } else {
-                        if (ContextCompat.checkSelfPermission(getContext(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-                        } else {
+                    if (locationManager != null) {
+                        if (Build.VERSION.SDK_INT < 23) {
+                            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                return;
+                            }
                             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, locationListener);
-                            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                            if (lastKnownLocation!=null){
-                            mMap.clear();
+                        } else {
+                            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                            } else {
+                                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, locationListener);
+                                Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                if (lastKnownLocation != null) {
+                                    mMap.clear();
 
-                            LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
-                            mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
-                        }}
-                    }}
+                                    LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+                                    mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+                                }
+                            }
+                        }
+                    }
                 }
             });
         }
     }
-
-
 }

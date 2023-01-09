@@ -96,10 +96,6 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".auth.Check"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".auth.LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

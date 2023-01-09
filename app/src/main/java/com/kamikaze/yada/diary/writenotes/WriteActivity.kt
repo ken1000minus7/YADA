@@ -4,32 +4,22 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Context
 import android.graphics.Point
 import android.graphics.Rect
 import android.graphics.RectF
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.switchmaterial.SwitchMaterial
 import com.kamikaze.yada.R
 import com.kamikaze.yada.R.*
-import com.kamikaze.yada.databinding.ActivityMainBinding
 import com.kamikaze.yada.databinding.ActivityWriteBinding
 import com.squareup.picasso.Picasso
 import uk.co.senab.photoview.PhotoView
@@ -37,40 +27,36 @@ import uk.co.senab.photoview.PhotoViewAttacher
 
 class WriteActivity : AppCompatActivity() {
     private lateinit var navController: NavController
-   public var position = 0
+   var position = 0
     var title : String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setTheme(R.style.Theme_YADA)
         val binding = ActivityWriteBinding.inflate(layoutInflater)
 
         val navHostFragment = supportFragmentManager.findFragmentById(id.myNavHostFragment2) as NavHostFragment
         navController = navHostFragment.navController
         position=intent.getIntExtra("position",0)
         title = intent.getStringExtra("title")
-        Log.d("position", position.toString());
+        Log.d("position", position.toString())
         title?.let { Log.d("tit", it) }
         setContentView(binding.root)
         animDuration=resources.getInteger(android.R.integer.config_shortAnimTime)
-        zoomedImg=findViewById(R.id.zoom_img)
-        container=findViewById(R.id.myNavHostFragment2)
+        zoomedImg=findViewById(id.zoom_img)
+        container=findViewById(id.myNavHostFragment2)
         val attacher=PhotoViewAttacher(zoomedImg)
         attacher.update()
-
     }
-
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-
     override fun onBackPressed() {
 
-        val et = findViewById<EditText>(R.id.edithere)
-        val tv = findViewById<TextView>(R.id.seehere)
-        val custops=findViewById<View>(R.id.customize_options)
-        val editimg=findViewById<ImageView>(R.id.edit_diary)
-        val doneimg=findViewById<ImageView>(R.id.done_edit_diary)
+        val et = findViewById<EditText>(id.edithere)
+        val tv = findViewById<TextView>(id.seehere)
+        val custops=findViewById<View>(id.customize_options)
+        val editimg=findViewById<ImageView>(id.edit_diary)
+        val doneimg=findViewById<ImageView>(id.done_edit_diary)
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         val bottomSheetBehavior = BottomSheetBehavior.from(custops)
         if(zoomedImg.visibility==View.VISIBLE)
@@ -131,7 +117,7 @@ class WriteActivity : AppCompatActivity() {
         }
         else if(bottomSheetBehavior.state==BottomSheetBehavior.STATE_EXPANDED)
         {
-            bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED;
+            bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
         }
         else if (et.isVisible){
             et.visibility = View.GONE
@@ -141,8 +127,7 @@ class WriteActivity : AppCompatActivity() {
             doneimg.visibility=View.GONE
             fab.visibility=View.GONE
             val fragment =WriteDiaryFragment()
-            if(fragment==null) Log.d("fragment","sadge")
-            else Log.d("fragment", fragment.currcolor.toString())
+            Log.d("fragment", fragment.currcolor.toString())
             fragment.restoreBg()
         }
         else{
@@ -217,7 +202,6 @@ class WriteActivity : AppCompatActivity() {
                         currAnim = null
 
                     }
-
                     override fun onAnimationCancel(animation: Animator) {
                         currAnim = null
                     }
@@ -226,5 +210,4 @@ class WriteActivity : AppCompatActivity() {
             }
         }
     }
-
 }

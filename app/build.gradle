@@ -4,12 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
     id("androidx.navigation.safeargs")
-
-
-
 }
-
-
 
 android {
 
@@ -29,7 +24,6 @@ android {
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-
     }
 
     buildTypes {
@@ -126,13 +120,10 @@ dependencies {
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
-    // MPAndroidChart
-
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     //volley
     implementation 'com.android.volley:volley:1.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.0"
     implementation 'com.commit451:PhotoView:1.2.4'
-
 
 }
