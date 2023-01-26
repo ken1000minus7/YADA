@@ -13,6 +13,16 @@ Yet Another Diary App created for travelers who want to write about their experi
 
 The app is open for contribution during [PWOC](https://pwoc.vercel.app/). Start discussion in the PWOC Discord Server. 
 
+To be able to use firebase services, like authentication, you will need to register your SHA-1 keys.
+For that, make sure your Java's bin directory is stored in environmental variables of your PC. 
+After that, enter this in your terminal:
+```
+keytool -list -v -keystore "c:\users\your_user_name\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android 
+```
+ and replace  your_user_name accordingly.
+You can share the SHA-1 Key with your mentor, and they will add it in Firebase console.
+If you face any problem in this step, make sure to contact the mentor.
+
 ## Roadmap
 
 - Complete Kotlin Supremacy
