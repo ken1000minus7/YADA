@@ -7,7 +7,7 @@ Please include a summary of the changes and the related issue. Why is this chang
 Fixes # (issue)
 
 # Checklist: 
-- [] I have performed a self-review of my code 
-- [] I have commented my code
-- [] My changes generate no new warnings 
-- [] Have you successfully run tests with your changes locally? 
+- [ ] I have performed a self-review of my code 
+- [ ] I have commented my code
+- [ ] My changes generate no new warnings 
+- [ ] Have you successfully run tests with your changes locally? 
