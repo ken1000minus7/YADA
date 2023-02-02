@@ -8,7 +8,7 @@ Please answer the following questions for yourself before submitting an issue.
 
 # Issue Type : Bug
 
-Please help provide information about the failure caused by the bug. 
+Please provide information about the failure caused by the bug. 
 
 # Expected Behavior
 
