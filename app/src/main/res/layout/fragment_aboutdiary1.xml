@@ -8,33 +8,126 @@
     android:background="@color/primary2"
     tools:context=".onboarding.FirstOnboardingFragment">
 
+    <!-- Surfing image -->
     <ImageView
         android:id="@+id/imgBackground"
-        android:layout_width="385dp"
-        android:layout_height="275dp"
+        android:layout_width="326dp"
+        android:layout_height="264dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="43dp"
+        android:layout_marginEnd="38dp"
         android:background="@drawable/empty_list_background"
         android:src="@drawable/surfing_pic" />
 
+    <!-- About Us Text -->
+    <TextView
+        android:id="@+id/about_us"
+        android:layout_width="318dp"
+        android:layout_height="79dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="281dp"
+        android:fontFamily="@font/segoeprint"
+        android:text="About Us"
+        android:textColor="#000000"
+        android:textSize="55sp" />
+
+    <!-- Intro Text -->
+    <TextView
+        android:id="@+id/yada_is_yet"
+        android:layout_width="372dp"
+        android:layout_height="244dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="366dp"
+        android:fontFamily="@font/segoeprint"
+        android:text="yada is `yet another diary app' created for travellers who want to write about their experiences."
+        android:textColor="#000000"
+        android:textSize="29sp"/>
+
+    <!-- Button to next page -->
     <ImageButton
         android:id="@+id/next1"
-        android:layout_width="wrap_content"
+        android:layout_width="47dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="644dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginBottom="-3dp"
         android:background="@android:color/transparent"
         android:src="@drawable/play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Slider Bar 1 -->
+    <ImageView
+        android:id="@+id/slider1"
+        android:layout_width="30dp"
+        android:layout_height="29dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="178dp"
+        android:layout_marginTop="634dp"
+        android:layout_marginEnd="203dp"
+        android:layout_marginRight="203dp"
+        android:src="@drawable/circle" />
+
+    <!-- Slider Bar 2 -->
+    <ImageView
+        android:id="@+id/slider2"
+        android:layout_width="30dp"
+        android:layout_height="29dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="216dp"
+        android:layout_marginTop="634dp"
+        android:layout_marginEnd="165dp"
+        android:layout_marginRight="165dp"
+        android:src="@drawable/circle" />
+
+    <!-- Slider Bar 3 -->
+
+    <!--Dot to indicate the page -->
+    <ImageView
+        android:id="@+id/slider3"
+        android:layout_width="30dp"
+        android:layout_height="29dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="256dp"
+        android:layout_marginTop="633dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginRight="125dp"
+        android:src="@drawable/circle" />
+
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="34dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="179dp"
+        android:layout_marginTop="630dp"
+        android:layout_marginEnd="202dp"
+        android:layout_marginRight="202dp"
         android:src="@drawable/circleabt"
-        app:layout_constraintTop_toTopOf="@id/up"
-        app:layout_constraintStart_toStartOf="@id/left"/>
+        app:layout_constraintStart_toStartOf="@id/left"
+        app:layout_constraintTop_toTopOf="@id/up" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/up"
@@ -42,7 +135,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.737" />
-
 
 
     <androidx.constraintlayout.widget.Guideline
