@@ -51,13 +51,13 @@
     <!-- Button to next page -->
     <ImageButton
         android:id="@+id/next1"
-        android:layout_width="47dp"
+        android:layout_width="67dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="350dp"
+        android:layout_marginLeft="330dp"
         android:layout_marginTop="644dp"
         android:layout_marginRight="14dp"
         android:layout_marginBottom="-3dp"
