@@ -7,6 +7,7 @@ Please answer the following questions for yourself before submitting an issue.
 - [ ] I checked to make sure that this issue has not already been filed
 
 # Issue Type : Adding Features
+Please give a brief description of the feature you want to be added
 
 # Expected Behavior
 
