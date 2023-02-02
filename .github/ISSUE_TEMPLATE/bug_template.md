@@ -1,6 +1,13 @@
+---
+name: BUG Report
+about: Reporting Bug.
+title: "[BUG]: [Bug Title]"
+labels: bug
+---
+
 # Prerequisites
 
-Please answer the following questions for yourself before submitting an issue. 
+Please answer the following questions for yourself before submitting an issue.
 
 - [ ] I am running the latest version
 - [ ] I checked the documentation and found no answer
@@ -8,7 +15,7 @@ Please answer the following questions for yourself before submitting an issue.
 
 # Issue Type : Bug
 
-Please provide information about the failure caused by the bug. 
+Please provide information about the failure caused by the bug.
 
 # Expected Behavior
 
