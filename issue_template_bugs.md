@@ -18,22 +18,9 @@ Please describe the behavior you are expecting
 
 What is the current behavior?
 
-### Steps To Reproduce:
-<!--
-Example: steps to reproduce the behavior:
-1. In this environment...
-2. With this config...
-3. Run '...'
-4. See error...
--->
+# Steps To Reproduce:
 
-### Environment:
-<!--
-Example:
-- OS: Ubuntu 20.04
-- Node: 13.14.0
-- npm: 7.6.3
--->
+Please provide the steps to reproduce the environment in one's local system
 
 ## Failure Logs
 
