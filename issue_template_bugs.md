@@ -6,7 +6,9 @@ Please answer the following questions for yourself before submitting an issue.
 - [ ] I checked the documentation and found no answer
 - [ ] I checked to make sure that this issue has not already been filed
 
-# Issue Type : Adding Features
+# Issue Type : Bug
+
+Please help provide information about the failure caused by the bug. 
 
 # Expected Behavior
 
@@ -16,18 +18,22 @@ Please describe the behavior you are expecting
 
 What is the current behavior?
 
-# Failure Information (for bugs)
+### Steps To Reproduce:
+<!--
+Example: steps to reproduce the behavior:
+1. In this environment...
+2. With this config...
+3. Run '...'
+4. See error...
+-->
 
-Please help provide information about the failure if this is a bug. If it is not a bug, please remove the rest of this template.
-
-## Context
-
-Please provide any relevant information about your setup. This is important in case the issue is not reproducible except for under certain conditions.
-
-* Firmware Version:
-* Operating System:
-* SDK version:
-* Toolchain version:
+### Environment:
+<!--
+Example:
+- OS: Ubuntu 20.04
+- Node: 13.14.0
+- npm: 7.6.3
+-->
 
 ## Failure Logs
 
