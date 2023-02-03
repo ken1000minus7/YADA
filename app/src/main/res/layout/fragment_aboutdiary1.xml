@@ -1,31 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/about_1"
+    android:background="@color/primary2"
     tools:context=".onboarding.FirstOnboardingFragment">
 
+    <!-- Surfing image -->
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="@dimen/_338sdp"
+        android:layout_height="@dimen/_230sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/_33sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:background="@drawable/empty_list_background"
+        android:src="@drawable/surfing_pic" />
+
+    <!-- About Us Text -->
+    <TextView
+        android:id="@+id/about_us"
+        android:layout_width="@dimen/_338sdp"
+        android:layout_height="@dimen/_79sdp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/_21sdp"
+        android:layout_marginTop="@dimen/_220sdp"
+        android:fontFamily="@font/segoeprint"
+        android:text="About Us"
+        android:textColor="#000000"
+        android:textSize="55sp" />
+
+    <!-- Intro Text -->
+    <TextView
+        android:id="@+id/yada_is_yet"
+        android:layout_width="@dimen/_400sdp"
+        android:layout_height="@dimen/_244sdp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/_21sdp"
+        android:layout_marginRight="@dimen/_21sdp"
+        android:layout_marginTop="@dimen/_250sdp"
+        android:fontFamily="@font/segoeprint"
+        android:text="yada is `yet another diary app' created for travellers who want to write about their experiences."
+        android:textColor="#000000"
+        android:textSize="29sp"/>
+
+    <!-- Button to next page -->
     <ImageButton
         android:id="@+id/next1"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_30sdp"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/_250sdp"
+        android:layout_marginTop="@dimen/_500sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
         android:background="@android:color/transparent"
         android:src="@drawable/play"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_20sdp"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Slider Bar 1 -->
+    <ImageView
+        android:id="@+id/slider1"
+        android:layout_width="@dimen/_23sdp"
+        android:layout_height="@dimen/_23sdp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/_148sdp"
+        android:layout_marginTop="@dimen/_490sdp"
+        android:layout_marginEnd="@dimen/_185sdp"
+        android:layout_marginRight="@dimen/_233sdp"
+        android:src="@drawable/circle" />
+
+    <!-- Slider Bar 2 -->
+    <ImageView
+        android:id="@+id/slider2"
+        android:layout_width="@dimen/_23sdp"
+        android:layout_height="@dimen/_23sdp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/_148sdp"
+        android:layout_marginTop="@dimen/_490sdp"
+        android:layout_marginEnd="@dimen/_154sdp"
+        android:layout_marginRight="@dimen/_233sdp"
+        android:src="@drawable/circle" />
+
+    <!-- Slider Bar 3 -->
+
+    <!--Dot to indicate the page -->
+    <ImageView
+        android:id="@+id/slider3"
+        android:layout_width="@dimen/_23sdp"
+        android:layout_height="@dimen/_23sdp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/_148sdp"
+        android:layout_marginTop="@dimen/_490sdp"
+        android:layout_marginEnd="@dimen/_128sdp"
+        android:layout_marginRight="@dimen/_233sdp"
+        android:src="@drawable/circle" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_23sdp"
+        android:layout_height="@dimen/_23sdp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/_148sdp"
+        android:layout_marginTop="@dimen/_490sdp"
+        android:layout_marginEnd="@dimen/_185sdp"
+        android:layout_marginRight="@dimen/_233sdp"
         android:src="@drawable/circleabt"
-        app:layout_constraintTop_toTopOf="@id/up"
-        app:layout_constraintStart_toStartOf="@id/left"/>
+        app:layout_constraintStart_toStartOf="@id/left"
+        app:layout_constraintTop_toTopOf="@id/up" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/up"
@@ -33,7 +137,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.737" />
-
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -44,4 +147,4 @@
         app:layout_constraintGuide_percent="0.438" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
