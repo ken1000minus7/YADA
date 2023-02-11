@@ -17,18 +17,19 @@ android {
     }
     compileSdk 31
 
+    defaultConfig {
+        applicationId "com.kamikaze.yada"
+        minSdk 19
+        targetSdk 31
+        versionCode 1
+        multiDexEnabled true
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
     buildTypes {
-        defaultConfig {
-            applicationId "com.kamikaze.yada"
-            minSdk 19
-            targetSdk 31
-            versionCode 1
-            multiDexEnabled true
-            versionName "1.0"
-            vectorDrawables.useSupportLibrary = true
-            testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-            multiDexEnabled true
-        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
