@@ -113,8 +113,7 @@
         android:layout_marginEnd="@dimen/_128sdp"
         android:layout_marginRight="@dimen/_233sdp"
         android:src="@drawable/circleabt"
-        app:layout_constraintStart_toStartOf="@id/left"
-        app:layout_constraintTop_toTopOf="@id/up" />
+        app:layout_constraintStart_toStartOf="@id/left" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/down"
