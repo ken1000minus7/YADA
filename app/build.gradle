@@ -7,6 +7,9 @@ plugins {
 }
 
 android {
+    lintOptions {
+        disable "JvmStaticProvidesInObjectDetector", "FieldSiteTargetOnQualifierAnnotation", "ModuleCompanionObjects", "ModuleCompanionObjectsNotInModuleParent"
+    }
 
     buildFeatures {
         dataBinding true
