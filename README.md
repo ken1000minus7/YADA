@@ -9,6 +9,17 @@
 
 Yet Another Diary App created for travelers who want to write about their experiences. Customizable themes with the fusion of maps and path tracking make it all the more interesting! 
 
+
+## Contributors
+- [M Umar Farooq 478](https://github.com/umarfarooq478)
+- [Armaan](https://github.com/armaanbadhan)
+- [HYnam](https://github.com/HYnam)
+- [Abhinav Malhotra](https://github.com/abhinavmalhotra01)
+- [Rijul.S](https://github.com/Rijul24)
+- [Ashutosh Aswal](https://github.com/yellowHatpro)
+- [The Gitter Badger](https://github.com/gitter-badger)
+
+
 ## Contributing
 
 The app is open for contribution during [PWOC](https://pwoc.vercel.app/). Start discussion in the PWOC Discord Server. 
