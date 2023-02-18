@@ -6,4 +6,8 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:bottomRightRadius="@dimen/_10sdp"
+    android:bottomLeftRadius="@dimen/_10sdp"
+    android:topLeftRadius="@dimen/_10sdp"
+    android:topRightRadius="@dimen/_10sdp"
     tools:context=".MapsActivity" />
