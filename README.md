@@ -133,7 +133,7 @@ Follow my Github for content
 <br>
 <br>
 <hr>
-<h6 align="center">© [ken1000minus7](https://github.com/ken1000minus7) 2023
+<h6 align="center">© [ken1000minus7](https://github.com/ken1000minus7)
 <br>
  
 ## Roadmap
