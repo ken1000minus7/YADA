@@ -29,7 +29,7 @@ If you face any problem in this step, make sure to contact the mentor.
 
 # 🖱️ How to Contribute 
 
-If you think that you can add a new feature or want to fix a bug, we invite you to contribute to Calculator and make this project better. To start contributing, follow the below instructions:
+If you think that you can add a new feature or want to fix a bug, we invite you to contribute to YADA and make this project better. To start contributing, follow the below instructions:
 
 1. Create a folder at your desire location (usually at your desktop).
 
@@ -39,12 +39,12 @@ If you think that you can add a new feature or want to fix a bug, we invite you 
 
    Run command `git init`
 
-4. [Fork](https://github.com/ken1000minus7/YADA) the project. Click on the <a href="https://github.com/ken1000minus7/YADA.git/fork"><img src="https://i.imgur.com/G4z1kEe.png" height="15" width="15"></a> icon in the top right to get started.
+4. [Fork](https://github.com/ken1000minus7/YADA) the project. Click on the <a href="https://github.com/ken1000minus7/YADA/fork"><img src="https://i.imgur.com/G4z1kEe.png" height="15" width="15"></a> icon in the top right to get started.
 
 5. Clone your forked repository of project.
 
 ```bash
-git clone https://github.com/<your_username>/YADA.git
+git clone https://github.com/ken1000minus7/YADA.git
 ```
 
 6. Navigate to the project directory.
