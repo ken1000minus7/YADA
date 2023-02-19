@@ -4,6 +4,7 @@
 **Explore** | **Travel** | **Write**
 
 [![Join the chat at https://gitter.im/YADA_/community](https://badges.gitter.im/YADA_/community.svg)](https://gitter.im/YADA_/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[!https://img.shields.io/github/downloads/ken1000minus7/YADA/total]
 
 ## About
 
