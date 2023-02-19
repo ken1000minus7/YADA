@@ -18,6 +18,8 @@ Yet Another Diary App created for travelers who want to write about their experi
 - [Rijul.S](https://github.com/Rijul24)
 - [Ashutosh Aswal](https://github.com/yellowHatpro)
 - [The Gitter Badger](https://github.com/gitter-badger)
+- [Dhruv-Porwal](https://github.com/dhruv-porwal)
+
 
 
 ## Contributing
@@ -33,6 +35,9 @@ keytool -list -v -keystore "c:\users\your_user_name\.android\debug.keystore" -al
  and replace  your_user_name accordingly.
 You can share the SHA-1 Key with your mentor, and they will add it in Firebase console.
 If you face any problem in this step, make sure to contact the mentor.
+
+### Important Note For Contributors
+Please note that you should also add your name under Contributor's list in this file before commiting and generating pull requests.
 
 ## Roadmap
 
