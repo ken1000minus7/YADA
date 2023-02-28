@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MemorablePlacesActivity extends AppCompatActivity {
 
@@ -17,12 +18,20 @@ public class MemorablePlacesActivity extends AppCompatActivity {
     static ArrayList<LatLng> locations = new ArrayList<>();
     static ArrayAdapter arrayAdapter;
 
+    static String addNewStr = "Add a new place...";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memorable_places);
         ListView listView = findViewById(R.id.listView);
-        places.add("Add a new place...");
+        if (places.size() == 0)
+        {
+            places.add(addNewStr);
+        } else if (!Objects.equals(places.get(places.size() - 1), addNewStr))
+        {
+            places.add(addNewStr);
+        }
         locations.add(new LatLng(0, 0));
 
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, places);
