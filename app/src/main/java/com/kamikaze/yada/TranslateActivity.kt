@@ -1,163 +1,123 @@
-package com.kamikaze.yada;
+package com.kamikaze.yada
 
-import static com.google.mlkit.nl.translate.TranslateLanguage.*;
+import android.app.ProgressDialog
+import android.os.Bundle
+import android.view.View
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import com.google.mlkit.common.model.DownloadConditions
+import com.google.mlkit.nl.languageid.LanguageIdentification
+import com.google.mlkit.nl.languageid.LanguageIdentificationOptions
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.TranslatorOptions
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+class TranslateActivity : AppCompatActivity() {
+    var inputLangs = arrayOf<String?>("Detect language", "Afrikaans", "Arabic", "Belarusian", "Bulgarian", "Bengali", "Catalan", "Czech", "Welsh", "Danish", "German", "Greek", "English", "Esperanto", "Spanish", "Estonian", "Persian", "Finnish", "French", "Irish", "Galician", "Gujarati", "Hebrew", "Hindi", "Croatian", "Haitian", "Hungarian", "Indonesian", "Icelandic", "Italian", "Japanese", "Georgian", "Kannada", "Korean", "Lithuanian", "Latvian", "Macedonian", "Marathi", "Malay", "Maltese", "Dutch", "Norwegian", "Polish", "Portuguese", "Romanian", "Russian", "Slovak", "Slovenian", "Albanian", "Swedish", "Swahili", "Tamil", "Telugu", "Thai", "Tagalog", "Turkish", "Ukrainian", "Urdu", "Vietnamese", "Chinese")
+    var outputLangs = arrayOf<String?>("Afrikaans", "Arabic", "Belarusian", "Bulgarian", "Bengali", "Catalan", "Czech", "Welsh", "Danish", "German", "Greek", "English", "Esperanto", "Spanish", "Estonian", "Persian", "Finnish", "French", "Irish", "Galician", "Gujarati", "Hebrew", "Hindi", "Croatian", "Haitian", "Hungarian", "Indonesian", "Icelandic", "Italian", "Japanese", "Georgian", "Kannada", "Korean", "Lithuanian", "Latvian", "Macedonian", "Marathi", "Malay", "Maltese", "Dutch", "Norwegian", "Polish", "Portuguese", "Romanian", "Russian", "Slovak", "Slovenian", "Albanian", "Swedish", "Swahili", "Tamil", "Telugu", "Thai", "Tagalog", "Turkish", "Ukrainian", "Urdu", "Vietnamese", "Chinese")
+    var langCodes = arrayOf(TranslateLanguage.AFRIKAANS, TranslateLanguage.ARABIC, TranslateLanguage.BELARUSIAN, TranslateLanguage.BULGARIAN, TranslateLanguage.BENGALI, TranslateLanguage.CATALAN, TranslateLanguage.CZECH, TranslateLanguage.WELSH, TranslateLanguage.DANISH, TranslateLanguage.GERMAN, TranslateLanguage.GREEK, TranslateLanguage.ENGLISH, TranslateLanguage.ESPERANTO, TranslateLanguage.SPANISH, TranslateLanguage.ESTONIAN, TranslateLanguage.PERSIAN, TranslateLanguage.FINNISH, TranslateLanguage.FRENCH, TranslateLanguage.IRISH, TranslateLanguage.GALICIAN, TranslateLanguage.GUJARATI, TranslateLanguage.HEBREW, TranslateLanguage.HINDI, TranslateLanguage.CROATIAN, TranslateLanguage.HAITIAN_CREOLE, TranslateLanguage.HUNGARIAN, TranslateLanguage.INDONESIAN, TranslateLanguage.ICELANDIC, TranslateLanguage.ITALIAN, TranslateLanguage.JAPANESE, TranslateLanguage.GEORGIAN, TranslateLanguage.KANNADA, TranslateLanguage.KOREAN, TranslateLanguage.LITHUANIAN, TranslateLanguage.LATVIAN, TranslateLanguage.MACEDONIAN, TranslateLanguage.MARATHI, TranslateLanguage.MALAY, TranslateLanguage.MALTESE, TranslateLanguage.DUTCH, TranslateLanguage.NORWEGIAN, TranslateLanguage.POLISH, TranslateLanguage.PORTUGUESE, TranslateLanguage.ROMANIAN, TranslateLanguage.RUSSIAN, TranslateLanguage.SLOVAK, TranslateLanguage.SLOVENIAN, TranslateLanguage.ALBANIAN, TranslateLanguage.SWEDISH, TranslateLanguage.SWAHILI, TranslateLanguage.TAMIL, TranslateLanguage.TELUGU, TranslateLanguage.THAI, TranslateLanguage.TAGALOG, TranslateLanguage.TURKISH, TranslateLanguage.UKRAINIAN, TranslateLanguage.URDU, TranslateLanguage.VIETNAMESE, TranslateLanguage.CHINESE)
 
-import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.mlkit.common.model.DownloadConditions;
-import com.google.mlkit.nl.languageid.IdentifiedLanguage;
-import com.google.mlkit.nl.languageid.LanguageIdentification;
-import com.google.mlkit.nl.languageid.LanguageIdentificationOptions;
-import com.google.mlkit.nl.languageid.LanguageIdentifier;
-import com.google.mlkit.nl.translate.Translation;
-import com.google.mlkit.nl.translate.Translator;
-import com.google.mlkit.nl.translate.TranslatorOptions;
-
-import java.util.List;
-
-public class TranslateActivity extends AppCompatActivity {
-    String[] inputLangs = {"Detect language", "Afrikaans", "Arabic", "Belarusian", "Bulgarian", "Bengali", "Catalan", "Czech", "Welsh", "Danish", "German", "Greek", "English", "Esperanto", "Spanish", "Estonian", "Persian", "Finnish", "French", "Irish", "Galician", "Gujarati", "Hebrew", "Hindi", "Croatian", "Haitian", "Hungarian", "Indonesian", "Icelandic", "Italian", "Japanese", "Georgian", "Kannada", "Korean", "Lithuanian", "Latvian", "Macedonian", "Marathi", "Malay", "Maltese", "Dutch", "Norwegian", "Polish", "Portuguese", "Romanian", "Russian", "Slovak", "Slovenian", "Albanian", "Swedish", "Swahili", "Tamil", "Telugu", "Thai", "Tagalog", "Turkish", "Ukrainian", "Urdu", "Vietnamese", "Chinese"};
-    String[] outputLangs = {"Afrikaans", "Arabic", "Belarusian", "Bulgarian", "Bengali", "Catalan", "Czech", "Welsh", "Danish", "German", "Greek", "English", "Esperanto", "Spanish", "Estonian", "Persian", "Finnish", "French", "Irish", "Galician", "Gujarati", "Hebrew", "Hindi", "Croatian", "Haitian", "Hungarian", "Indonesian", "Icelandic", "Italian", "Japanese", "Georgian", "Kannada", "Korean", "Lithuanian", "Latvian", "Macedonian", "Marathi", "Malay", "Maltese", "Dutch", "Norwegian", "Polish", "Portuguese", "Romanian", "Russian", "Slovak", "Slovenian", "Albanian", "Swedish", "Swahili", "Tamil", "Telugu", "Thai", "Tagalog", "Turkish", "Ukrainian", "Urdu", "Vietnamese", "Chinese"};
-    String[] langCodes = {AFRIKAANS, ARABIC, BELARUSIAN, BULGARIAN, BENGALI, CATALAN, CZECH, WELSH, DANISH, GERMAN, GREEK, ENGLISH, ESPERANTO, SPANISH, ESTONIAN, PERSIAN, FINNISH, FRENCH, IRISH, GALICIAN, GUJARATI, HEBREW, HINDI, CROATIAN, HAITIAN_CREOLE, HUNGARIAN, INDONESIAN, ICELANDIC, ITALIAN, JAPANESE, GEORGIAN, KANNADA, KOREAN, LITHUANIAN, LATVIAN, MACEDONIAN, MARATHI, MALAY, MALTESE, DUTCH, NORWEGIAN, POLISH, PORTUGUESE, ROMANIAN, RUSSIAN, SLOVAK, SLOVENIAN, ALBANIAN, SWEDISH, SWAHILI, TAMIL, TELUGU, THAI, TAGALOG, TURKISH, UKRAINIAN, URDU, VIETNAMESE, CHINESE};
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_translate);
-        Button translateButton = (Button) findViewById(R.id.translate_button);
-        EditText inputText = (EditText) findViewById(R.id.input_lang_text);
-        TextView outputText = (TextView) findViewById(R.id.output_lang_text);
-        Spinner inputLang = (Spinner) findViewById(R.id.input_langs);
-        Spinner outputLang = (Spinner) findViewById(R.id.output_langs);
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_item, inputLangs);
-        adapter.setDropDownViewResource(R.layout.spinner_item);
-        inputLang.setAdapter(adapter);
-        adapter = new ArrayAdapter(this, R.layout.spinner_item, outputLangs);
-        adapter.setDropDownViewResource(R.layout.spinner_item);
-        outputLang.setAdapter(adapter);
-        outputLang.setSelection(11);
-        ImageButton swapButton = (ImageButton) findViewById(R.id.swap_button);
-        swapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (inputLang.getSelectedItemPosition() == 0) {
-                    Toast.makeText(TranslateActivity.this, "Please select a particular language", Toast.LENGTH_SHORT).show();
-                } else {
-                    int input = inputLang.getSelectedItemPosition();
-                    int output = outputLang.getSelectedItemPosition();
-                    inputLang.setSelection(output + 1);
-                    outputLang.setSelection(input - 1);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_translate)
+        val translateButton = findViewById<View>(R.id.translate_button) as Button
+        val inputText = findViewById<View>(R.id.input_lang_text) as EditText
+        val outputText = findViewById<View>(R.id.output_lang_text) as TextView
+        val inputLang = findViewById<View>(R.id.input_langs) as Spinner
+        val outputLang = findViewById<View>(R.id.output_langs) as Spinner
+        var adapter: ArrayAdapter<*> = ArrayAdapter<Any?>(this, R.layout.spinner_item, inputLangs)
+        adapter.setDropDownViewResource(R.layout.spinner_item)
+        inputLang.adapter = adapter
+        adapter = ArrayAdapter<Any?>(this, R.layout.spinner_item, outputLangs)
+        adapter.setDropDownViewResource(R.layout.spinner_item)
+        outputLang.adapter = adapter
+        outputLang.setSelection(11)
+        val swapButton = findViewById<View>(R.id.swap_button) as ImageButton
+        swapButton.setOnClickListener {
+            if (inputLang.selectedItemPosition == 0) {
+                Toast.makeText(this@TranslateActivity, "Please select a particular language", Toast.LENGTH_SHORT).show()
+            } else {
+                val input = inputLang.selectedItemPosition
+                val output = outputLang.selectedItemPosition
+                inputLang.setSelection(output + 1)
+                outputLang.setSelection(input - 1)
+            }
+        }
+        translateButton.setOnClickListener { view: View? ->
+            when (inputLang.selectedItemPosition) {
+                0 -> {
+                    val options1 = LanguageIdentificationOptions.Builder().setConfidenceThreshold(0.5f).build()
+                    val languageIdentifier = LanguageIdentification.getClient(options1)
+                    languageIdentifier.identifyPossibleLanguages(inputText.text.toString()).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            var found = false
+                            var ii = 0
+                            while (ii < task.result.size) {
+                                for (langCode in langCodes) {
+                                    if (task.result[ii].languageTag == langCode) {
+                                        found = true
+                                        break
+                                    }
+                                }
+                                if (found) break
+                                ii++
+                            }
+                            if (!found) {
+                                Toast.makeText(this@TranslateActivity, "No language found", Toast.LENGTH_SHORT).show()
+                                return@addOnCompleteListener
+                            }
+                            val options = TranslatorOptions.Builder().setSourceLanguage(task.result[0].languageTag).setTargetLanguage(langCodes[outputLang.selectedItemPosition]).build()
+                            val translator = Translation.getClient(options)
+                            val conditions = DownloadConditions.Builder().requireWifi().build()
+                            val progressDialog = ProgressDialog(this@TranslateActivity)
+                            progressDialog.setTitle("Downloading required models")
+                            progressDialog.isIndeterminate = true
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
+                            progressDialog.setCanceledOnTouchOutside(false)
+                            progressDialog.window!!.setBackgroundDrawableResource(R.drawable.empty_list_background)
+                            progressDialog.setProgressNumberFormat(null)
+                            progressDialog.setProgressPercentFormat(null)
+                            progressDialog.show()
+                            translator.downloadModelIfNeeded(conditions).addOnCompleteListener { task ->
+                                progressDialog.cancel()
+                                if (task.isSuccessful) {
+                                    translator.translate(inputText.text.toString()).addOnCompleteListener { task ->
+                                        if (task.isSuccessful) {
+                                            val translatedText = task.result
+                                            outputText.text = translatedText
+                                        }
+                                    }
+                                } else Toast.makeText(this@TranslateActivity, "Failed", Toast.LENGTH_SHORT).show()
+                            }
+                        } else Toast.makeText(this@TranslateActivity, "Failed", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                else -> {
+                    val options = TranslatorOptions.Builder().setSourceLanguage(langCodes[inputLang.selectedItemPosition - 1]).setTargetLanguage(langCodes[outputLang.selectedItemPosition]).build()
+                    val translator = Translation.getClient(options)
+                    val conditions = DownloadConditions.Builder().requireWifi().build()
+                    val progressDialog = ProgressDialog(this@TranslateActivity)
+                    progressDialog.setTitle("Downloading required models")
+                    progressDialog.isIndeterminate = true
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
+                    progressDialog.setCanceledOnTouchOutside(false)
+                    progressDialog.window!!.setBackgroundDrawableResource(R.drawable.empty_list_background)
+                    progressDialog.setProgressNumberFormat(null)
+                    progressDialog.setProgressPercentFormat(null)
+                    progressDialog.show()
+                    translator.downloadModelIfNeeded(conditions).addOnCompleteListener { task ->
+                        progressDialog.cancel()
+                        if (task.isSuccessful) {
+                            translator.translate(inputText.text.toString()).addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    val translatedText = task.result
+                                    outputText.text = translatedText
+                                }
+                            }
+                        } else Toast.makeText(this@TranslateActivity, "Failed", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
-        });
-        translateButton.setOnClickListener(view -> {
-            switch (inputLang.getSelectedItemPosition()) {
-                case 0:
-                    LanguageIdentificationOptions options1 = new LanguageIdentificationOptions.Builder().setConfidenceThreshold(0.5f).build();
-                    LanguageIdentifier languageIdentifier = LanguageIdentification.getClient(options1);
-
-                    languageIdentifier.identifyPossibleLanguages(inputText.getText().toString()).addOnCompleteListener(new OnCompleteListener<List<IdentifiedLanguage>>() {
-                        @Override
-                        public void onComplete(@NonNull Task<List<IdentifiedLanguage>> task) {
-                            if (task.isSuccessful()) {
-                                boolean found = false;
-                                for (int ii = 0; ii < task.getResult().size(); ii++) {
-                                    for (String langCode : langCodes) {
-                                        if (task.getResult().get(ii).getLanguageTag().equals(langCode)) {
-                                            found = true;
-                                            break;
-                                        }
-                                    }
-                                    if (found) break;
-                                }
-                                if (!found) {
-                                    Toast.makeText(TranslateActivity.this, "No language found", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                                TranslatorOptions options = new TranslatorOptions.Builder().setSourceLanguage(task.getResult().get(0).getLanguageTag()).setTargetLanguage(langCodes[outputLang.getSelectedItemPosition()]).build();
-                                Translator translator = Translation.getClient(options);
-                                DownloadConditions conditions = new DownloadConditions.Builder().requireWifi().build();
-                                ProgressDialog progressDialog = new ProgressDialog(TranslateActivity.this);
-                                progressDialog.setTitle("Downloading required models");
-                                progressDialog.setIndeterminate(true);
-                                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                                progressDialog.setCanceledOnTouchOutside(false);
-                                progressDialog.getWindow().setBackgroundDrawableResource(R.drawable.empty_list_background);
-                                progressDialog.setProgressNumberFormat(null);
-                                progressDialog.setProgressPercentFormat(null);
-                                progressDialog.show();
-                                translator.downloadModelIfNeeded(conditions).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        progressDialog.cancel();
-                                        if (task.isSuccessful()) {
-                                            translator.translate(inputText.getText().toString()).addOnCompleteListener(new OnCompleteListener<String>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<String> task) {
-                                                    if (task.isSuccessful()) {
-                                                        String translatedText = task.getResult();
-                                                        outputText.setText(translatedText);
-                                                    }
-                                                }
-                                            });
-                                        } else
-                                            Toast.makeText(TranslateActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else
-                                Toast.makeText(TranslateActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    break;
-
-                default:
-                    TranslatorOptions options = new TranslatorOptions.Builder().setSourceLanguage(langCodes[inputLang.getSelectedItemPosition() - 1]).setTargetLanguage(langCodes[outputLang.getSelectedItemPosition()]).build();
-                    Translator translator = Translation.getClient(options);
-                    DownloadConditions conditions = new DownloadConditions.Builder().requireWifi().build();
-                    ProgressDialog progressDialog = new ProgressDialog(TranslateActivity.this);
-                    progressDialog.setTitle("Downloading required models");
-                    progressDialog.setIndeterminate(true);
-                    progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                    progressDialog.setCanceledOnTouchOutside(false);
-                    progressDialog.getWindow().setBackgroundDrawableResource(R.drawable.empty_list_background);
-                    progressDialog.setProgressNumberFormat(null);
-                    progressDialog.setProgressPercentFormat(null);
-                    progressDialog.show();
-                    translator.downloadModelIfNeeded(conditions).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            progressDialog.cancel();
-                            if (task.isSuccessful()) {
-                                translator.translate(inputText.getText().toString()).addOnCompleteListener(new OnCompleteListener<String>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<String> task) {
-                                        if (task.isSuccessful()) {
-                                            String translatedText = task.getResult();
-                                            outputText.setText(translatedText);
-                                        }
-                                    }
-                                });
-                            } else
-                                Toast.makeText(TranslateActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    break;
-            }
-        });
+        }
     }
 }

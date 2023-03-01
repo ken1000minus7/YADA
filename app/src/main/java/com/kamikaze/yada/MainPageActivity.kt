@@ -1,153 +1,126 @@
-package com.kamikaze.yada;
+package com.kamikaze.yada
 
-import static androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_DRAGGING;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager2.widget.ViewPager2;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.kamikaze.yada.options.OptionsActivity;
-import com.squareup.picasso.Picasso;
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.google.android.gms.tasks.Task
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import com.kamikaze.yada.options.OptionsActivity
+import com.squareup.picasso.Picasso
 
-public class MainPageActivity extends AppCompatActivity {
-    ViewPager2 viewPager;
-    String pfpUrl = "";
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_page);
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView sidebar = (NavigationView) findViewById(R.id.sidebar);
-        viewPager = (ViewPager2) findViewById(R.id.main_fragment_container);
-        MainFragmentPagerAdapter adapter = new MainFragmentPagerAdapter(this);
-        viewPager.setAdapter(adapter);
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+class MainPageActivity : AppCompatActivity() {
+    var viewPager: ViewPager2? = null
+    var pfpUrl = ""
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main_page)
+        val drawerLayout = findViewById<View>(R.id.drawer_layout) as DrawerLayout
+        val sidebar = findViewById<View>(R.id.sidebar) as NavigationView
+        viewPager = findViewById<View>(R.id.main_fragment_container) as ViewPager2
+        val adapter = MainFragmentPagerAdapter(this)
+        viewPager!!.adapter = adapter
+        viewPager!!.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
             }
 
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
             }
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                super.onPageScrollStateChanged(state);
-                viewPager.setUserInputEnabled(state != SCROLL_STATE_DRAGGING || viewPager.getCurrentItem() != 1);
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+                viewPager!!.isUserInputEnabled = state != ViewPager2.SCROLL_STATE_DRAGGING || viewPager!!.currentItem != 1
             }
-        });
-        View header = sidebar.getHeaderView(0);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference document = db.collection("users").document(FirebaseAuth.getInstance().getUid());
-        ImageView profilePic = (ImageView) header.findViewById(R.id.profile_pic);
-        TextView nameText = (TextView) header.findViewById(R.id.display_name);
-        document.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                String imageUrl = (String) task.getResult().get("imageUrl");
-                String name = (String) task.getResult().get("displayName");
-                nameText.setText(name);
-                if (imageUrl != null && !imageUrl.equals("") && !imageUrl.equals("null")) {
-                    if (profilePic != null) Picasso.get().load(imageUrl).into(profilePic);
-                    else
-                        Toast.makeText(getApplicationContext(), "Sadge not working", Toast.LENGTH_SHORT).show();
+        })
+        val header = sidebar.getHeaderView(0)
+        val db = FirebaseFirestore.getInstance()
+        val document = db.collection("users").document(FirebaseAuth.getInstance().uid!!)
+        val profilePic = header.findViewById<View>(R.id.profile_pic) as ImageView
+        val nameText = header.findViewById<View>(R.id.display_name) as TextView
+        document.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
+            if (task.isSuccessful) {
+                val imageUrl = task.result["imageUrl"] as String?
+                val name = task.result["displayName"] as String?
+                nameText.text = name
+                if ((imageUrl != null) && imageUrl != "" && imageUrl != "null") {
+                    if (profilePic != null) Picasso.get().load(imageUrl).into(profilePic) else Toast.makeText(applicationContext, "Sadge not working", Toast.LENGTH_SHORT).show()
                 }
             }
-        });
-        sidebar.setNavigationItemSelectedListener(item -> {
-            Intent intent = new Intent(getApplicationContext(), OptionsActivity.class);
-            intent.putExtra("pfpUrl", pfpUrl);
-            switch (item.getItemId()) {
-                case R.id.profile:
-                    intent.putExtra("position", 0);
-                    break;
-
-                case R.id.security:
-                    intent.putExtra("position", 1);
-                    break;
-
-                case R.id.customize:
-                    intent.putExtra("position", 2);
-                    break;
-
-                case R.id.settings:
-                    intent.putExtra("position", 3);
-                    break;
-
-                case R.id.logout:
-                    View confirmDialog = LayoutInflater.from(MainPageActivity.this).inflate(R.layout.confirm_dialog, drawerLayout, false);
-                    new AlertDialog.Builder(MainPageActivity.this).setView(confirmDialog).setTitle("Are you sure you want to log out?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent(MainPageActivity.this, MainActivity.class);
-                            FirebaseAuth.getInstance().signOut();
-                            Toast.makeText(MainPageActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }).setNegativeButton("No", (dialogInterface, i) -> {
-
-                    }).show();
-                    return false;
+        }
+        sidebar.setNavigationItemSelectedListener { item: MenuItem ->
+            val intent = Intent(applicationContext, OptionsActivity::class.java)
+            intent.putExtra("pfpUrl", pfpUrl)
+            when (item.itemId) {
+                R.id.profile -> intent.putExtra("position", 0)
+                R.id.security -> intent.putExtra("position", 1)
+                R.id.customize -> intent.putExtra("position", 2)
+                R.id.settings -> intent.putExtra("position", 3)
+                R.id.logout -> {
+                    val confirmDialog = LayoutInflater.from(this@MainPageActivity).inflate(R.layout.confirm_dialog, drawerLayout, false)
+                    AlertDialog.Builder(this@MainPageActivity).setView(confirmDialog).setTitle("Are you sure you want to log out?").setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, i ->
+                        val intent = Intent(this@MainPageActivity, MainActivity::class.java)
+                        FirebaseAuth.getInstance().signOut()
+                        Toast.makeText(this@MainPageActivity, "Logged out successfully", Toast.LENGTH_SHORT).show()
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                        finish()
+                    }).setNegativeButton("No") { dialogInterface: DialogInterface?, i: Int -> }.show()
+                    return@setNavigationItemSelectedListener false
+                }
             }
-            startActivityForResult(intent, 1);
-            return false;
-        });
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (viewPager.getCurrentItem() == 0) {
-            SearchView searchView = (SearchView) findViewById(R.id.search_view);
-            if (searchView.isIconified()) super.onBackPressed();
-            else {
-                searchView.setIconified(true);
-                searchView.onActionViewCollapsed();
-            }
-        } else {
-            viewPager.setCurrentItem(0);
-            viewPager.setUserInputEnabled(true);
+            startActivityForResult(intent, 1)
+            false
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    override fun onBackPressed() {
+        if (viewPager!!.currentItem == 0) {
+            val searchView = findViewById<View>(R.id.search_view) as SearchView
+            if (searchView.isIconified) super.onBackPressed() else {
+                searchView.isIconified = true
+                searchView.onActionViewCollapsed()
+            }
+        } else {
+            viewPager!!.currentItem = 0
+            viewPager!!.isUserInputEnabled = true
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && data != null && requestCode == 1) {
-            NavigationView sidebar = (NavigationView) findViewById(R.id.sidebar);
-            View header = sidebar.getHeaderView(0);
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference document = db.collection("users").document(FirebaseAuth.getInstance().getUid());
-            ImageView profilePic = (ImageView) header.findViewById(R.id.profile_pic);
-            TextView nameText = (TextView) header.findViewById(R.id.display_name);
-            document.get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    String imageUrl = (String) task.getResult().get("imageUrl");
-                    String name = (String) task.getResult().get("displayName");
-                    nameText.setText(name);
-                    if (imageUrl != null && !imageUrl.equals("") && !imageUrl.equals("null")) {
-                        if (profilePic != null) Picasso.get().load(imageUrl).into(profilePic);
-                        else
-                            Toast.makeText(getApplicationContext(), "Sadge not working", Toast.LENGTH_SHORT).show();
+            val sidebar = findViewById<View>(R.id.sidebar) as NavigationView
+            val header = sidebar.getHeaderView(0)
+            val db = FirebaseFirestore.getInstance()
+            val document = db.collection("users").document(FirebaseAuth.getInstance().uid!!)
+            val profilePic = header.findViewById<View>(R.id.profile_pic) as ImageView
+            val nameText = header.findViewById<View>(R.id.display_name) as TextView
+            document.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
+                if (task.isSuccessful) {
+                    val imageUrl = task.result["imageUrl"] as String?
+                    val name = task.result["displayName"] as String?
+                    nameText.text = name
+                    if ((imageUrl != null) && imageUrl != "" && imageUrl != "null") {
+                        if (profilePic != null) Picasso.get().load(imageUrl).into(profilePic) else Toast.makeText(applicationContext, "Sadge not working", Toast.LENGTH_SHORT).show()
                     }
                 }
-            });
+            }
         }
     }
 }

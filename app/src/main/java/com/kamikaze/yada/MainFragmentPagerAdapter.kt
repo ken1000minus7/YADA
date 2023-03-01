@@ -1,27 +1,16 @@
-package com.kamikaze.yada;
+package com.kamikaze.yada
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.kamikaze.yada.diary.MainFragment
 
-import com.kamikaze.yada.diary.MainFragment;
-
-public class MainFragmentPagerAdapter extends FragmentStateAdapter {
-
-    public MainFragmentPagerAdapter(FragmentActivity fragmentActivity)
-    {
-        super(fragmentActivity);
-    }
-    @NonNull
-    @Override
-    public Fragment createFragment(int position) {
-        if(position==0) return new MainFragment();
-        else return new FeatureFragment();
+class MainFragmentPagerAdapter(fragmentActivity: FragmentActivity?) : FragmentStateAdapter(fragmentActivity!!) {
+    override fun createFragment(position: Int): Fragment {
+        return if (position == 0) MainFragment() else FeatureFragment()
     }
 
-    @Override
-    public int getItemCount() {
-        return 2;
+    override fun getItemCount(): Int {
+        return 2
     }
 }
