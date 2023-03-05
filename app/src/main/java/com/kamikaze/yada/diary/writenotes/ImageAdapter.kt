@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kamikaze.yada.R
 
-class ImageAdapter(val images:List<String>, val context: Context) : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
+class ImageAdapter(val images: MutableList<String?>?, val context: Context) : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val img = itemView.findViewById<ImageView>(R.id.imginwa)
@@ -23,15 +23,15 @@ class ImageAdapter(val images:List<String>, val context: Context) : RecyclerView
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val image = images[position]
+        val image = images?.get(position)
         Glide.with(context).load(image).into(holder.img)
 
         holder.img.setOnClickListener {
-            WriteActivity.openZoomed(holder.img, image)
+            WriteActivity.openZoomed(holder.img, image!!)
         }
     }
 
     override fun getItemCount(): Int {
-        return images.size
+        return images?.size!!
     }
 }

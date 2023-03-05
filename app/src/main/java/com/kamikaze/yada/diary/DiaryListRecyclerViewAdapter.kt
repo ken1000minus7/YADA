@@ -1,149 +1,136 @@
-package com.kamikaze.yada.diary;
+package com.kamikaze.yada.diary
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.RecyclerView;
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import com.kamikaze.yada.R;
-import com.kamikaze.yada.diary.writenotes.WriteActivity;
-import com.squareup.picasso.Picasso;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import java.util.*;
+import android.content.Context
+import android.content.Intent
+import android.os.AsyncTask
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
+import com.kamikaze.yada.R
+import com.kamikaze.yada.diary.DiaryListRecyclerViewAdapter.DiaryListViewHolder
+import com.kamikaze.yada.diary.writenotes.WriteActivity
+import com.squareup.picasso.Picasso
+import org.jsoup.Jsoup
+import java.util.*
 
-public class DiaryListRecyclerViewAdapter extends RecyclerView.Adapter<DiaryListRecyclerViewAdapter.DiaryListViewHolder> {
-    public ArrayList<Diary> itemList;
-    private final LayoutInflater inflater;
-    private RecyclerView recyclerView;
+class DiaryListRecyclerViewAdapter : RecyclerView.Adapter<DiaryListViewHolder> {
+    var itemList: MutableList<Diary?>?
+    private val inflater: LayoutInflater
+    private var recyclerView: RecyclerView? = null
 
-    public DiaryListRecyclerViewAdapter(Context context, ArrayList<Diary> itemList) {
-        this.itemList = itemList;
-        inflater = LayoutInflater.from(context);
+    constructor(context: Context?, itemList: MutableList<Diary?>?) {
+        this.itemList = itemList
+        inflater = LayoutInflater.from(context)
     }
 
-    public DiaryListRecyclerViewAdapter(Context context, ArrayList<Diary> itemList, RecyclerView recyclerView) {
-        this.itemList = itemList;
-        this.recyclerView = recyclerView;
-        inflater = LayoutInflater.from(context);
-
-        if (recyclerView.getParent() != null) {
-            ConstraintLayout mainLayout = (ConstraintLayout) recyclerView.getParent().getParent();
-            TextView startDiary = (TextView) mainLayout.findViewById(R.id.start_diary);
-            if (itemList.size() == 0) startDiary.setVisibility(View.VISIBLE);
-            else startDiary.setVisibility(View.INVISIBLE);
+    constructor(context: Context?, itemList: MutableList<Diary?>?, recyclerView: RecyclerView?) {
+        this.itemList = itemList
+        this.recyclerView = recyclerView
+        inflater = LayoutInflater.from(context)
+        if (recyclerView!!.parent != null) {
+            val mainLayout = recyclerView.parent.parent as ConstraintLayout
+            val startDiary = mainLayout.findViewById<View>(R.id.start_diary) as TextView
+            if (itemList!!.size == 0) startDiary.visibility =
+                View.VISIBLE else startDiary.visibility = View.INVISIBLE
         }
     }
 
-    @NonNull
-    @Override
-    public DiaryListRecyclerViewAdapter.DiaryListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.fragment_diary_list_item, parent, false);
-
-        view.setOnClickListener(view1 -> {
-            int position = recyclerView.getChildLayoutPosition(view1);
-            Intent intent = new Intent(recyclerView.getContext(), WriteActivity.class);
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiaryListViewHolder {
+        val view = inflater.inflate(R.layout.fragment_diary_list_item, parent, false)
+        view.setOnClickListener { view1: View ->
+            var position = recyclerView!!.getChildLayoutPosition(view1)
+            val intent = Intent(recyclerView!!.context, WriteActivity::class.java)
             if (MainFragment.originalList != null) {
-                String title = ((TextView) view1.findViewById(R.id.title)).getText().toString();
-                String description = ((TextView) view1.findViewById(R.id.description)).getText().toString();
-                String location = ((TextView) view1.findViewById(R.id.location)).getText().toString();
-                for (int i = 0; i < itemList.size(); i++) {
-                    Diary diary = itemList.get(i);
-                    if (diary.getTitle().equals(title) && diary.getLocation().equals(location) && diary.getDescription().equals(description)) {
-                        position = i;
-                        break;
+                val title = (view1.findViewById<View>(R.id.title) as TextView).text.toString()
+                val description =
+                    (view1.findViewById<View>(R.id.description) as TextView).text.toString()
+                val location = (view1.findViewById<View>(R.id.location) as TextView).text.toString()
+                for (i in itemList!!.indices) {
+                    val diary = itemList!![i]
+                    if (diary?.title == title && diary.location == location && diary.description == description) {
+                        position = i
+                        break
                     }
                 }
             }
-
-            intent.putExtra("title", itemList.get(position).getTitle());
-            intent.putExtra("position", position);
-
-            recyclerView.getContext().startActivity(intent);
-        });
-        return new DiaryListViewHolder(view, this);
+            intent.putExtra("title", itemList!![position]?.title)
+            intent.putExtra("position", position)
+            recyclerView!!.context.startActivity(intent)
+        }
+        return DiaryListViewHolder(view, this)
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull DiaryListRecyclerViewAdapter.DiaryListViewHolder holder, int position) {
-        Diary item = itemList.get(position);
-        holder.titleView.setText(item.getTitle());
-        holder.descriptionView.setText(item.getDescription());
-        holder.locationView.setText(item.getLocation());
-        if (item.getLocation() != null) {
-            if (item.getBgImageUrl() == null)
-                new ImageGetter(item.getLocation(), holder.locationImage, item, position).execute();
-            else Picasso.get().load(item.getBgImageUrl()).into(holder.locationImage);
+    override fun onBindViewHolder(holder: DiaryListViewHolder, position: Int) {
+        val item = itemList!![position]
+        if (item != null) {
+            holder.titleView.text = item.title
+        }
+        holder.descriptionView.text = item?.description
+        holder.locationView.text = item?.location
+        if (item?.location != null) {
+            if (item.bgImageUrl == null)
+                ImageGetter(
+                    item.location!!,
+                    holder.locationImage,
+                    item,
+                    position
+                ).execute() else Picasso.get().load(item.bgImageUrl).into(holder.locationImage)
         }
     }
 
-    @Override
-    public int getItemCount() {
-        return itemList.size();
+    override fun getItemCount(): Int {
+        return itemList!!.size
     }
 
-    class DiaryListViewHolder extends RecyclerView.ViewHolder {
-        public TextView titleView;
-        public TextView descriptionView;
-        public ImageView locationImage;
-        public TextView locationView;
-        public DiaryListRecyclerViewAdapter adapter;
+    inner class DiaryListViewHolder(view: View, adapter: DiaryListRecyclerViewAdapter) :
+        RecyclerView.ViewHolder(view) {
+        var titleView: TextView
+        var descriptionView: TextView
+        var locationImage: ImageView
+        var locationView: TextView
+        var adapter: DiaryListRecyclerViewAdapter
 
-        public DiaryListViewHolder(View view, DiaryListRecyclerViewAdapter adapter) {
-            super(view);
-            titleView = (TextView) view.findViewById(R.id.title);
-            descriptionView = (TextView) view.findViewById(R.id.description);
-            locationImage = (ImageView) view.findViewById(R.id.location_image);
-            locationView = (TextView) view.findViewById(R.id.location);
-            this.adapter = adapter;
+        init {
+            titleView = view.findViewById<View>(R.id.title) as TextView
+            descriptionView = view.findViewById<View>(R.id.description) as TextView
+            locationImage = view.findViewById<View>(R.id.location_image) as ImageView
+            locationView = view.findViewById<View>(R.id.location) as TextView
+            this.adapter = adapter
         }
-
     }
 
-    public class ImageGetter extends AsyncTask<Void, Void, String> {
-        String location;
-        ImageView locationImage;
-        Diary item;
-        int position;
-
-        public ImageGetter(String location, ImageView locationImage, Diary item, int position) {
-            this.location = location;
-            this.locationImage = locationImage;
-            this.item = item;
-            this.position = position;
+    inner class ImageGetter(
+        var location: String,
+        var locationImage: ImageView,
+        var item: Diary,
+        var position: Int
+    ) : AsyncTask<Void?, Void?, String?>() {
+        override fun onPostExecute(s: String?) {
+            super.onPostExecute(s)
+            DiaryHandler(locationImage.context).updateDiary(position, s, recyclerView)
+            Picasso.get().load(s).into(locationImage)
         }
 
-        @Override
-        protected String doInBackground(Void... voids) {
-            String searchUrl = "https://www.google.com/search?q=" + location + "+tourism+4k" + "&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiUpP35yNXiAhU1BGMBHdDeBAgQ_AUIECgB";
-            String result;
+        override fun doInBackground(vararg p0: Void?): String? {
+            val searchUrl =
+                "https://www.google.com/search?q=$location+tourism+4k&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiUpP35yNXiAhU1BGMBHdDeBAgQ_AUIECgB"
+            val result: String
             try {
-                Document document = Jsoup.connect(searchUrl).get();
-                Elements media = document.select("[data-src]");
-                int position = new Random().nextInt(Math.min(10, media.size()));
-                Element image = media.get(position);
-                String imageUrl = image.attr("abs:data-src");
-                result = imageUrl.replace("&quot", "");
-                return result;
-            } catch (Exception e) {
-                e.getStackTrace();
+                val document = Jsoup.connect(searchUrl).get()
+                val media = document.select("[data-src]")
+                val position = Random().nextInt(Math.min(10, media.size))
+                val image = media[position]
+                val imageUrl = image.attr("abs:data-src")
+                result = imageUrl.replace("&quot", "")
+                return result
+            } catch (e: Exception) {
+                e.stackTrace
             }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            new DiaryHandler(locationImage.getContext()).updateDiary(position, s, recyclerView);
-            Picasso.get().load(s).into(locationImage);
+            return null
         }
     }
 }

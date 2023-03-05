@@ -44,7 +44,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/diary_fragment_container"
-        class="com.kamikaze.yada.diary.DiaryListFragment"
+        android:name="com.kamikaze.yada.diary.DiaryListFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

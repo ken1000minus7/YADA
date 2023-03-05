@@ -1,241 +1,238 @@
-package com.kamikaze.yada.weather;
+package com.kamikaze.yada.weather
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
+import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import com.android.volley.Request
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.kamikaze.yada.R
+import com.squareup.picasso.Picasso
+import org.json.JSONException
+import org.json.JSONObject
+import java.text.DecimalFormat
+import java.util.*
+import kotlin.math.abs
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.kamikaze.yada.R;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.DecimalFormat;
-import java.util.Date;
-
-public class WeatherActivity extends AppCompatActivity {
-
-    private final String url = "http://api.openweathermap.org/data/2.5/weather";
-    private final String appid = "cd0755a868710f3da85d3e63a838080e";
-    String imgUrl="http://openweathermap.org/img/wn/";
-    String celcius="°C";
-    DecimalFormat df = new DecimalFormat("#.##");
-    FusedLocationProviderClient fusedLocationProviderClient;
-    LocationManager locationManager;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weather);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        locationManager=(LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(WeatherActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(WeatherActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(WeatherActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-        }
-        else
-        {
-            getWeatherDetails();
+class WeatherActivity : AppCompatActivity() {
+    private val url = "http://api.openweathermap.org/data/2.5/weather"
+    private val appid = "cd0755a868710f3da85d3e63a838080e"
+    var imgUrl = "http://openweathermap.org/img/wn/"
+    var celcius = "°C"
+    var df = DecimalFormat("#.##")
+    var fusedLocationProviderClient: FusedLocationProviderClient? = null
+    var locationManager: LocationManager? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_weather)
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        if (ActivityCompat.checkSelfPermission(
+                this@WeatherActivity,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this@WeatherActivity,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this@WeatherActivity,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                1
+            )
+        } else {
+            weatherDetails
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getWeatherDetails();
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                weatherDetails
             }
         }
     }
 
-    @SuppressLint("MissingPermission")
-    public void getWeatherDetails() {
-        LocationListener locationListener=new LocationListener() {
-            @Override
-            public void onLocationChanged(@NonNull Location location) {
-                setData(location);
-            }
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-
-            }
-        };
-
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,1000,10,locationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000,10,locationListener);
-        Location location= locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if(location==null) location=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        setData(location);
-
-    }
-
-    private void setData(Location userLocation) {
-        if (userLocation == null) {
-            Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        double latitude = userLocation.getLatitude();
-        double longitude = userLocation.getLongitude();
-        String tempUrl = url + "?lat=" + latitude + "&lon=" + longitude + "&appid=" + appid;
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, tempUrl, new Response.Listener<String>() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    JSONArray jsonArray = jsonResponse.getJSONArray("weather");
-                    JSONObject jsonObjectWeather = jsonArray.getJSONObject(0);
-                    String main = jsonObjectWeather.getString("main");
-                    String description = jsonObjectWeather.getString("description");
-                    description = description.substring(0, 1).toUpperCase() + description.substring(1);
-                    JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
-                    double temp = jsonObjectMain.getDouble("temp") - 273.15;
-                    double minTemp = jsonObjectMain.getDouble("temp_min") - 273.15;
-                    double maxTemp = jsonObjectMain.getDouble("temp_max") - 273.15;
-                    float pressure = jsonObjectMain.getInt("pressure");
-                    int humidity = jsonObjectMain.getInt("humidity");
-                    JSONObject jsonObjectWind = jsonResponse.getJSONObject("wind");
-                    JSONObject jsonObjectClouds = jsonResponse.getJSONObject("clouds");
-                    String cityName = jsonResponse.getString("name");
-                    if (cityName.equals("")) cityName = "Unknown city";
-                    String countryName = "";
-                    if (jsonResponse.getJSONObject("sys").has("country"))
-                        countryName = jsonResponse.getJSONObject("sys").getString("country");
-                    String iconUrl = imgUrl + jsonObjectWeather.getString("icon") + "@2x.png";
-                    int timestamp = jsonResponse.getInt("dt");
-                    Date date = new Date((long) 1000 * timestamp);
-                    String timezone = "GMT";
-                    if (date.getTimezoneOffset() < 0) timezone += "+";
-                    else timezone += "-";
-                    int offset = Math.abs(date.getTimezoneOffset());
-                    String mins = String.valueOf(offset % 60);
-                    if (mins.length() == 1) mins = "0" + mins;
-                    timezone += (offset / 60) + ":" + mins;
-                    String minutes = String.valueOf(date.getMinutes());
-                    if (minutes.length() == 1) minutes = "0" + minutes;
-                    String hours = String.valueOf(date.getHours());
-                    if (hours.length() == 1) hours = "0" + hours;
-
-                    TextView tempText = (TextView) findViewById(R.id.temperature);
-                    TextView tempMinmax = (TextView) findViewById(R.id.temperature_minmax);
-                    TextView weatherMain = (TextView) findViewById(R.id.weather_main);
-                    TextView weatherDescription = (TextView) findViewById(R.id.weather_description);
-                    TextView cityText = (TextView) findViewById(R.id.city);
-                    TextView countryText = (TextView) findViewById(R.id.country);
-                    TextView dateText = (TextView) findViewById(R.id.date);
-                    TextView timeText = (TextView) findViewById(R.id.timestamp);
-                    TextView dayText = (TextView) findViewById(R.id.day);
-                    TextView humidityText = (TextView) findViewById(R.id.humidity);
-                    TextView pressureText = (TextView) findViewById(R.id.pressure);
-                    TextView timezoneText = (TextView) findViewById(R.id.timezone);
-                    ImageView weatherImg = (ImageView) findViewById(R.id.weather_image);
-
-                    tempText.setText(String.format("%.0f", temp) + celcius);
-                    tempMinmax.setText(String.format("%.0f", minTemp) + celcius + "/" + String.format("%.0f", maxTemp) + celcius);
-                    weatherMain.setText(main);
-                    weatherDescription.setText(description);
-                    cityText.setText(cityName);
-                    countryText.setText(countryName);
-                    dateText.setText(getMonth(date.getMonth() + 1) + " " + date.getDate() + ", " + (date.getYear() + 1900));
-                    timeText.setText(hours + ":" + minutes);
-                    dayText.setText(getDay(date.getDay()));
-                    humidityText.setText(humidity + "%");
-                    pressureText.setText(String.format("%.0f", pressure) + "hPa");
-                    timezoneText.setText(timezone);
-                    Picasso.get().load(iconUrl).into(weatherImg);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-
+    @get:SuppressLint("MissingPermission")
+    val weatherDetails: Unit
+        get() {
+            val locationListener: LocationListener = object : LocationListener {
+                override fun onLocationChanged(location: Location) {
+                    setData(location)
                 }
+
+                override fun onStatusChanged(s: String, i: Int, bundle: Bundle) {}
+                override fun onProviderEnabled(s: String) {}
+                override fun onProviderDisabled(s: String) {}
             }
-        }, error -> Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show());
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
-    }
-    private String getMonth(int n)
-    {
-        switch(n)
-        {
-            case 1:
-                return "January";
-            case 2:
-                return "February";
-            case 3:
-                return "March";
-            case 4:
-                return "April";
-            case 5:
-                return "May";
-            case 6:
-                return "June";
-            case 7:
-                return "July";
-            case 8:
-                return "August";
-            case 9:
-                return "September";
-            case 10:
-                return "October";
-            case 11:
-                return "November";
-            case 12:
-                return "December";
+            locationManager!!.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER,
+                1000,
+                10f,
+                locationListener
+            )
+            locationManager!!.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                1000,
+                10f,
+                locationListener
+            )
+            var location = locationManager!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+            if (location == null) location =
+                locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            setData(location)
         }
-        return "";
+
+    private fun setData(userLocation: Location?) {
+        if (userLocation == null) {
+            Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val latitude = userLocation.latitude
+        val longitude = userLocation.longitude
+        val tempUrl = "$url?lat=$latitude&lon=$longitude&appid=$appid"
+        val stringRequest = StringRequest(Request.Method.GET, tempUrl, { response ->
+            try {
+                val jsonResponse = JSONObject(response)
+                val jsonArray = jsonResponse.getJSONArray("weather")
+                val jsonObjectWeather = jsonArray.getJSONObject(0)
+                val main = jsonObjectWeather.getString("main")
+                var description = jsonObjectWeather.getString("description")
+                description = description.substring(0, 1)
+                    .uppercase(Locale.getDefault()) + description.substring(1)
+                val jsonObjectMain = jsonResponse.getJSONObject("main")
+                val temp = jsonObjectMain.getDouble("temp") - 273.15
+                val minTemp = jsonObjectMain.getDouble("temp_min") - 273.15
+                val maxTemp = jsonObjectMain.getDouble("temp_max") - 273.15
+                val pressure = jsonObjectMain.getInt("pressure").toFloat()
+                val humidity = jsonObjectMain.getInt("humidity")
+                val jsonObjectWind = jsonResponse.getJSONObject("wind")
+                val jsonObjectClouds = jsonResponse.getJSONObject("clouds")
+                var cityName = jsonResponse.getString("name")
+                if (cityName == "") cityName = "Unknown city"
+                var countryName: String? = ""
+                if (jsonResponse.getJSONObject("sys").has("country")) countryName =
+                    jsonResponse.getJSONObject("sys").getString("country")
+                val iconUrl = imgUrl + jsonObjectWeather.getString("icon") + "@2x.png"
+                val timestamp = jsonResponse.getInt("dt")
+                val date = Date(1000L * timestamp)
+                var timezone = "GMT"
+                timezone += if (date.timezoneOffset < 0) "+" else "-"
+                val offset = abs(date.timezoneOffset)
+                var mins = (offset % 60).toString()
+                if (mins.length == 1) mins = "0$mins"
+                timezone += (offset / 60).toString() + ":" + mins
+                var minutes = date.minutes.toString()
+                if (minutes.length == 1) minutes = "0$minutes"
+                var hours = date.hours.toString()
+                if (hours.length == 1) hours = "0$hours"
+                val tempText = findViewById<View>(R.id.temperature) as TextView
+                val tempMinmax = findViewById<View>(R.id.temperature_minmax) as TextView
+                val weatherMain = findViewById<View>(R.id.weather_main) as TextView
+                val weatherDescription = findViewById<View>(R.id.weather_description) as TextView
+                val cityText = findViewById<View>(R.id.city) as TextView
+                val countryText = findViewById<View>(R.id.country) as TextView
+                val dateText = findViewById<View>(R.id.date) as TextView
+                val timeText = findViewById<View>(R.id.timestamp) as TextView
+                val dayText = findViewById<View>(R.id.day) as TextView
+                val humidityText = findViewById<View>(R.id.humidity) as TextView
+                val pressureText = findViewById<View>(R.id.pressure) as TextView
+                val timezoneText = findViewById<View>(R.id.timezone) as TextView
+                val weatherImg = findViewById<View>(R.id.weather_image) as ImageView
+                tempText.text = buildString {
+                    append(String.format("%.0f", temp))
+                    append(celcius)
+                }
+                tempMinmax.text = buildString {
+                    append(String.format("%.0f", minTemp))
+                    append(celcius)
+                    append("/")
+                    append(String.format("%.0f", maxTemp))
+                    append(celcius)
+                }
+                weatherMain.text = main
+                weatherDescription.text = description
+                cityText.text = cityName
+                countryText.text = countryName
+                dateText.text = buildString {
+                    append(getMonth(date.month + 1))
+                    append(" ")
+                    append(date.date)
+                    append(", ")
+                    append((date.year + 1900))
+                }
+                timeText.text = buildString {
+                    append(hours)
+                    append(":")
+                    append(minutes)
+                }
+                dayText.text = getDay(date.day)
+                humidityText.text = buildString {
+                    append(humidity)
+                    append("%")
+                }
+                pressureText.text = buildString {
+                    append(String.format("%.0f", pressure))
+                    append("hPa")
+                }
+                timezoneText.text = timezone
+                Picasso.get().load(iconUrl).into(weatherImg)
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+        }) { error: VolleyError? ->
+            Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
+        }
+        val requestQueue = Volley.newRequestQueue(applicationContext)
+        requestQueue.add(stringRequest)
     }
 
-    private String getDay(int n)
-    {
-        switch(n)
-        {
-            case 1:
-                return "Monday";
-            case 2:
-                return "Tuesday";
-            case 3:
-                return "Wednesday";
-            case 4:
-                return "Thursday";
-            case 5:
-                return "Friday";
-            case 6:
-                return "Saturday";
-            case 0:
-                return "Sunday";
+    private fun getMonth(n: Int): String {
+        when (n) {
+            1 -> return "January"
+            2 -> return "February"
+            3 -> return "March"
+            4 -> return "April"
+            5 -> return "May"
+            6 -> return "June"
+            7 -> return "July"
+            8 -> return "August"
+            9 -> return "September"
+            10 -> return "October"
+            11 -> return "November"
+            12 -> return "December"
         }
-        return "";
+        return ""
+    }
+
+    private fun getDay(n: Int): String {
+        when (n) {
+            1 -> return "Monday"
+            2 -> return "Tuesday"
+            3 -> return "Wednesday"
+            4 -> return "Thursday"
+            5 -> return "Friday"
+            6 -> return "Saturday"
+            0 -> return "Sunday"
+        }
+        return ""
     }
 }

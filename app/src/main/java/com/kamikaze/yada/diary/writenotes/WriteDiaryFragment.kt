@@ -382,8 +382,8 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
 
                 val imgadapter = recyclerView?.adapter as ImageAdapter?
 
-                var imagepath = imgadapter?.images as MutableList?
-                if (imagepath == null) imagepath = mutableListOf<String>()
+                var imagepath = imgadapter?.images
+                if (imagepath == null) imagepath = mutableListOf()
                 imagepath.add(path1)
                 loadImages(imagepath)
 
@@ -433,7 +433,7 @@ class WriteDiaryFragment : Fragment(R.layout.fragment_write_diary) {
     }
 
     @SuppressLint("WrongConstant")
-    fun loadImages(imagepath: List<String>) {
+    fun loadImages(imagepath: MutableList<String?>) {
         val recyclerView = view?.findViewById<RecyclerView>(R.id.rvimages)
         val act = activity as WriteActivity
 
