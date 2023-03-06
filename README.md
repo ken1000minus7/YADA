@@ -1,15 +1,14 @@
-#  YADA
+<div align="center">
+<h1 id="yada">YADA</h1>
+<p><strong>Explore</strong> | <strong>Travel</strong> | <strong>Write</strong></p>
+<p><a href="https://gitter.im/YADA_/community?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/YADA_/community.svg" alt="Join the chat at https://gitter.im/YADA_/community"></a></p>
+</div>
 
-
-**Explore** | **Travel** | **Write**
-
-[![Join the chat at https://gitter.im/YADA_/community](https://badges.gitter.im/YADA_/community.svg)](https://gitter.im/YADA_/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-## About
+## ✨ About
 
 Yet Another Diary App created for travelers who want to write about their experiences. Customizable themes with the fusion of maps and path tracking make it all the more interesting! 
 
-## Contributing
+## 🤝 Contributing
 
 The app is open for contribution during [PWOC](https://pwoc.vercel.app/). Start discussion in the PWOC Discord Server. 
 
@@ -119,9 +118,26 @@ Wait for your submission to be accepted and your PR to be merged by a maintainer
 1. [Learn from Video](https://www.youtube.com/watch?v=nkuYH40cjo4)
 2. [Open Source Guide](https://opensource.guide/how-to-contribute/)
 
-## Code of Conduct
+## 🤵 Code of Conduct
 
 - [Code of Conduct](CODE_OF_CONDUCT.md)
+
+## 🛣️ Roadmap
+
+- Complete Kotlin Supremacy
+- Introduction of ViewModels and implementation of MVVM architecture
+- UI Overhauls
+
+## 🐛 Issues
+
+If you think you have found a bug, please report it on [Issues](https://github.com/ken1000minus7/YADA/issues). The app is under active development and some new features are planned. You can suggest and vote for new features in the same location.
+
+## 🎨 FIGMA File
+
+[Click here](https://www.figma.com/file/VVNKBMvON3t4gZXpNpDNeS/first-page?node-id=0%3A1&t=xcpMwzDkU5J449RP-1)
+
+<img src="https://user-images.githubusercontent.com/78747188/144723438-c91a196a-d486-4f79-adaa-57d91a172052.png" width=200>
+
 
 ## 🙏🏽 Support
 
@@ -133,20 +149,4 @@ Follow my Github for content
 <h6 align="center">© ken1000minus7
 <br>
  
-## Roadmap
-
-- Complete Kotlin Supremacy
-- Introduction of ViewModels and implementation of MVVM architecture
-- UI Overhauls
-
-## Issues
-
-If you think you have found a bug, please report it on [Issues](https://github.com/ken1000minus7/YADA/issues). The app is under active development and some new features are planned. You can suggest and vote for new features in the same location.
-
-## FIGMA File
-
-https://www.figma.com/file/VVNKBMvON3t4gZXpNpDNeS/first-page?node-id=0%3A1&t=xcpMwzDkU5J449RP-1
-
-<img src="https://user-images.githubusercontent.com/78747188/144723438-c91a196a-d486-4f79-adaa-57d91a172052.png" width=200>
-
 
