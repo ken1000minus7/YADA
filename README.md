@@ -4,10 +4,24 @@
 <p><a href="https://gitter.im/YADA_/community?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/YADA_/community.svg" alt="Join the chat at https://gitter.im/YADA_/community"></a></p>
 </div>
 
+## Table of Contents
+
+- [About](#about)
+- [Contributing](#contributing)
+- [How To Contribute](#howto)
+- [Code Of Conduct](#coc)
+- [Roadmap](#roadmap)
+- [Issues](#issues)
+- [Figma File](#figma)
+- [Contributors](#contribs)
+- [Support](#support)
+
+<a name="about"></a>
 ## ✨ About
 
 Yet Another Diary App created for travelers who want to write about their experiences. Customizable themes with the fusion of maps and path tracking make it all the more interesting! 
 
+<a name="contributing"></a>
 ## 🤝 Contributing
 
 The app is open for contribution during [PWOC](https://pwoc.vercel.app/). Start discussion in the PWOC Discord Server. 
@@ -22,10 +36,7 @@ keytool -list -v -keystore "c:\users\your_user_name\.android\debug.keystore" -al
 You can share the SHA-1 Key with your mentor, and they will add it in Firebase console.
 If you face any problem in this step, make sure to contact the mentor.
 
-
-
-
-
+<a name="howto"></a>
 ## 🖱️ How to Contribute 
 
 If you think that you can add a new feature or want to fix a bug, we invite you to contribute to YADA and make this project better. To start contributing, follow the below instructions:
@@ -118,27 +129,38 @@ Wait for your submission to be accepted and your PR to be merged by a maintainer
 1. [Learn from Video](https://www.youtube.com/watch?v=nkuYH40cjo4)
 2. [Open Source Guide](https://opensource.guide/how-to-contribute/)
 
+<a name="coc"></a>
 ## 🤵 Code of Conduct
 
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 
+<a name="roadmap"></a>
 ## 🛣️ Roadmap
 
 - Complete Kotlin Supremacy
 - Introduction of ViewModels and implementation of MVVM architecture
 - UI Overhauls
 
+<a name="issues"></a>
 ## 🐛 Issues
 
 If you think you have found a bug, please report it on [Issues](https://github.com/ken1000minus7/YADA/issues). The app is under active development and some new features are planned. You can suggest and vote for new features in the same location.
 
+<a name="figma"></a>
 ## 🎨 FIGMA File
 
 [Click here](https://www.figma.com/file/VVNKBMvON3t4gZXpNpDNeS/first-page?node-id=0%3A1&t=xcpMwzDkU5J449RP-1)
 
 <img src="https://user-images.githubusercontent.com/78747188/144723438-c91a196a-d486-4f79-adaa-57d91a172052.png" width=200>
 
+<a name="contribs"></a>
+## 🙌 Contributors 
 
+<a href="https://github.com/ken1000minus7/YADA/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ken1000minus7/YADA" />
+</a>
+
+<a name="support"></a>
 ## 🙏🏽 Support
 
 This project needs a star️ from you. Don't forget to leave a star✨
